@@ -1,3 +1,88 @@
 *{
-    color:beige;
+    margin:0;
+    padding: 0;
+    border: 1px solid black;
+    font-family:roboto;
+}
+
+/* ---------- COLORES ---------- */
+
+.red {
+    background-color: #ea0c0a;
+}
+
+.text-red {
+    color: #ea0c0a;
+}
+
+.green{
+    background-color: #3bc697;
+}
+
+.text-green{
+    color: #3bc697;
+}
+
+.yellow{
+    background-color: #f4e630;
+}
+
+.text-yellow{
+    color: #f4e630;
+}
+
+.black{
+    background-color: #070505;
+}
+
+.text-black{
+    color: #070505;
+}
+
+.grey{
+    background-color:#a2a1a5;
+}
+
+.text-grey{
+    color: #a2a1a5;
+}
+
+.white{
+    background-color:white;
+}
+
+.text-grey{
+    color: white;
+}
+
+
+/* ---------- TAMANIO TEXTO ---------- */
+
+.verybig{
+    font-size: 30;
+}
+
+.big{
+    font-size: 25;
+}
+
+.normal{
+    font-size: 20;
+}
+
+.small{
+    font-size: 18;
+}
+
+.verysmall{
+    font-size: 15;
+}
+
+
+/* ---------- COMPONENTES ---------- */
+
+.button {
+    width: 10%;
+    height: 20px;
+    border-radius: 20px;
 }
