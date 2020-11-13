@@ -2,7 +2,6 @@
     margin:0;
     padding: 0;
     border: 1px solid black;
-    font-family:roboto;
 }
 
 /* ---------- COLORES ---------- */
@@ -51,7 +50,7 @@
     background-color:white;
 }
 
-.text-grey{
+.text-white{
     color: white;
 }
 
@@ -59,30 +58,178 @@
 /* ---------- TAMANIO TEXTO ---------- */
 
 .verybig{
-    font-size: 30;
+    font-size: 30px;
 }
 
 .big{
-    font-size: 25;
+    font-size: 25px;
 }
 
 .normal{
-    font-size: 20;
+    font-size: 20px;
 }
 
 .small{
-    font-size: 18;
+    font-size: 18px;
 }
 
 .verysmall{
-    font-size: 15;
+    font-size: 15px;
 }
 
 
-/* ---------- COMPONENTES ---------- */
+/* ---------- ETIQUETAS ---------- */
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+
+    background: linear-gradient(45deg, #3bc697, white, white, white,  #f4e630);
+    font-family: roboto, sans-serif;
+}
+
+input {
+    height: 100%;
+    width: 300px;
+    padding: 5px 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 10px;
+}
+
+input:focus {
+    border: 1px solid #3bc697;
+    border-radius: 10px;
+    outline: none;
+}
+
+
+label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ---------- HEADER ---------- */
+
+.header {
+    min-width: 800px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 30px; /* horizontal margin */
+}
+
+.header-logo {
+    height: 150px;
+    width: 300px;
+}
+
+.header-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img[src*="user"] {
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+}
+
+
+/* ---------- CLASES ---------- */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 50px;
+    min-width: 800px;
+}
+
+.logo {
+    height: 50%;
+    max-width: 400px;
+    width: 50%;
+}
+
 
 .button {
-    width: 10%;
-    height: 20px;
-    border-radius: 20px;
+    width: 150px;
+    height: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.button-long {
+    width: 200px;
+    height: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-long:hover {
+    opacity: .8;
+}
+
+.button-special {       /* NO MARGIN TOP, BUTTONS LIKE SEARCH THAT DONT NEED MARGIN... */
+    width: 150px;
+    height: 25px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-special:hover {
+    opacity: .8;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+.search {
+    height: 25px;
+    width: 500px;
+    padding: 5px 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 10px;
+    background-image: url(https://cdn.pixabay.com/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 5px;
+    padding-left: 25px;
+    margin: 0 10px;
 }
