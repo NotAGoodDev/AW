@@ -81,19 +81,7 @@
     font-size: 15px;
 }
 
-/* ---------- WEIGHT TEXTO ---------- */
 
-.bolder{
-    font-weight: bolder;
-}
-
-.bold{
-    font-weight: bold;
-}
-
-.light{
-    font-weight: lighter;
-}
 
 /* ---------- MARGENES ---------- */
 
@@ -136,6 +124,7 @@ input:focus {
 label {
     margin-top: 20px;
     margin-bottom: 5px;
+    font-weight: bolder;
 }
 
 form {
