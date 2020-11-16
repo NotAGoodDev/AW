@@ -6,10 +6,51 @@
     <title>404 grupo 26</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../styles.css">
-    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
 </head>
 <body>
+    <div class="header">
+        <div class="header-buttons">
+            <a href="" class="button-long green text-white">Preguntas</a>
+            <a href="" class="button-long green text-white">Sin responder</a>
+            <a href="" class="button-long green text-white">Usuarios</a>
+        </div>
 
+        <img src="../images/logo.png" alt="" class="header-logo">
+
+        <div class="header-user">
+            <img src="../images/users/U2.png" alt="">
+            <p class="big text-black">Bakugo K.</p>
+            <a href="" class="button red text-white">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="search-container">
+            <a href="" class="button-special green text-white">Buscar</a>
+            <input type="text" name="" id="" class="search">
+        </div>
+
+        <div class="title">
+            Formular una pregunta
+        </div>
+
+        <form action="" method="post">
+            <label for="titulo">Título</label>
+            Sé especifico e imagina que estás haciendo la pregunta a otra persona
+            <input type="text" name="titulo" id="titulo" value="¿Cuál es tu pregunta sobre programación de aplicaciones web?">
+            <label for="cuerpo">Cuerpo</label>
+            Incluye toda la información que alguien necesitaría para responder tu pregunta
+            <textarea name="cuerpo" id="cuerpo" cols="30" rows="10"></textarea>            
+            <label for="etiquetas">Etiquetas</label>
+           Añade hasta 5 etiquetas para describir sobre qué trata tu pregunta
+            <input type="text" name="etiquetas" id="etiquetas" value="Por ejemplo: @node@express"> 
+            <button type="submit" class="button green text-white"> Publica tu pregunta</button>
+        </form>
+    </div>
+    
+    <a href="" class="button green text-white">Publica tu pregunta</a>
+        
     
 
 </body>

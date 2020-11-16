@@ -1,7 +1,7 @@
 *{
     margin:0;
     padding: 0;
-    border: 1px solid black;
+    border:1px solid black
 }
 
 /* ---------- COLORES ---------- */
@@ -24,6 +24,10 @@
 
 .yellow{
     background-color: #f4e630;
+}
+
+.light-yellow{
+    background-color: #fdf79a2f;
 }
 
 .text-yellow{
@@ -77,6 +81,29 @@
     font-size: 15px;
 }
 
+/* ---------- WEIGHT TEXTO ---------- */
+
+.bolder{
+    font-weight: bolder;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.light{
+    font-weight: lighter;
+}
+
+/* ---------- MARGENES ---------- */
+
+.bottomMargin{
+    margin-bottom: 100px;
+}
+
+.topMargin{
+    margin-top: 100px;
+}
 
 /* ---------- ETIQUETAS ---------- */
 
