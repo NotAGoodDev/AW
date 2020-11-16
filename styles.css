@@ -1,7 +1,7 @@
 *{
     margin:0;
     padding: 0;
-    border:1px solid black;
+    //border:1px solid black;
 }
 
 /* ---------- COLORES ---------- */
@@ -15,11 +15,11 @@
 }
 
 .green{
-    background-color: #3bc697;
+    background-color: #388e3c;
 }
 
 .text-green{
-    color: #3bc697;
+    color: #388e3c ;
 }
 
 .yellow{
@@ -85,25 +85,23 @@
 
 /* ---------- MARGENES ---------- */
 
-.bottomMargin{
-    margin-bottom: 100px;
-}
-
-.topMargin{
-    margin-top: 100px;
+.spaced{
+    margin-top: 40px;
 }
 
 /* ---------- ETIQUETAS ---------- */
 
 html {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    max-height: 100vh;
 }
 
 body {
-
-    background: linear-gradient(45deg, #3bc697, white, white, white,  #f4e630);
+    max-height: 100vh;
+    background-image: url(images/background.png);
     font-family: roboto, sans-serif;
+    background-attachment: fixed;
 }
 
 input {
@@ -146,7 +144,8 @@ a {
     /* justify-content: center; */
     align-items: center;
     justify-content: space-between;
-    margin: 0 30px; /* horizontal margin */
+    padding: 15px; /* horizontal margin */
+    background-color: black;
 }
 
 .header-logo {
@@ -167,15 +166,24 @@ img[src*="user"] {
     border-radius: 50px;
 }
 
+img[src$="tive.png"] {
+    height: 20px;
+    width: 20px;
+    padding-left: 10px;
+}
 
-/* ---------- CLASES ---------- */
+img[src$="tive.png"]:hover {
+    opacity: .5;
+}
+
+/* ---------- CLASES GENÉRICAS ---------- */
 
 .container {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
     min-width: 800px;
 }
 
@@ -186,9 +194,12 @@ img[src*="user"] {
 }
 
 
+
+/* ---------- TIPOS DE BOTONES ---------- */
+
 .button {
-    width: 150px;
-    height: 25px;
+    width: 120px;
+    height: 20px;
     border-radius: 15px;
     margin-top: 20px;
     padding: 5px;
@@ -203,7 +214,7 @@ img[src*="user"] {
 
 .button-long {
     width: 200px;
-    height: 25px;
+    height: 20px;
     border-radius: 15px;
     margin-top: 20px;
     padding: 5px;
@@ -218,7 +229,7 @@ img[src*="user"] {
 
 .button-special {       /* NO MARGIN TOP, BUTTONS LIKE SEARCH THAT DONT NEED MARGIN... */
     width: 150px;
-    height: 25px;
+    height: 20px;
     border-radius: 15px;
     padding: 5px;
     display: flex;
@@ -230,6 +241,10 @@ img[src*="user"] {
     opacity: .8;
 }
 
+
+
+/* ---------- BUSCADOR ---------- */
+
 .search-container {
     display: flex;
     justify-content: center;
@@ -237,18 +252,112 @@ img[src*="user"] {
 }
 
 .search {
-    height: 25px;
+    height: 20px;
     width: 500px;
     padding: 5px 10px;
+    padding-left: 25px;
+    margin: 0 10px;
     border: 1px solid #a2a1a5;
-    border-radius: 10px;
+    border-radius: 20px;
     background-image: url(https://cdn.pixabay.com/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png);
     background-repeat: no-repeat;
     background-size: 15px;
     background-position: 5px;
-    padding-left: 25px;
-    margin: 0 10px;
 }
+
+.search:focus {
+    border: 1px solid #3bc697;
+    border-radius: 20px;
+    outline: none;
+}
+
+
+
+/* ---------- PREGUNTA ---------- */
+
+.question-container {
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+}
+
+
+/* ---------- BARRAS DE VOTOS ---------- */
+
+.visit-votes-container {
+    height: 30px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.votes-container {
+    display: flex;
+    align-items: center;
+}
+
+.partial-text {
+    /* ESTE ES EL TUYO ALEX, TIENES QUE PONER LÍMITE DE CHARS */
+}
+
+
+/* ---------- ETIQUETAS EN PREGUNTAS---------- */
+
+.tags-container {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    margin-top: 10px;
+    align-items: left;
+    justify-content: left;
+}
+
+.tag {
+    padding: 5px 10px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.tag:hover {
+    opacity: .7;
+}
+
+
+/* ---------- RESPUESTAS EN PREGUNTAS ---------- */
+
+.answer-container {
+    width: 70%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+}
+
+/* ---------- USUARIOS EN PREGUNTAS Y RESPUESTAS ---------- */
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 1200px;
+}
+
+.userquestion-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 
 #loginB{
     margin-bottom: 50px;
