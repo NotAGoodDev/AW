@@ -1,7 +1,7 @@
 *{
     margin:0;
     padding: 0;
-    border:1px solid black
+    border:1px solid black;
 }
 
 /* ---------- COLORES ---------- */
@@ -248,4 +248,8 @@ img[src*="user"] {
     background-position: 5px;
     padding-left: 25px;
     margin: 0 10px;
+}
+
+#loginB{
+    margin-bottom: 50px;
 }
