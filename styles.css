@@ -340,6 +340,7 @@ img[src$="tive.png"]:hover {
     flex-direction: column;
     align-items: left;
     justify-content: left;
+    
 }
 
 /* ---------- USUARIOS EN PREGUNTAS Y RESPUESTAS ---------- */
@@ -357,6 +358,9 @@ img[src$="tive.png"]:hover {
     align-items: center;
 }
 
+.answer-question-text {
+
+}
 
 
 #loginB{
