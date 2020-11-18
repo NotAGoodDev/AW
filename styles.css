@@ -366,3 +366,137 @@ img[src$="tive.png"]:hover {
 #loginB{
     margin-bottom: 50px;
 }
+
+
+/* ---------- PREGUNTAS Y SIN RESPONDER---------- */
+.nPreguntas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 67%;
+}
+
+.button-long-special {
+    width: 200px;
+    height: 20px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preguntas {
+
+    max-width: 70%;
+}
+
+.pregunta {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5%;
+    border: #388e3c 5px double;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 3% 0;
+}
+
+.contenido {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin-right: 3%;
+    justify-content: space-between;
+}
+
+.titulo {
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.titulo:hover {
+    color: #388e3c;
+    cursor: pointer;
+}
+
+.cuerpo {
+    margin: 5px 5px 25px 5px;
+}
+
+.etiqueta {
+    background-color: #a2a1a5;
+    border: 3px solid black;
+    padding: 3px;
+    margin: 10px;
+    font-family: fantasy;
+    text-decoration: none;
+    color: darkgreen;
+}
+
+.etiqueta:hover {
+    background-color: #388e3c;
+    color: black;
+}
+
+.usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nombre {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.spaced-left {
+    margin-left: 5%;
+}
+
+/* ---------- FORMULAR---------- */
+
+.spaced-form{
+    margin:3px 0;
+    
+}
+
+.center{
+    margin:auto;
+}
+
+.textForm{
+    margin:0 0 20px 0;
+}
+
+/* ---------- USUARIOS---------- */
+
+.title{
+    font-weight: bold;
+    margin: 20px 0 40px 0;
+}
+
+.user-search{
+    width: 100px;
+    margin-right: 42%;
+}
+
+.usuarios{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    justify-content:  center;
+}
+
+.usuario{
+    margin: 20px;
+    padding: 10px;
+    border:5px solid #388e3c;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-weight: bolder;
+    background-color: #a2a1a5;
+    color: white;
+}
+.img-user{
+    border:3px solid #388e3c;
+}
