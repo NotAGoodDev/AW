@@ -106,7 +106,7 @@ body {
 
 input {
     height: 100%;
-    width: 300px;
+    min-width: 150px;
     padding: 5px 10px;
     border: 1px solid #a2a1a5;
     border-radius: 10px;
@@ -117,6 +117,21 @@ input:focus {
     border-radius: 10px;
     outline: none;
 }
+
+textarea {
+    height: 100%;
+    min-width: 300px;
+    padding: 5px 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 10px;
+}
+
+textarea:focus {
+    border: 1px solid #3bc697;
+    border-radius: 10px;
+    outline: none;
+}
+
 
 
 label {
@@ -193,6 +208,15 @@ img[src$="tive.png"]:hover {
     width: 50%;
 }
 
+.title{
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.title:hover {
+    color: #388e3c;
+    cursor: pointer;
+}
 
 
 /* ---------- TIPOS DE BOTONES ---------- */
@@ -242,6 +266,21 @@ img[src$="tive.png"]:hover {
 }
 
 
+.button-long-special {
+    width: 200px;
+    height: 20px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-long-special:hover {
+    opacity: .8;
+}
+
+
 
 /* ---------- BUSCADOR ---------- */
 
@@ -272,25 +311,12 @@ img[src$="tive.png"]:hover {
 }
 
 
-
-/* ---------- PREGUNTA ---------- */
-
-.question-container {
-    width: 80%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: left;
-}
-
-
 /* ---------- BARRAS DE VOTOS ---------- */
 
 .visit-votes-container {
     height: 30px;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-top: 5px #388e3c double;
+    border-bottom: 5px #388e3c double;
 
     margin-bottom: 20px;
     display: flex;
@@ -304,10 +330,44 @@ img[src$="tive.png"]:hover {
     align-items: center;
 }
 
-.partial-text {
-    /* ESTE ES EL TUYO ALEX, TIENES QUE PONER LÍMITE DE CHARS */
+
+
+/* ---------- PREGUNTA ---------- */
+
+.question-container {   /* ESTILO ALVARO */
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
 }
 
+.n-question {   /* ESTILO ALEX DOUBLE DASH*/    /* numero preguntas*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 67%;
+}
+
+
+.unanswered-container { /* ESTILO ALEX DOUBLE DASH*/    /* caja de preguntas verder*/
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5%;
+    border: #388e3c 5px double;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 3% 0;
+}
+
+.unanswered {   /* ESTILO ALEX DOUBLE DASH*/    /* interior de caja preguntas verdes*/
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin-right: 3%;
+    justify-content: space-between;
+}
 
 /* ---------- ETIQUETAS EN PREGUNTAS---------- */
 
@@ -340,7 +400,6 @@ img[src$="tive.png"]:hover {
     flex-direction: column;
     align-items: left;
     justify-content: left;
-    
 }
 
 /* ---------- USUARIOS EN PREGUNTAS Y RESPUESTAS ---------- */
@@ -356,147 +415,72 @@ img[src$="tive.png"]:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
-
-.answer-question-text {
-
-}
-
 
 #loginB{
     margin-bottom: 50px;
 }
 
 
-/* ---------- PREGUNTAS Y SIN RESPONDER---------- */
-.nPreguntas {
+/* ---------- FORMULAR---------- */
+
+/* .textForm{
+    margin:0 0 20px 0;
+} */
+
+/* ----------FILTRO---------- */
+
+.filter-user-container{
     display: flex;
-    align-items: center;
+    width: 80%;
+    flex-direction: row;
     justify-content: space-between;
-    width: 67%;
 }
 
-.button-long-special {
-    width: 200px;
-    height: 20px;
-    border-radius: 15px;
-    padding: 5px;
+.search-user-container {
+    width: 30%;
     display: flex;
+    flex-direction: row;
+}
+
+.search-user {
+    height: 20px;
+    padding: 5px 10px;
+    padding-left: 25px;
+    margin: 0 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 20px;
+    background-image: url(https://cdn.pixabay.com/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 5px;
+}
+
+.users-container{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter-user{
+    height: 150px;
+    width: 15%;
+    margin: 10px;
+    padding: 10px;
+    border:3px solid #388e3c;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.preguntas {
 
-    max-width: 70%;
-}
-
-.pregunta {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.5%;
-    border: #388e3c 5px double;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    margin: 3% 0;
-}
-
-.contenido {
-    display: flex;
-    flex-direction: column;
-    max-width: 70%;
-    margin-right: 3%;
-    justify-content: space-between;
-}
-
-.titulo {
-    font-weight: bold;
-    margin: 0 5px;
-}
-
-.titulo:hover {
-    color: #388e3c;
-    cursor: pointer;
-}
-
-.cuerpo {
-    margin: 5px 5px 25px 5px;
-}
-
-.etiqueta {
-    background-color: #a2a1a5;
-    border: 3px solid black;
-    padding: 3px;
-    margin: 10px;
-    font-family: fantasy;
-    text-decoration: none;
-    color: darkgreen;
-}
-
-.etiqueta:hover {
-    background-color: #388e3c;
-    color: black;
-}
-
-.usuario {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.nombre {
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.spaced-left {
-    margin-left: 5%;
-}
-
-/* ---------- FORMULAR---------- */
-
-.spaced-form{
-    margin:3px 0;
-    
-}
-
-.center{
-    margin:auto;
-}
-
-.textForm{
-    margin:0 0 20px 0;
-}
-
-/* ---------- USUARIOS---------- */
-
-.title{
-    font-weight: bold;
-    margin: 20px 0 40px 0;
-}
-
-.user-search{
-    width: 100px;
-    margin-right: 42%;
-}
-
-.usuarios{
-    display: flex;
-    flex-wrap: wrap;
-    width: 60%;
-    justify-content:  center;
-}
-
-.usuario{
-    margin: 20px;
-    padding: 10px;
-    border:5px solid #388e3c;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    font-weight: bolder;
-    background-color: #a2a1a5;
-    color: white;
-}
-.img-user{
-    border:3px solid #388e3c;
+.filter-tag {
+    padding: 5px 10px;
+    border-radius: 5px;
 }
