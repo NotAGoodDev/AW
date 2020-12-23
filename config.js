@@ -1,13 +1,18 @@
 "use strict";
 
 module.exports = {
-      host: "localhost",// Ordenador que ejecuta el SGBD
-      user: "root",   // Usuario que accede a la BD
-      password: "",  // Contraseña con la que se accede a la BD
-      database: "P404"  // Nombre de la base de datos
-}
+    mysqlConfig: {
+            host: "localhost",     // Ordenador que ejecuta el SGBD
+            user: "root",          // Usuario que accede a la BD
+            password: "",          // Contraseña con la que se accede a la BD
+            database: "p404"     // Nombre de la base de datos
+    },
+      port: 3000                   // Puerto en el que escucha el servidor
+ }
+ 
 
 /*
+
 DROP DATABASE IF EXISTS P404;
 CREATE DATABASE P404;
 
@@ -20,7 +25,7 @@ CREATE TABLE usuarios (
     imagen VARCHAR(100) NOT NULL,
     fecha_alta DATE
    );
-   
+
 CREATE TABLE preguntas (
     id INT PRIMARY KEY,
     email VARCHAR(20) NOT NULL,
@@ -29,16 +34,8 @@ CREATE TABLE preguntas (
     fecha DATE NOT NULL,
     FOREIGN KEY (email) REFERENCES usuarios(email)
    );
-   
- CREATE TABLE medallas (
-    id INT PRIMARY KEY,
-    email VARCHAR(20) NOT NULL,
-    tipo VARCHAR(10) NOT NULL,
-    fecha DATE NOT NULL,
-    FOREIGN KEY (email) REFERENCES usuarios(email)
-   );
-   
- CREATE TABLE respuestas (
+
+  CREATE TABLE respuestas (
     id INT PRIMARY KEY,
     id_preg INT NOT NULL,
     email_resp VARCHAR(20) NOT NULL,
@@ -46,15 +43,21 @@ CREATE TABLE preguntas (
     FOREIGN KEY (id_preg) REFERENCES preguntas(id),
     FOREIGN KEY (email_resp) REFERENCES usuarios(email)
    );
-   
-CREATE TABLE votos (
-	id INT PRIMARY KEY,
+
+ CREATE TABLE medallas (
+    id INT PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL
+   );
+
+ CREATE TABLE usuario_medallas(
+     id INT NOT NULL,
     email VARCHAR(20) NOT NULL,
-    id_preg_resp INT NOT NULL,
-    voto INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY (email) REFERENCES usuarios(email),
-    FOREIGN KEY (id_preg_resp) REFERENCES preguntas(id)
-);
+    FOREIGN KEY (id) REFERENCES medallas(id),
+    PRIMARY KEY(id, email)
+    );
+
 
 CREATE TABLE etiquetas (
     id INT PRIMARY KEY,
@@ -63,10 +66,22 @@ CREATE TABLE etiquetas (
     FOREIGN KEY (id_preg) REFERENCES preguntas(id)
 );
 
-CREATE TABLE tipovotos (
-    id INT PRIMARY KEY,
+CREATE TABLE voto_preg (
+    email_usuario VARCHAR(20) NOT NULL,
     id_pregunta INT NOT NULL,
-    pregunta BOOLEAN NOT NULL,
-    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id)
+    voto BOOLEAN NOT NULL,
+    FOREIGN KEY (email_usuario) REFERENCES usuarios(email),
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id),
+    PRIMARY KEY(email_usuario, id_pregunta) 
 );
+
+CREATE TABLE voto_resp (
+    email_usuario VARCHAR(20) NOT NULL,
+    id_respuesta INT NOT NULL,
+    voto BOOLEAN NOT NULL,
+    FOREIGN KEY (email_usuario) REFERENCES usuarios(email),
+    FOREIGN KEY (id_respuesta) REFERENCES respuestas(id),
+    PRIMARY KEY(email_usuario, id_respuesta) 
+);
+
 */

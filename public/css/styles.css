@@ -1,0 +1,614 @@
+*{
+    margin:0;
+    padding: 0;
+    //border:1px solid black;
+}
+
+/* ---------- COLORES ---------- */
+
+.red {
+    background-color: #ea0c0a;
+}
+
+.text-red {
+    color: #ea0c0a;
+}
+
+.green{
+    background-color: #388e3c;
+}
+
+.text-green{
+    color: #388e3c ;
+}
+
+.yellow{
+    background-color: #f4e630;
+}
+
+.light-yellow{
+    background-color: #fdf79a2f;
+}
+
+.text-yellow{
+    color: #f4e630;
+}
+
+.black{
+    background-color: #070505;
+}
+
+.text-black{
+    color: #070505;
+}
+
+.grey{
+    background-color:#a2a1a5;
+}
+
+.text-grey{
+    color: #a2a1a5;
+}
+
+.white{
+    background-color:white;
+}
+
+.text-white{
+    color: white;
+}
+
+.bronze {
+    background-color: #bcaaa4;
+}
+
+.silver {
+    background-color: #cfd8dc;
+}
+
+.gold {
+    background-color: #ffd54f ;
+}
+
+/* ---------- TAMANIO TEXTO ---------- */
+
+.verybig{
+    font-size: 30px;
+}
+
+.big{
+    font-size: 25px;
+}
+
+.normal{
+    font-size: 20px;
+}
+
+.small{
+    font-size: 18px;
+}
+
+.verysmall{
+    font-size: 15px;
+}
+
+
+
+/* ---------- MARGENES ---------- */
+
+.spaced{
+    margin-top: 40px;
+}
+
+/* ---------- ETIQUETAS ---------- */
+
+html {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+body {
+    max-height: 100vh;
+    background-image: url(../img/background.png);
+    font-family: roboto, sans-serif;
+    background-attachment: fixed;
+}
+
+input {
+    height: 100%;
+    min-width: 150px;
+    padding: 5px 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 10px;
+}
+
+input:focus {
+    border: 1px solid #3bc697;
+    border-radius: 10px;
+    outline: none;
+}
+
+input[type="submit"] {
+    height: 30px;
+    align-self: center;
+}
+
+input[type="submit"]:focus{
+    border-radius: 20px;
+    outline: none;
+}
+
+textarea {
+    height: 100%;
+    min-width: 300px;
+    padding: 5px 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 10px;
+}
+
+textarea:focus {
+    border: 1px solid #3bc697;
+    border-radius: 10px;
+    outline: none;
+}
+
+
+
+label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ---------- HEADER ---------- */
+
+.header {
+    min-width: 800px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px; /* horizontal margin */
+    background-color: black;
+}
+
+.header-logo {
+    height: 150px;
+    width: 300px;
+}
+
+.header-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img[src*="user"] {
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+}
+
+img[src$="tive.png"] {
+    height: 20px;
+    width: 20px;
+    padding-left: 10px;
+}
+
+img[src$="tive.png"]:hover {
+    opacity: .5;
+}
+
+/* ---------- CLASES GENÉRICAS ---------- */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 20px;
+    min-width: 800px;
+}
+
+.logo {
+    height: 50%;
+    max-width: 400px;
+    width: 50%;
+}
+
+.title{
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.title:hover {
+    color: #388e3c;
+    cursor: pointer;
+}
+
+
+/* ---------- TIPOS DE BOTONES ---------- */
+
+.button {
+    width: 120px;
+    height: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.button-long {
+    width: 200px;
+    height: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-long:hover {
+    opacity: .8;
+}
+
+.button-special {       /* NO MARGIN TOP, BUTTONS LIKE SEARCH THAT DONT NEED MARGIN... */
+    width: 150px;
+    height: 20px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-special:hover {
+    opacity: .8;
+}
+
+
+.button-long-special {
+    width: 200px;
+    height: 20px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-long-special:hover {
+    opacity: .8;
+}
+
+
+
+/* ---------- BUSCADOR ---------- */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+.search {
+    height: 20px;
+    width: 500px;
+    padding: 5px 10px;
+    padding-left: 25px;
+    margin: 0 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 20px;
+    background-image: url(https://cdn.pixabay.com/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 5px;
+}
+
+.search:focus {
+    border: 1px solid #3bc697;
+    border-radius: 20px;
+    outline: none;
+}
+
+
+/* ---------- BARRAS DE VOTOS ---------- */
+
+.visit-votes-container {
+    height: 30px;
+    border-top: 5px #388e3c double;
+    border-bottom: 5px #388e3c double;
+
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.votes-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* ---------- PREGUNTA ---------- */
+
+.question-container {   /* ESTILO ALVARO */
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+}
+
+.n-question {   /* ESTILO ALEX DOUBLE DASH*/    /* numero preguntas*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 67%;
+}
+
+
+.unanswered-container { /* ESTILO ALEX DOUBLE DASH*/    /* caja de preguntas verder*/
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5%;
+    border: #388e3c 5px double;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 3% 0;
+}
+
+.unanswered {   /* ESTILO ALEX DOUBLE DASH*/    /* interior de caja preguntas verdes*/
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin-right: 3%;
+    justify-content: space-between;
+}
+
+/* ---------- ETIQUETAS EN PREGUNTAS---------- */
+
+.tags-container {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    margin-top: 10px;
+    align-items: left;
+    justify-content: left;
+}
+
+.tag {
+    padding: 5px 10px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.tag:hover {
+    opacity: .7;
+}
+
+
+/* ---------- RESPUESTAS EN PREGUNTAS ---------- */
+
+.answer-container {
+    width: 70%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+}
+
+/* ---------- USUARIOS EN PREGUNTAS Y RESPUESTAS ---------- */
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 1200px;
+}
+
+.userquestion-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#loginB{
+    margin-bottom: 50px;
+}
+
+
+/* ---------- FORMULAR---------- */
+
+/* .textForm{
+    margin:0 0 20px 0;
+} */
+
+/* ----------FILTRO---------- */
+
+.filter-user-container{
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.search-user-container {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-user {
+    height: 20px;
+    padding: 5px 10px;
+    padding-left: 25px;
+    margin: 0 10px;
+    border: 1px solid #a2a1a5;
+    border-radius: 20px;
+    background-image: url(https://cdn.pixabay.com/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 5px;
+}
+
+.users-container{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter-user{
+    height: 150px;
+    width: 15%;
+    margin: 10px;
+    padding: 10px;
+    border:3px solid #388e3c;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.filter-tag {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+/* ---------- PROFILE ---------- */
+.profile-container {
+    height: 100%;
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+
+.statistics-container {
+    width: 70%;
+}
+
+.profile-bar {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.reputation-container {
+    display: grid;
+    row-gap: 20px;
+    
+}
+
+#reputation-number {
+    height: 50px;
+    grid-row: 1;
+    grid-column: 1 / 10;
+}
+
+#reputation-questions {
+    height: 50px;
+    grid-row: 2;
+    grid-column: 1 / 5;
+}
+
+#reputation-answers {
+    height: 50px;
+    grid-row: 2;
+    grid-column: 6 / 10;
+}
+
+.medals-container {
+    height: 100%;
+    width: 80%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.medal-types-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.medal-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+.medal-type {
+    width: 90%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.medal-tag {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.medal-in-medaltag {
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+
+    margin-left: 10px;
+}
+
+.text-in-medaltag {
+    height: 100%;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.times-in-medaltag {
+    height: 100%;
+    margin-left: 15px;
+}
