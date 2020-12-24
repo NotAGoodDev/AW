@@ -6,26 +6,28 @@
 
 "use strict"
 
-class DAOPreguntas {
+class DAOEtiquetas {
 
     constructor(pool) {
         this.pool = pool;
     }
 
-    listarPreguntas(callback) {
-        this.pool.getConnection( function(err, connection) {
-            if(err) {
+
+    leerPorIdEtiquetas(parametros, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.email = usuarios.email;";
+                const query = "SELECT FROM etiquet";
                 connection.query(
                     query,
+                    [values],
                     (err, rows) => {
                         connection.release();
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"))
                         } else {
-                            callback(null, rows);
+                            /* CODIGO */
                         }
                     }
                 )
@@ -34,4 +36,5 @@ class DAOPreguntas {
     }
 }
 
-module.exports = DAOPreguntas;
+
+module.exports = DAOEtiquetas;

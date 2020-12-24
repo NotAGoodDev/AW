@@ -40,6 +40,13 @@ function gestionarImagen(imagen, email) {
     }
 }
 
+function mostrarReducido(texto){
+    if(texto.length > 150){
+        texto = texto.slice(0, 150);
+    }
+    return texto;
+}
+
 module.exports = {
     informar,
     passCoincide,

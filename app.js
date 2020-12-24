@@ -102,6 +102,36 @@ app.post("/loginout/registro", function (request, response) {
     } else {
         response.render("loginout/registro");
     }
-
 })
 
+/* QUITAMOS ESTA VARIABLE CUANDO INICIEMOS SESIÓN */
+const email = "alex@404.COM";
+
+app.get("/index", function (request, response) {
+    response.status(200);
+    daoUsuarios.leerPorEmail(email, (err, usuario) => {
+        if(err) {
+            console.warn(err);
+        } else {
+            response.render("index", { usuario: usuario[0] });
+        }
+    });
+})
+
+app.get("/", function (request, response) {
+    response.status(302);
+    response.redirect("/index");
+})
+
+/* CONTROLADOR */
+app.get("/usuarios/perfil/:id", function (request, response) {
+    response.status(200);
+
+    daoUsuarios.leerPorId(request.body.id, (err, result) => {
+        if(err) {
+            console.warn(err);
+        } else {   
+            response.render("perfil", { nombreEnView: valores });
+        }
+    });
+})

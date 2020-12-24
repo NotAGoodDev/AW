@@ -5,8 +5,8 @@
 <head>
     <title>404 grupo 26</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
     <link href="https://www.dafont.com/es/forum/read/249632/my-hero-academia-font?family=Roboto" rel="stylesheet">
 </head>
 <body>
@@ -17,12 +17,12 @@
             <a href="usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
         </div>
 
-        <a href="index.html"><img src="images/logo.png" alt="" class="header-logo"></a>
+        <a href="index.html"><img src="/img/logo.png" alt="" class="header-logo"></a>
 
         <div class="header-user">
-            <img src="images/users/U1.png" alt="">
-            <p class="titule-page text-white">Midoriya I.</p>
-            <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
+            <img src="<%= usuario.imagen %>" alt="">
+            <p class="titule-page text-white"> <%= usuario.nombre %> </p>
+            <a href="/loginout/login.html" class="button red text-white">Cerrar sesión</a>
         </div>
     </div>
 

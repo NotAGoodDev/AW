@@ -5,8 +5,9 @@
 <head>
     <title>404 grupo 26</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link href="https://www.dafont.com/es/forum/read/249632/my-hero-academia-font?family=Roboto" rel="stylesheet">
 </head>
 <body>
     <div class="header">
@@ -19,8 +20,8 @@
         <a href="../index.html"><img src="../images/logo.png" alt="" class="header-logo"></a>
 
         <div class="header-user">
-            <img src="../images/users/U1.png" alt="">
-            <p class="titule-page text-white">Midoriya I.</p>
+            <img src="<%= usuario.imagen %>" alt="">
+            <p class="titule-page text-white"> <%= usuario.nombre %> </p>
             <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
         </div>
     </div>
@@ -33,9 +34,9 @@
 
         <div class="profile-container spaced">
             <div class="filter-user">
-                <img src="../images/users/U3.png" alt="" class="spaced-form img-user">
-                <p class="small">SFG</p>
-                <p class="verysmall">Miembro desde 1/10/2020</p>
+                <img src="<%= usuarioPerfil.imagen %>" alt="" class="spaced-form img-user">
+                <p class="small"><%= usuarioPerfil.nombre %></p>
+                <p class="verysmall"><%= usuarioPerfil.fecha_alta %></p>
             </div>
 
             <div class="statistics-container">
@@ -46,15 +47,15 @@
                 <div class="reputation-container spaced">
                     <div id="reputation-number">
                         <p class="small">Reputación</p>
-                        <p class="normal">278</p>
+                        <p class="normal"><%= usuarioPerfil.reputacion %></p>
                     </div>
                     <div id="reputation-questions">
                         <p class="small">Preguntas</p>
-                        <p class="normal">30</p>
+                        <p class="normal"><%= usuarioPerfil.n_preguntas %></p>
                     </div>
                     <div id="reputation-answers">
                         <p class="small">Respuestas</p>
-                        <p class="normal">10</p>
+                        <p class="normal"><%= usuarioPerfil.n_respuestas %></p>
                     </div>
                 </div>
             </div>

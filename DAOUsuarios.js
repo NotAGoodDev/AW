@@ -26,7 +26,7 @@ class DAOUsuarios {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"))
                         } else {
-
+                            /* CODIGO */
                         }
                     }
                 )
@@ -82,6 +82,58 @@ class DAOUsuarios {
                                 callback(null, false);
                             } else {
                                 callback(null, true);
+                            }
+                        }
+                    }
+                )
+            }
+        })
+    }
+
+    leerPorEmail(email, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT * FROM USUARIOS WHERE EMAIL = ?";
+                connection.query(
+                    query,
+                    [email],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            if(rows.length === 0) {
+                                callback(new Error("No existe un usuario con el email " + email))
+                            } else {
+                                callback(null, rows);
+                            }
+                        }
+                    }
+                )
+            }
+        })
+    }
+
+    leerPorId(id, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT * FROM USUARIOS WHERE ID = ?";
+                connection.query(
+                    query,
+                    [id],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            if(rows.length === 0) {
+                                callback(new Error("No existe un usuario con el id " + id))
+                            } else {
+                                callback(null, rows);
                             }
                         }
                     }
