@@ -15,8 +15,11 @@ module.exports = {
 DROP DATABASE IF EXISTS P404;
 CREATE DATABASE P404;
 
+USE P404;
+
 CREATE TABLE usuarios (
-    email VARCHAR(20) PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL,
+    email VARCHAR(20) UNIQUE NOT NULL,
     reputacion INT NOT NULL,
     contrasena VARCHAR(20) NOT NULL,
     nombre VARCHAR(20) NOT NULL,
@@ -30,16 +33,16 @@ CREATE TABLE preguntas (
     titulo VARCHAR(20) NOT NULL,
     cuerpo VARCHAR(1000) NOT NULL,
     fecha DATE NOT NULL,
-    FOREIGN KEY (email) REFERENCES usuarios(email)
+    FOREIGN KEY (id) REFERENCES usuarios(id)
    );
 
   CREATE TABLE respuestas (
     id INT PRIMARY KEY,
     id_preg INT NOT NULL,
-    email_resp VARCHAR(20) NOT NULL,
+    id_usu_resp VARCHAR(20) NOT NULL,
     texto VARCHAR(1000) NOT NULL,
     FOREIGN KEY (id_preg) REFERENCES preguntas(id),
-    FOREIGN KEY (email_resp) REFERENCES usuarios(email)
+    FOREIGN KEY (id_usu_resp) REFERENCES usuarios(id)
    );
 
  CREATE TABLE medallas (
@@ -48,7 +51,7 @@ CREATE TABLE preguntas (
    );
 
  CREATE TABLE usuario_medallas(
-     id INT NOT NULL,
+    id INT NOT NULL,
     email VARCHAR(20) NOT NULL,
     fecha DATE NOT NULL,
     FOREIGN KEY (email) REFERENCES usuarios(email),
@@ -84,19 +87,19 @@ CREATE TABLE voto_resp (
 
 
 
-INSERT INTO `usuarios` VALUES ('alex@404.com', '30', 'AAAAAAAA', 'alex', '/img/users/U1.png', '2020/12/24');
-INSERT INTO `usuarios` VALUES ('alvaro03@404.com', '-49', 'BBBBBBBB', 'alvaro', '/img/users/U2.png', '2010/10/13');
-INSERT INTO `usuarios` VALUES ('pedro404@404.com', '70', 'CCCCCCCC', 'pedro', '/img/users/U3.png', '2011/09/22');
-INSERT INTO `usuarios` VALUES ('anamaria@404.com', '300', 'DDDDDDDD', 'ana', '/img/users/ana.png', '1990/06/04');
+
+INSERT INTO `usuarios` VALUES (0, 'alex@404.com', 30, 'AAAAAAAA', 'alex', '/img/users/U1.png', '2020/12/24');
+INSERT INTO `usuarios` VALUES (1, 'alvaro03@404.com', -49, 'BBBBBBBB', 'alvaro', '/img/users/U2.png', '2010/10/13');
+INSERT INTO `usuarios` VALUES (2, 'pedro404@404.com', 70, 'CCCCCCCC', 'pedro', '/img/users/U3.png', '2011/09/22');
+INSERT INTO `usuarios` VALUES (3, 'anamaria@404.com', 300, 'DDDDDDDD', 'ana', '/img/users/ana.png', '1990/06/04');
 
 
-INSERT INTO `preguntas` VALUES ('0','alex@404.com', 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24');
-INSERT INTO `preguntas` VALUES ('1','alvaro03@404.com', 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
-INSERT INTO `preguntas` VALUES ('3','anamaria@404.com', 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
-INSERT INTO `preguntas` VALUES ('4','alvaro03@404.com', 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
-INSERT INTO `preguntas` VALUES ('5','alvaro03@404.com', 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
-INSERT INTO `preguntas` VALUES ('6','alex@404.com', 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24');
+INSERT INTO `preguntas` VALUES (0, 0, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24');
+INSERT INTO `preguntas` VALUES (1, 1, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
+INSERT INTO `preguntas` VALUES (2, 3, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
+INSERT INTO `preguntas` VALUES (3, 1, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
+INSERT INTO `preguntas` VALUES (4, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
 
 
-INSERT INTO `etiquetas` VALUES ('6','alex@404.com', 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24');
+INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
 */
