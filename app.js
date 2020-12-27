@@ -53,7 +53,7 @@ app.listen(config.port, function(err) {
 app.get("/RUTA/:id", function (request, response) {
     response.status(200);
     //response.status(302);
-    //app.post -> request.body.parametro_de_formulario
+    //app.post -> request.params.parametro_de_formulario
     dao.funcion(parametro, (err, result) => {
         if(err) {
             console.warn(err);
@@ -127,11 +127,36 @@ app.get("/", function (request, response) {
 app.get("/usuarios/perfil/:id", function (request, response) {
     response.status(200);
 
-    daoUsuarios.leerPorId(request.body.id, (err, result) => {
-        if(err) {
-            console.warn(err);
-        } else {   
-            response.render("perfil", { nombreEnView: valores });
-        }
+    daoUsuarios.leerPorEmail(email, (err, usuario) => {
+        daoUsuarios.leerPorId(request.params.id, (err, perfil) => {
+            if(err) {
+                console.warn(err);
+            } else {
+                perfil[0].fecha_alta = perfil[0].fecha_alta.toLocaleDateString();
+
+                daoPreguntas.contar(request.params.id, (err, preguntas) => {
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        
+                        perfil[0].n_preguntas = preguntas[0].n_preguntas;
+
+                        daoRespuestas.contar(request.params.id, (err, respuestas) => {
+                            if(err) {
+                                console.warn(err);
+                            } else {
+                                perfil[0].n_respuestas = respuestas[0].n_respuestas;
+
+                                response.render("perfil/perfil", {
+                                    usuario: usuario[0],
+                                    usuarioPerfil: perfil[0]
+                                });
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
     });
-})
+});

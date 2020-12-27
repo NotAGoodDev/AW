@@ -29,17 +29,17 @@ CREATE TABLE usuarios (
 
 CREATE TABLE preguntas (
     id INT PRIMARY KEY,
-    email VARCHAR(20) NOT NULL,
+    id_usu INT NOT NULL,
     titulo VARCHAR(20) NOT NULL,
     cuerpo VARCHAR(1000) NOT NULL,
     fecha DATE NOT NULL,
-    FOREIGN KEY (id) REFERENCES usuarios(id)
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id)
    );
 
   CREATE TABLE respuestas (
     id INT PRIMARY KEY,
     id_preg INT NOT NULL,
-    id_usu_resp VARCHAR(20) NOT NULL,
+    id_usu_resp INT NOT NULL,
     texto VARCHAR(1000) NOT NULL,
     FOREIGN KEY (id_preg) REFERENCES preguntas(id),
     FOREIGN KEY (id_usu_resp) REFERENCES usuarios(id)

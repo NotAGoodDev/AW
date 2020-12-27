@@ -17,12 +17,12 @@
             <a href="../usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
         </div>
 
-        <a href="../index.html"><img src="../images/logo.png" alt="" class="header-logo"></a>
+        <a href="/index"><img src="/img/logo.png" alt="" class="header-logo"></a>
 
         <div class="header-user">
             <img src="<%= usuario.imagen %>" alt="">
             <p class="titule-page text-white"> <%= usuario.nombre %> </p>
-            <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
+            <a href="/loginout/login" class="button red text-white">Cerrar sesión</a>
         </div>
     </div>
 
@@ -35,8 +35,10 @@
         <div class="profile-container spaced">
             <div class="filter-user">
                 <img src="<%= usuarioPerfil.imagen %>" alt="" class="spaced-form img-user">
-                <p class="small"><%= usuarioPerfil.nombre %></p>
-                <p class="verysmall"><%= usuarioPerfil.fecha_alta %></p>
+                <p class="normal"><%= usuarioPerfil.nombre %></p>
+                <p class="verysmall">Miembro desde:
+                    <%= usuarioPerfil.fecha_alta %>
+                </p>
             </div>
 
             <div class="statistics-container">
