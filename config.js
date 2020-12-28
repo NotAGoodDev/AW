@@ -102,4 +102,13 @@ INSERT INTO `preguntas` VALUES (4, 2, 'html y css cosas', 'orem Ipsum es simplem
 
 
 INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
+INSERT INTO `etiquetas` VALUES (1, 1, 'html');
+INSERT INTO `etiquetas` VALUES (2, 1, 'css');
+INSERT INTO `etiquetas` VALUES (3, 2, 'javascript');
+INSERT INTO `etiquetas` VALUES (4, 3, 'javascript');
+INSERT INTO `etiquetas` VALUES (5, 3, 'node');
+INSERT INTO `etiquetas` VALUES (6, 4, 'javascript');
+INSERT INTO `etiquetas` VALUES (7, 4, 'css');
+INSERT INTO `etiquetas` VALUES (8, 1, 'express');
+
 */

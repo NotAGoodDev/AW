@@ -17,7 +17,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.email = usuarios.email;";
+                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id ORDER BY usuarios.nombre ASC;";
                 connection.query(
                     query,
                     (err, rows) => {

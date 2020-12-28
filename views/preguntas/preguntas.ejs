@@ -5,8 +5,8 @@
 <head>
     <title>404 grupo 26</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
 </head>
 <body>
     <div class="header">
@@ -16,10 +16,10 @@
             <a href="../usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
         </div>
 
-        <a href="../index.html"><img src="../images/logo.png" alt="" class="header-logo"></a>
+        <a href="../index.html"><img src="/img/logo.png" alt="" class="header-logo"></a>
 
         <div class="header-user">
-            <img src="../images/users/U1.png" alt="">
+            <img src="/img/users/U1.png" alt="">
             <p class="titule-page text-white">Midoriya I.</p>
             <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
         </div>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="n-question spaced">
-            <p><%= preguntas.length %>/p>
+            <p><%= preguntas.length %> preguntas</p>
             <a href="formular.html" class="button-long-special green text-white">Formular una pregunta</a>
         </div>
         
@@ -45,25 +45,28 @@
             <div class="unanswered-container">
                 <div class="unanswered">
                     <div class="normal">
-                        <%= pregunta.titulo %>
+                        <%= preg.titulo %>
                     </div>
                     <div class="answer-question-text very-small">
-                        <%= pregunta.cuerpo %>
+                        <%= preg.cuerpo %>
                     </div>
                     <div>
-                        <a href="etiquetadas.html"  class="tag green text-white">css</a>
-                        <a href="etiquetadas.html"  class="tag green text-white">css3</a>
+                        <%if(etiquetas[preg.id] != undefined){ %>
+                            <% etiquetas[preg.id].forEach(etiq =>{ %>
+                            <a href="etiquetadas.html"  class="tag green text-white"><%=etiq%></a>
+                            <% }); %>
+                        <% }; %>
                     </div>
                 </div>
                 <div class="info-container">
                     <div class="userquestion-info">
-                        <p class="small">Formulada el 5/11/2020</p>
-                        <img src="../images/users/U4.png" alt="">
-                        <p class="very-small">Nico</p>
+                        <p class="small">Formulada el <%= preg.fecha %></p>
+                        <img src= <%= preg.imagen %> alt="">
+                        <p class="very-small"><%= preg.nombre %></p>
                     </div>
                 </div>
             </div>
-            <% }) %>
+            <% }); %>
         </div>
     </div>
 </body>

@@ -18,6 +18,7 @@ const utils = require("./utils");
 const DAOUsuarios = require("./DAOUsuarios");
 const DAOPreguntas = require("./DAOPreguntas");
 const DAORespuestas = require("./DAORespuestas");
+const DAOEtiquetas = require("./DAOEtiquetas");
 
 /* EXPRESS + EJS EN PUBLIC */
 const app = express();
@@ -34,6 +35,7 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUsuarios = new DAOUsuarios(pool);
 const daoPreguntas = new DAOPreguntas(pool);
 const daoRespuestas = new DAORespuestas(pool);
+const daoEtiquetas = new DAOEtiquetas(pool);
 
 /* USO DE MIDDLEWARES */
 app.use(express.static(staticFiles));       //RECURSOS ESTÁTICOS
@@ -160,3 +162,22 @@ app.get("/usuarios/perfil/:id", function (request, response) {
         });
     });
 });
+
+app.get("/preguntas", function (request, response) {
+    daoPreguntas.listarPreguntas((err, preguntas) =>{
+        if(err) {
+            console.warn(err);
+        } else {
+            daoEtiquetas.listarEtiquetas((err, etiquetas) => {
+                if(err) {
+                    console.warn(err);
+                } else {
+                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas:etiquetas});
+                }
+            });
+        }
+    });
+})
+
+
+
