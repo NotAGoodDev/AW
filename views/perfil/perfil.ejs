@@ -74,60 +74,66 @@
                 <div class="medal-container">
                     <div class="medal-type bronze">
                         <p class="small">BRONCE</p>
-                        <p class="big">5</p>
+                        <p class="big"><%= medallasBronce.reduce((ac, medalla) => ac += medalla.contador, 0); %></p>
                     </div>
 
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag bronze"></p>
-                        <p class="text-in-medaltag verysmall">Pregunta popular</p>
-                    </div>
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag bronze"></p>
-                        <p class="text-in-medaltag verysmall">Respuesta interesante</p>
-                    </div>
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag bronze"></p>
-                        <p class="text-in-medaltag verysmall">Estudiante</p>
-                    </div>
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag bronze"></p>
-                        <p class="text-in-medaltag verysmall">Pregunta interesante</p>
-                        <p class="times-in-medaltag">x2</p>
-                    </div>
+                    <% medallasBronce.map(medalla => { %>
+                        <div class="medal-tag">
+                            <p class="medal-in-medaltag bronze"></p>
+                            <p class="text-in-medaltag verysmall"> <%= medalla.descripcion %> </p>
+
+                            <% if(medalla.contador != 1) { %>
+                            <p class="times-in-medaltag"> x<%= medalla.contador %></p>
+                            <% } %>
+
+
+                        </div>
+
+                    <% }) %>
                 </div>
 
 
                 <div class="medal-container">
                     <div class="medal-type silver">
                         <p class="small">PLATA</p>
-                        <p class="big">3</p>
+                        <p class="big"><%= medallasPlata.reduce((ac, medalla) => ac += medalla.contador, 0); %></p>
                     </div>
 
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag silver"></p>
-                        <p class="text-in-medaltag verysmall">Pregunta destacada</p>
-                    </div>
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag silver"></p>
-                        <p class="text-in-medaltag verysmall">Buena pregunta</p>
-                        <p class="times-in-medaltag">x2</p>
-                    </div>
+                    <% medallasPlata.map(medalla => { %>
+                        <div class="medal-tag">
+                            <p class="medal-in-medaltag silver"></p>
+                            <p class="text-in-medaltag verysmall"> <%= medalla.descripcion %> </p>
+
+                            <% if(medalla.contador != 1) { %>
+                            <p class="times-in-medaltag"> x<%= medalla.contador %></p>
+                            <% } %>
+
+
+                        </div>
+
+                    <% }) %>
+
                 </div>
 
                 <div class="medal-container">
                     <div class="medal-type gold">
                         <p class="small">ORO</p>
-                        <p class="big">2</p>
+                        <p class="big"><%= medallasOro.reduce((ac, medalla) => ac += medalla.contador, 0); %></p>
                     </div>
                     
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag gold"></p>
-                        <p class="text-in-medaltag verysmall">Excelente pregunta</p>
-                    </div>
-                    <div class="medal-tag">
-                        <p class="medal-in-medaltag gold"></p>
-                        <p class="text-in-medaltag verysmall">Pregunta famosa</p>
-                    </div>
+                    <% medallasOro.map(medalla => { %>
+                        <div class="medal-tag">
+                            <p class="medal-in-medaltag gold"></p>
+                            <p class="text-in-medaltag verysmall"> <%= medalla.descripcion %> </p>
+
+                            <% if(medalla.contador != 1) { %>
+                            <p class="times-in-medaltag"> x<%= medalla.contador %></p>
+                            <% } %>
+
+
+                        </div>
+
+                    <% }) %>
                 </div>
 <!-- 
 

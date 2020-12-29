@@ -149,10 +149,17 @@ app.get("/usuarios/perfil/:id", function (request, response) {
                             } else {
                                 perfil[0].n_respuestas = respuestas[0].n_respuestas;
 
+                                daoUsuarios.medallas(request.params.id, (err, medallas) => {
+                                
                                 response.render("perfil/perfil", {
-                                    usuario: usuario[0],
-                                    usuarioPerfil: perfil[0]
+                                        usuario: usuario[0],
+                                        usuarioPerfil: perfil[0],
+                                        medallasBronce: medallas["bronce"],
+                                        medallasPlata: medallas["plata"],
+                                        medallasOro: medallas["oro"]
+                                    });
                                 });
+
                             }
                         });
                     }
@@ -168,7 +175,10 @@ app.get("/preguntas", function (request, response) {
         if(err) {
             console.warn(err);
         } else {
+            preguntas = utils.reducirCuerpoA150(preguntas);
+
             daoEtiquetas.listarEtiquetas((err, etiquetas) => {
+                console.warn(preguntas);
                 if(err) {
                     console.warn(err);
                 } else {

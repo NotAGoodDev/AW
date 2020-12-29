@@ -12,6 +12,8 @@ module.exports = {
  
 
 /*
+
+
 DROP DATABASE IF EXISTS P404;
 CREATE DATABASE P404;
 
@@ -33,6 +35,7 @@ CREATE TABLE preguntas (
     titulo VARCHAR(20) NOT NULL,
     cuerpo VARCHAR(1000) NOT NULL,
     fecha DATE NOT NULL,
+    visitas INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_usu) REFERENCES usuarios(id)
    );
 
@@ -47,16 +50,17 @@ CREATE TABLE preguntas (
 
  CREATE TABLE medallas (
     id INT PRIMARY KEY,
-    descripcion VARCHAR(100) NOT NULL
+    descripcion VARCHAR(100) NOT NULL,
+    tipo ENUM('bronce', 'plata', 'oro')
    );
 
  CREATE TABLE usuario_medallas(
     id INT NOT NULL,
-    email VARCHAR(20) NOT NULL,
+    id_usu INT NOT NULL,
     fecha DATE NOT NULL,
-    FOREIGN KEY (email) REFERENCES usuarios(email),
     FOREIGN KEY (id) REFERENCES medallas(id),
-    PRIMARY KEY(id, email)
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id),
+    PRIMARY KEY(id, id_usu, fecha)
     );
 
 
@@ -94,11 +98,11 @@ INSERT INTO `usuarios` VALUES (2, 'pedro404@404.com', 70, 'CCCCCCCC', 'pedro', '
 INSERT INTO `usuarios` VALUES (3, 'anamaria@404.com', 300, 'DDDDDDDD', 'ana', '/img/users/ana.png', '1990/06/04');
 
 
-INSERT INTO `preguntas` VALUES (0, 0, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24');
-INSERT INTO `preguntas` VALUES (1, 1, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
-INSERT INTO `preguntas` VALUES (2, 3, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
-INSERT INTO `preguntas` VALUES (3, 1, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
-INSERT INTO `preguntas` VALUES (4, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13');
+INSERT INTO `preguntas` VALUES (0, 0, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0);
+INSERT INTO `preguntas` VALUES (1, 1, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (2, 3, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
+INSERT INTO `preguntas` VALUES (3, 1, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (4, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
 
 
 INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
@@ -110,5 +114,42 @@ INSERT INTO `etiquetas` VALUES (5, 3, 'node');
 INSERT INTO `etiquetas` VALUES (6, 4, 'javascript');
 INSERT INTO `etiquetas` VALUES (7, 4, 'css');
 INSERT INTO `etiquetas` VALUES (8, 1, 'express');
+
+INSERT INTO `medallas` VALUES (0, 'Estudiante', 'bronce');
+INSERT INTO `medallas` VALUES (1, 'Pregunta interesante', 'bronce');
+INSERT INTO `medallas` VALUES (2, 'Buena pregunta', 'plata');
+INSERT INTO `medallas` VALUES (3, 'Excelente pregunta', 'oro');
+INSERT INTO `medallas` VALUES (4, 'Pregunta popular', 'bronce');
+INSERT INTO `medallas` VALUES (5, 'Pregunta destacada', 'plata');
+INSERT INTO `medallas` VALUES (6, 'Pregunta famosa', 'oro');
+INSERT INTO `medallas` VALUES (7, 'Respuesta interesante', 'bronce');
+INSERT INTO `medallas` VALUES (8, 'Buena respuesta', 'plata');
+INSERT INTO `medallas` VALUES (9, 'Respuesta famosa', 'oro');
+
+INSERT INTO `usuario_medallas` VALUES (0, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (0, 0, CURDATE() + 1);
+INSERT INTO `usuario_medallas` VALUES (0, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (0, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (0, 3, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (1, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (1, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (1, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (2, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (2, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (3, 0, CURDATE());
+
+INSERT INTO `usuario_medallas` VALUES (4, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (4, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (4, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (5, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (5, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (6, 0, CURDATE());
+
+INSERT INTO `usuario_medallas` VALUES (7, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (7, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (7, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (8, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (8, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (9, 0, CURDATE());
 
 */

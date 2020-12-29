@@ -40,16 +40,26 @@ function gestionarImagen(imagen, email) {
     }
 }
 
-function mostrarReducido(texto){
-    if(texto.length > 150){
-        texto = texto.slice(0, 150);
+function reducirCuerpoA150(array){
+
+    if(array instanceof Array && array.length > 0) {
+        array.forEach(pregunta => {
+            if(pregunta.cuerpo.length > 150){
+                pregunta.cuerpo = pregunta.cuerpo.slice(0, 150) + "...";
+            }
+        })
+    } else {
+        console.warn(informar("NO ESTÁS PASANDO UN ARRAY A reducirCuerpoA150"));
     }
-    return texto;
+
+
+    return array;
 }
 
 module.exports = {
     informar,
     passCoincide,
     passCorrecta,
-    gestionarImagen
+    gestionarImagen,
+    reducirCuerpoA150
 }

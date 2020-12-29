@@ -141,6 +141,52 @@ class DAOUsuarios {
             }
         })
     }
+
+    medallas(id, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query =
+                "SELECT UM.id, UM.fecha, M.descripcion, M.tipo FROM USUARIO_MEDALLAS AS UM"
+                + " JOIN MEDALLAS AS M"
+                + " ON UM.id = M.id"
+                + " WHERE id_usu = ?"
+                + " ORDER BY DESCRIPCION";
+
+                connection.query(
+                    query,
+                    [id],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            let medallas = [];
+                            medallas["bronce"] = [];
+                            medallas["plata"] = [];
+                            medallas["oro"] = [];
+                            
+                            rows.map((medalla, i) => {
+                                if( i == 0 || medalla.descripcion != rows[i - 1].descripcion) {
+                                    medalla.contador = 1;
+                                    medallas[ medalla.tipo ].push(medalla);
+                                }
+
+                                else {
+                                    let ultimaPosicion = medallas[ medalla.tipo ].length - 1;
+                                    medallas[ medalla.tipo ][ ultimaPosicion ].contador++;
+                                }
+
+                            })
+
+                            callback(null, medallas);
+                        }
+                    }
+                )
+            }
+        })
+    }
 }
 
 module.exports = DAOUsuarios;

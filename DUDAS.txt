@@ -1,0 +1,11 @@
+DAOEtiquetas.js
+    - ¿Se considera lógica de negocio en programación web hacer un forEach en el DAO?
+
+DAOUsuarios.js
+    - 
+
+DAOPreguntas.js
+    - 
+
+DAORespuestas.js
+    - 
