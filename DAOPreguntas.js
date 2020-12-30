@@ -54,6 +54,28 @@ class DAOPreguntas {
             }
         })
     }
+
+    buscar(texto, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT * FROM PREGUNTAS WHERE titulo LIKE ? OR CUERPO LIKE ?";
+                connection.query(
+                    query,
+                    ['%' + texto + '%', '%' + texto + '%'],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error(err));
+                        } else {
+                            callback(null, rows);
+                        }
+                    }
+                )
+            }
+        })
+    }
 }
 
 module.exports = DAOPreguntas;

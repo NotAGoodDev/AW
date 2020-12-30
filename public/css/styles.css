@@ -125,7 +125,7 @@ input {
 
 input:focus {
     border: 1px solid #3bc697;
-    border-radius: 10px;
+    border-radius: 15px;
     outline: none;
 }
 
@@ -245,6 +245,7 @@ img[src$="tive.png"]:hover {
 .button {
     width: 120px;
     height: 20px;
+    min-height: 30px;
     border-radius: 15px;
     margin-top: 20px;
     padding: 5px;
@@ -259,6 +260,7 @@ img[src$="tive.png"]:hover {
 
 .button-long {
     width: 200px;
+    min-height: 30px;
     height: 20px;
     border-radius: 15px;
     margin-top: 20px;
@@ -275,6 +277,7 @@ img[src$="tive.png"]:hover {
 .button-special {       /* NO MARGIN TOP, BUTTONS LIKE SEARCH THAT DONT NEED MARGIN... */
     width: 150px;
     height: 20px;
+    min-height: 30px;
     border-radius: 15px;
     padding: 5px;
     display: flex;
@@ -290,6 +293,7 @@ img[src$="tive.png"]:hover {
 .button-long-special {
     width: 200px;
     height: 20px;
+    min-height: 30px;
     border-radius: 15px;
     padding: 5px;
     display: flex;
@@ -306,9 +310,11 @@ img[src$="tive.png"]:hover {
 /* ---------- BUSCADOR ---------- */
 
 .search-container {
-    display: flex;
+    height: 30px;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .search {
@@ -327,7 +333,7 @@ img[src$="tive.png"]:hover {
 
 .search:focus {
     border: 1px solid #3bc697;
-    border-radius: 20px;
+    border-radius: 15px;
     outline: none;
 }
 

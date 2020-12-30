@@ -125,7 +125,24 @@ app.get("/", function (request, response) {
     response.redirect("/index");
 })
 
-/* CONTROLADOR */
+app.get("/preguntas/buscar", function (request, response) {
+    response.status(200);
+    daoPreguntas.buscar(request.query.busqueda, (err, preguntas) => {
+        if(err) {
+            console.warn(err);
+        } else {
+
+
+
+            //AQUI VA TODA LA BÚSQUEDA
+
+
+            
+            response.render("buscar", { preguntas: preguntas });
+        }
+    });
+})
+
 app.get("/usuarios/perfil/:id", function (request, response) {
     response.status(200);
 

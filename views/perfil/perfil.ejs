@@ -27,9 +27,11 @@
     </div>
 
     <div class="container">
-        <div class="search-container ">
-            <a href="" class="button-special green text-white">Buscar</a>
-            <input type="text" name="" id="" class="search">
+        <div >
+            <form class="search-container" action="/preguntas/buscar" method="GET">
+                <input type="submit" class="button-special green text-white small" value="Buscar"/>
+                <input type="text" name="busqueda" class="search" placeholder="Buscar por título/cuerpo de la pregunta">
+            </form>
         </div>
 
         <div class="profile-container spaced">
