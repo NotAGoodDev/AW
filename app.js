@@ -19,6 +19,9 @@ const DAOUsuarios = require("./DAOUsuarios");
 const DAOPreguntas = require("./DAOPreguntas");
 const DAORespuestas = require("./DAORespuestas");
 const DAOEtiquetas = require("./DAOEtiquetas");
+const DAOVotos = require("./DAOVotos");
+const { request } = require("http");
+const { response } = require("express");
 
 /* EXPRESS + EJS EN PUBLIC */
 const app = express();
@@ -36,6 +39,7 @@ const daoUsuarios = new DAOUsuarios(pool);
 const daoPreguntas = new DAOPreguntas(pool);
 const daoRespuestas = new DAORespuestas(pool);
 const daoEtiquetas = new DAOEtiquetas(pool);
+const daoVotos = new DAOVotos(pool);
 
 /* USO DE MIDDLEWARES */
 app.use(express.static(staticFiles));       //RECURSOS ESTÁTICOS
@@ -63,17 +67,17 @@ app.get("/RUTA/:id", function (request, response) {
             response.render("EJSView", { nombreEnView: valores });
         }
     });
-})
+});
 
 app.get("/loginout/login", function (request, response) {
     response.status(200);
     response.render("loginout/login");
-})
+});
 
 app.get("/loginout/registro", function (request, response) {
     response.status(200);
     response.render("loginout/registro");
-})
+});
 
 app.post("/loginout/registro", function (request, response) {
     response.status(200);
@@ -104,7 +108,7 @@ app.post("/loginout/registro", function (request, response) {
     } else {
         response.render("loginout/registro");
     }
-})
+});
 
 /* QUITAMOS ESTA VARIABLE CUANDO INICIEMOS SESIÓN */
 const email = "alex@404.COM";
@@ -118,30 +122,202 @@ app.get("/index", function (request, response) {
             response.render("index", { usuario: usuario[0] });
         }
     });
-})
+});
 
 app.get("/", function (request, response) {
     response.status(302);
     response.redirect("/index");
-})
+});
 
-app.get("/preguntas/buscar", function (request, response) {
-    response.status(200);
-    daoPreguntas.buscar(request.query.busqueda, (err, preguntas) => {
+app.get("/preguntas", function (request, response) {
+    daoPreguntas.listarPreguntas((err, preguntas) =>{
         if(err) {
             console.warn(err);
         } else {
-
-
-
-            //AQUI VA TODA LA BÚSQUEDA
-
-
-            
-            response.render("buscar", { preguntas: preguntas });
+            preguntas = utils.reducirCuerpoA150(preguntas);
+            daoEtiquetas.listarEtiquetas((err, etiquetas) => {
+                //console.warn(preguntas);
+                if(err) {
+                    console.warn(err);
+                } else {
+                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas:etiquetas, titulo:"Todas las preguntas"});
+                }
+            });
         }
     });
-})
+});
+
+app.post("/preguntas/busqueda", function (request, response){
+    response.status(200);
+    if(request.body.busqueda !== ""){
+        let ruta="/preguntas/buscar/"+request.body.busqueda;
+        response.redirect(ruta);
+    }else{
+        response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+    }
+});
+
+
+
+app.get("/preguntas/buscar/:id", function (request, response) {
+    response.status(200);
+    daoPreguntas.buscar(request.params.id, (err, preguntas) => {
+        if(err) {
+            console.warn(err);
+        } else {
+            if(preguntas.length == 0){
+                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+            }else{
+                let etiquetasALeer = "";
+                preguntas.forEach(pregunta => {
+                    etiquetasALeer += pregunta.id +" ,";
+                });
+                etiquetasALeer = etiquetasALeer.substring(0, etiquetasALeer.length-1); //para quitar la ultima coma
+                daoEtiquetas.leerPorIdEtiquetas(etiquetasALeer, (err, etiquetas) => {
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        preguntas = utils.reducirCuerpoA150(preguntas);  
+                        response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas, titulo:"Resultado de las búsqueda '" + request.params.id + "'" });
+                    }
+                });
+            }
+        }
+    });
+});
+
+app.get("/preguntas/sinResponder", function (request, response) {
+    daoPreguntas.buscarSinRespuesta((err, preguntas) =>{
+        if(err) {
+            console.warn(err);
+        } else {
+            preguntas = utils.reducirCuerpoA150(preguntas);
+            let etiquetasALeer = "";
+            preguntas.forEach(pregunta => {
+                etiquetasALeer += pregunta.id +" ,";
+            });
+            etiquetasALeer = etiquetasALeer.substring(0, etiquetasALeer.length-1); //para quitar la ultima coma
+            daoEtiquetas.leerPorIdEtiquetas(etiquetasALeer, (err, etiquetas) => {
+                if(err) {
+                    console.warn(err);
+                } else {
+                    preguntas = utils.reducirCuerpoA150(preguntas);  
+                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas , titulo:"Preguntas sin responder"});
+                }
+            });
+        }
+    });
+});
+
+app.get("/preguntas/etiquetadas/:etiqueta", function (request, response) {
+    daoPreguntas.leerPorEtiqueta(request.params.etiqueta, (err, preguntas) =>{
+        if(err) {
+            console.warn(err);
+        } else {
+            if(preguntas.length == 0){
+                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+            }else{
+                let etiquetasALeer = "";
+                preguntas.forEach(pregunta => {
+                    etiquetasALeer += pregunta.id +" ,";
+                });
+                etiquetasALeer = etiquetasALeer.substring(0, etiquetasALeer.length-1); //para quitar la ultima coma
+                daoEtiquetas.leerPorIdEtiquetas(etiquetasALeer, (err, etiquetas) => {
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        preguntas = utils.reducirCuerpoA150(preguntas);  
+                        response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas, titulo:"Preguntas con la etiqueta [" + request.params.etiqueta + "]" });
+                    }
+                });
+            }
+        }
+    });
+});
+
+
+app.get("/preguntas/formular", function (request, response) {
+    response.render("preguntas/formular");
+});
+
+app.get("/preguntas/prueba", function (request, response) {
+    response.render("/preguntas/mostrar", {});
+});
+
+app.post("/preguntas/formular/procesar", function (request, response){
+    response.status(200);
+    if(request.body.titulo !== "" && request.body.cuerpo !== ""){
+        
+            daoPreguntas.insertarPregunta(0,request.body.titulo, request.body.cuerpo, (err, rows) => {
+                if(err) {
+                    console.warn(err);
+                } else {
+                    if(request.body.etiquetas !== ""){
+                        console.log("ahora a etiquetas");
+                        let etiquetas = utils.procesarEtiquetas(request.body.etiquetas);
+                        console.log(etiquetas);
+                        etiquetas.forEach(etiqueta => {
+                            daoEtiquetas.insertarEtiqueta(rows.insertId, etiqueta, (err, ok) => {
+                                if(err) {
+                                    console.warn(err);
+                                }
+                            });    
+                        });
+                    }
+                    response.redirect("/preguntas");
+                }
+            });
+        
+
+    }else{
+        response.render("preguntas/formular"); //hacemos algo más?
+    }
+});
+
+
+app.get("/preguntas/vista/:id", function (request, response) {
+    response.status(200);
+    daoPreguntas.buscarPorId(request.params.id, (err, pregunta) => {
+        if(err) {
+            console.warn(err);
+        } else {
+            if(pregunta.length == 0){
+                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+            }else{
+                daoEtiquetas.leerPorIdEtiquetas(pregunta[0].id, (err, etiquetas) => {
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        daoVotos.contarDePreguntas(pregunta[0].id, (err, n_votos) => {
+                            if(err) {
+                                console.warn(err);
+                            } else {
+                                daoRespuestas.listarRespuestas(pregunta[0].id,(err, respuestas) => {
+                                    if(err) {
+                                        console.warn(err);
+                                    } else {
+                                        response.render("preguntas/funciona", {pregunta: pregunta[0], n_votos_preg: n_votos[0].n_votos, etiquetas: etiquetas, respuestas: respuestas});
+                                        /*let n_votos_resp = [];
+                                        respuestas.forEach(respuesta =>{
+                                            daoVotos.contarDeRespuestas(respuesta.id,(err, votos) => {
+                                                if(err) {
+                                                    console.warn(err);
+                                                } else {
+                                                    n_votos_resp.push(votos[0].n_votos);
+                                                }
+                                            });
+                                        })*/
+                                       
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
+});
 
 app.get("/usuarios/perfil/:id", function (request, response) {
     response.status(200);
@@ -187,24 +363,7 @@ app.get("/usuarios/perfil/:id", function (request, response) {
     });
 });
 
-app.get("/preguntas", function (request, response) {
-    daoPreguntas.listarPreguntas((err, preguntas) =>{
-        if(err) {
-            console.warn(err);
-        } else {
-            preguntas = utils.reducirCuerpoA150(preguntas);
 
-            daoEtiquetas.listarEtiquetas((err, etiquetas) => {
-                console.warn(preguntas);
-                if(err) {
-                    console.warn(err);
-                } else {
-                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas:etiquetas});
-                }
-            });
-        }
-    });
-})
 
 
 

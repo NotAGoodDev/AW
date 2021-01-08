@@ -6,21 +6,21 @@
 
 "use strict"
 
-class DAORespuestas {
+class DAOVotos {
 
     constructor(pool) {
         this.pool = pool;
     }
 
-    contar(id_usu, callback) {
+    contarDePreguntas(id_pregunta, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT COUNT(id) AS n_respuestas FROM RESPUESTAS WHERE id_usu_resp = ?";
+                const query = "SELECT COUNT(id_pregunta) AS n_votos FROM voto_preg WHERE id_pregunta = ?";
                 connection.query(
                     query,
-                    [id_usu],
+                    [id_pregunta],
                     (err, rows) => {
                         connection.release();
                         if (err) {
@@ -34,15 +34,16 @@ class DAORespuestas {
         })
     }
 
-    listarRespuestas(id_preg, callback) {
+
+    contarDeRespuestas(id_respuesta, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT respuestas.texto, respuestas.fecha, respuestas.id, usuarios.nombre, usuarios.imagen FROM respuestas JOIN usuarios on respuestas.id_usu_resp = usuarios.id WHERE respuestas.id_preg = ?;";
+                const query = "SELECT COUNT(id_respuesta) AS n_votos FROM voto_resp WHERE id_respuesta = ?";
                 connection.query(
                     query,
-                    [id_preg],
+                    [id_respuesta],
                     (err, rows) => {
                         connection.release();
                         if (err) {
@@ -57,4 +58,4 @@ class DAORespuestas {
     }
 }
 
-module.exports = DAORespuestas;
+module.exports = DAOVotos;

@@ -30,7 +30,7 @@ CREATE TABLE usuarios (
    );
 
 CREATE TABLE preguntas (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_usu INT NOT NULL,
     titulo VARCHAR(20) NOT NULL,
     cuerpo VARCHAR(1000) NOT NULL,
@@ -44,9 +44,12 @@ CREATE TABLE preguntas (
     id_preg INT NOT NULL,
     id_usu_resp INT NOT NULL,
     texto VARCHAR(1000) NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY (id_preg) REFERENCES preguntas(id),
     FOREIGN KEY (id_usu_resp) REFERENCES usuarios(id)
    );
+
+
 
  CREATE TABLE medallas (
     id INT PRIMARY KEY,
@@ -65,28 +68,28 @@ CREATE TABLE preguntas (
 
 
 CREATE TABLE etiquetas (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_preg INT NOT NULL,
     etiqueta VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_preg) REFERENCES preguntas(id)
 );
 
 CREATE TABLE voto_preg (
-    email_usuario VARCHAR(20) NOT NULL,
+    id_usu INT NOT NULL,
     id_pregunta INT NOT NULL,
     voto BOOLEAN NOT NULL,
-    FOREIGN KEY (email_usuario) REFERENCES usuarios(email),
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id),
     FOREIGN KEY (id_pregunta) REFERENCES preguntas(id),
-    PRIMARY KEY(email_usuario, id_pregunta) 
+    PRIMARY KEY(id_usu, id_pregunta) 
 );
 
 CREATE TABLE voto_resp (
-    email_usuario VARCHAR(20) NOT NULL,
+    id_usu INT NOT NULL,
     id_respuesta INT NOT NULL,
     voto BOOLEAN NOT NULL,
-    FOREIGN KEY (email_usuario) REFERENCES usuarios(email),
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id),
     FOREIGN KEY (id_respuesta) REFERENCES respuestas(id),
-    PRIMARY KEY(email_usuario, id_respuesta) 
+    PRIMARY KEY(id_usu, id_respuesta) 
 );
 
 
@@ -99,21 +102,25 @@ INSERT INTO `usuarios` VALUES (3, 'anamaria@404.com', 300, 'DDDDDDDD', 'ana', '/
 
 
 INSERT INTO `preguntas` VALUES (0, 0, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0);
-INSERT INTO `preguntas` VALUES (1, 1, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
-INSERT INTO `preguntas` VALUES (2, 3, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
-INSERT INTO `preguntas` VALUES (3, 1, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
-INSERT INTO `preguntas` VALUES (4, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 3, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
+INSERT INTO `preguntas` VALUES (0, 1, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
 
+INSERT INTO `respuestas` VALUES (0, 1, 2, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
+INSERT INTO `respuestas` VALUES (1, 1, 0, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04');
+INSERT INTO `respuestas` VALUES (2, 3, 0, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
+INSERT INTO `respuestas` VALUES (3, 3, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
 
 INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
-INSERT INTO `etiquetas` VALUES (1, 1, 'html');
-INSERT INTO `etiquetas` VALUES (2, 1, 'css');
-INSERT INTO `etiquetas` VALUES (3, 2, 'javascript');
-INSERT INTO `etiquetas` VALUES (4, 3, 'javascript');
-INSERT INTO `etiquetas` VALUES (5, 3, 'node');
-INSERT INTO `etiquetas` VALUES (6, 4, 'javascript');
-INSERT INTO `etiquetas` VALUES (7, 4, 'css');
-INSERT INTO `etiquetas` VALUES (8, 1, 'express');
+INSERT INTO `etiquetas` VALUES (0, 1, 'html');
+INSERT INTO `etiquetas` VALUES (0, 1, 'css');
+INSERT INTO `etiquetas` VALUES (0, 2, 'javascript');
+INSERT INTO `etiquetas` VALUES (0, 3, 'javascript');
+INSERT INTO `etiquetas` VALUES (0, 3, 'node');
+INSERT INTO `etiquetas` VALUES (0, 4, 'javascript');
+INSERT INTO `etiquetas` VALUES (0, 4, 'css');
+INSERT INTO `etiquetas` VALUES (0, 1, 'express');
 
 INSERT INTO `medallas` VALUES (0, 'Estudiante', 'bronce');
 INSERT INTO `medallas` VALUES (1, 'Pregunta interesante', 'bronce');

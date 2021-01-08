@@ -1,0 +1,108 @@
+<!-- Figura 9 -->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>404 grupo 26</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="icon" type="image/png" href="/img/favicon.png">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-buttons">
+                <a href="/preguntas" class="button-long green text-white">Preguntas</a>
+                <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
+                <a href="../usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
+            </div>
+    
+            <a href="../index.html"><img src="/img/logo.png" alt="" class="header-logo"></a>
+    
+            <div class="header-user">
+                <img src="/img/users/U1.png" alt="">
+                <p class="titule-page text-white">Midoriya I.</p>
+                <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
+            </div>
+        </div>
+
+    <div class="container">
+        <div class="search-container">
+            <form action="/preguntas/busqueda" method="post" class="formSearch">
+                <input type="submit" class="button-special green text-white" value="Buscar">
+                <input type="text" name="busqueda" id="" class="search">
+            </form>
+        </div>
+
+        <div class="title big spaced">
+            <%= pregunta.titulo %>
+        </div>
+
+        <div class="question-container">
+            <div class="visit-votes-container spaced">
+                <div class="votes-container">
+                    <p><%= n_votos_preg %> votos</p>
+                    <div class="vote-icon">
+                        <img src="/img/positive.png" alt="">
+                    </div>
+                    <div class="vote-icon">
+                        <img src="/img/negative.png" alt="">
+                    </div>
+                </div>
+                <p>Vista <%= pregunta.visitas %> veces</p>
+            </div>
+
+            <div class="answer-question-text small">
+                <%= pregunta.cuerpo %>
+            </div>
+
+            <div class="tags-container">
+                <%if(etiquetas[0] != undefined){ %>
+                    <% etiquetas[0].forEach(etiq =>{ let ruta = "/preguntas/etiquetadas/" + etiq; %>
+                    <a class="tag red text-white" href=<%=ruta%>  ><%=etiq%></a>
+                    <% }); %>
+                <% }; %>
+            </div>
+
+            <div class="info-container">
+                <div class="userquestion-info">
+                    <p class="small">Formulada el <%= pregunta.fecha.getDate() %>/<%= pregunta.fecha.getMonth()+1 %>/<%= pregunta.fecha.getFullYear() %> </p>
+                    <img src= <%= pregunta.imagen %> alt="">
+                    <p class="very-small"><%= pregunta.nombre %></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="spaced">
+            <p class="big"><%= respuestas.length %> Respuestas</p>
+        </div>
+        <% respuestas.forEach(respuesta => { %>
+        <div class="answer-container">
+            <div class="visit-votes-container spaced">
+                <div class="votes-container">
+                    <p><%= n_votos_preg %> votos</p>
+                    <div class="vote-icon">
+                        <img src="/img/positive.png" alt="">
+                    </div>
+                    <div class="vote-icon">
+                        <img src="/img/negative.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="answer-question-text verysmall">
+                <%= respuesta.texto %>
+            </div>
+
+            <div class="info-container">
+                <div class="userquestion-info">
+                    <p class="small">Formulada el <%= respuesta.fecha.getDate() %>/<%= respuesta.fecha.getMonth()+1 %>/<%= respuesta.fecha.getFullYear() %> </p>
+                    <img src= <%= respuesta.imagen %> alt="">
+                    <p class="very-small"><%= respuesta.nombre %></p>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</body>
+
+</html>

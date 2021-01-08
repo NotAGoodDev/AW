@@ -231,7 +231,7 @@ img[src$="tive.png"]:hover {
 
 .title{
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .title:hover {
@@ -335,6 +335,12 @@ img[src$="tive.png"]:hover {
     border: 1px solid #3bc697;
     border-radius: 15px;
     outline: none;
+}
+
+.formSearch{
+    display: flex;
+    flex-direction: row;
+    
 }
 
 

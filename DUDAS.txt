@@ -1,6 +1,6 @@
 DAOEtiquetas.js
     - ¿Se considera lógica de negocio en programación web hacer un forEach en el DAO?
-
+    -leerPorIdEtiquetas paso un string, no la he podido hacer parametrica, no me ha dejado 
 DAOUsuarios.js
     - 
 
@@ -9,3 +9,10 @@ DAOPreguntas.js
 
 DAORespuestas.js
     - 
+
+preguntas.ejs
+    - las imagenes las controlamos ya con la funcion del utils no?
+    -he metido el searchbox en un form para especificar que es post y he cambiado el margin de search en el css
+
+app.js
+    -que hacemos cuando no nos rellenan bien en formular???

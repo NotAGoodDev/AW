@@ -1,5 +1,7 @@
 //Funciones LOGICAS
 
+const { text } = require("body-parser");
+
 function informar(texto){
     let guiones = "";
 
@@ -56,10 +58,24 @@ function reducirCuerpoA150(array){
     return array;
 }
 
+function procesarEtiquetas (texto){
+    let etiquetasProcesadas= [];
+    console.log(texto);
+    if(texto.length > 0){
+        texto.split("@").forEach( x => {                //Dividimos por espacios y recorremos
+            etiquetasProcesadas.push(x.trim());
+        })
+        etiquetasProcesadas.shift();  //hay un valor basura al principio
+    }
+
+    return etiquetasProcesadas;
+}
+
 module.exports = {
     informar,
     passCoincide,
     passCorrecta,
     gestionarImagen,
-    reducirCuerpoA150
+    reducirCuerpoA150,
+    procesarEtiquetas
 }

@@ -11,8 +11,8 @@
 <body>
     <div class="header">
         <div class="header-buttons">
-            <a href="../preguntas/preguntas.html" class="button-long green text-white">Preguntas</a>
-            <a href="../sinresponder/sinresponder.html" class="button-long green text-white">Sin responder</a>
+            <a href="/preguntas" class="button-long green text-white">Preguntas</a>
+            <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
             <a href="../usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
         </div>
 
@@ -27,17 +27,19 @@
 
     <div class="container">
         <div class="search-container">
-            <a href="" class="button-special green text-white">Buscar</a>
-            <input type="text" name="" id="" class="search">
+            <form action="/preguntas/busqueda" method="post" class="formSearch">
+                <input type="submit" class="button-special green text-white" value="Buscar">
+                <input type="text" name="busqueda" id="" class="search">
+            </form>
         </div>
 
         <div class="title big spaced">
-            Todas las preguntas
+            <%= titulo %>
         </div>
 
-        <div class="n-question spaced">
+        <div class="n-question">
             <p><%= preguntas.length %> preguntas</p>
-            <a href="formular.html" class="button-long-special green text-white">Formular una pregunta</a>
+            <a href="/preguntas/formular" class="button-long-special green text-white">Formular una pregunta</a>
         </div>
         
         <div class="question-container">
@@ -52,15 +54,15 @@
                     </div>
                     <div>
                         <%if(etiquetas[preg.id] != undefined){ %>
-                            <% etiquetas[preg.id].forEach(etiq =>{ %>
-                            <a href="etiquetadas.html"  class="tag green text-white"><%=etiq%></a>
+                            <% etiquetas[preg.id].forEach(etiq =>{ let ruta = "/preguntas/etiquetadas/" + etiq; %>
+                            <a href=<%=ruta%>  class="tag green text-white"><%=etiq%></a>
                             <% }); %>
                         <% }; %>
                     </div>
                 </div>
                 <div class="info-container">
                     <div class="userquestion-info">
-                        <p class="small">Formulada el <%= preg.fecha %></p>
+                        <p class="small">Formulada el <%= preg.fecha.getDate() %>/<%= preg.fecha.getMonth()+1 %>/<%= preg.fecha.getFullYear() %> </p>
                         <img src= <%= preg.imagen %> alt="">
                         <p class="very-small"><%= preg.nombre %></p>
                     </div>
