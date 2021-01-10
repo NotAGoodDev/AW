@@ -12,9 +12,9 @@
 <body>
     <div class="header">
         <div class="header-buttons">
-            <a href="preguntas/preguntas.html" class="button-long green text-white">Preguntas</a>
-            <a href="sinresponder/sinresponder.html" class="button-long green text-white">Sin responder</a>
-            <a href="usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
+            <a href="/preguntas" class="button-long green text-white">Preguntas</a>
+            <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
+            <a href="/usuarios" class="button-long green text-white">Usuarios</a>
         </div>
 
         <a href="index.html"><img src="/img/logo.png" alt="" class="header-logo"></a>
@@ -28,8 +28,10 @@
 
     <div class="container">
         <div class="search-container">
-            <a href="" class="button-special green text-white">Buscar</a>
-            <input type="text" name="" id="" class="search">
+            <form action="/preguntas/busqueda" method="post" class="formSearch">
+                <input type="submit" class="button-special green text-white" value="Buscar">
+                <input type="text" name="busqueda" id="" class="search">
+            </form>
         </div>
     </div>
 </body>

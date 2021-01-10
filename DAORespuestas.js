@@ -39,7 +39,7 @@ class DAORespuestas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT respuestas.texto, respuestas.fecha, respuestas.id, usuarios.nombre, usuarios.imagen FROM respuestas JOIN usuarios on respuestas.id_usu_resp = usuarios.id WHERE respuestas.id_preg = ?;";
+                const query = "SELECT respuestas.texto, respuestas.id_usu_resp AS id_usu, respuestas.fecha, respuestas.id, usuarios.nombre, usuarios.imagen FROM respuestas JOIN usuarios on respuestas.id_usu_resp = usuarios.id WHERE respuestas.id_preg = ?;";
                 connection.query(
                     query,
                     [id_preg],

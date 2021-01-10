@@ -159,4 +159,23 @@ INSERT INTO `usuario_medallas` VALUES (8, 0, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (8, 1, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (9, 0, CURDATE());
 
+INSERT INTO `voto_preg` VALUES (2, 1, 0);
+INSERT INTO `voto_preg` VALUES (2, 2, 0);
+INSERT INTO `voto_preg` VALUES (3, 3, 1);
+INSERT INTO `voto_preg` VALUES (3, 2, 0);
+INSERT INTO `voto_preg` VALUES (1, 1, 1);
+INSERT INTO `voto_preg` VALUES (1, 2, 1);
+INSERT INTO `voto_preg` VALUES (1, 3, 1);
+INSERT INTO `voto_preg` VALUES (1, 4, 1);
+
+INSERT INTO `voto_resp` VALUES (2, 1, 0);
+INSERT INTO `voto_resp` VALUES (2, 2, 0);
+INSERT INTO `voto_resp` VALUES (3, 3, 1);
+INSERT INTO `voto_resp` VALUES (3, 2, 0);
+INSERT INTO `voto_resp` VALUES (1, 1, 1);
+INSERT INTO `voto_resp` VALUES (1, 2, 1);
+INSERT INTO `voto_resp` VALUES (1, 3, 1);
+INSERT INTO `voto_resp` VALUES (1, 4, 1);
+
+
 */

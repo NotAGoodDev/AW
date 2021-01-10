@@ -17,7 +17,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id ORDER BY preguntas.fecha DESC;";
+                const query = "SELECT usuarios.nombre,usuarios.id AS id_usu, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id ORDER BY preguntas.fecha DESC;";
                 connection.query(
                     query,
                     (err, rows) => {
@@ -60,7 +60,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id WHERE titulo LIKE ? OR CUERPO LIKE ? ORDER BY usuarios.nombre ASC ";
+                const query = "SELECT usuarios.nombre, usuarios.id AS id_usu, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id WHERE titulo LIKE ? OR CUERPO LIKE ? ORDER BY usuarios.nombre ASC ";
                 connection.query(
                     query,
                     ['%' + texto + '%', '%' + texto + '%'],
@@ -83,7 +83,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT preguntas.visitas, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha, usuarios.nombre, usuarios.imagen FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id WHERE preguntas.id=?; ";
+                const query = "SELECT preguntas.visitas, preguntas.id, usuarios.id AS id_usu, preguntas.titulo, preguntas.cuerpo, preguntas.fecha, usuarios.nombre, usuarios.imagen FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id WHERE preguntas.id=?; ";
                 connection.query(
                     query,
                     [id],
@@ -109,7 +109,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM preguntas LEFT JOIN respuestas on preguntas.id = respuestas.id_preg JOIN usuarios on preguntas.id_usu = usuarios.id WHERE respuestas.id_preg IS NULL ";
+                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, usuarios.id AS id_usu, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM preguntas LEFT JOIN respuestas on preguntas.id = respuestas.id_preg JOIN usuarios on preguntas.id_usu = usuarios.id WHERE respuestas.id_preg IS NULL ";
                 connection.query(
                     query,
                     (err, rows) => {
@@ -130,7 +130,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT usuarios.nombre, usuarios.imagen, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM preguntas JOIN etiquetas on preguntas.id = etiquetas.id_preg JOIN usuarios on preguntas.id_usu = usuarios.id WHERE etiquetas.etiqueta = ?;";
+                const query = "SELECT usuarios.nombre, usuarios.imagen, usuarios.id AS id_usu, preguntas.id, preguntas.titulo, preguntas.cuerpo, preguntas.fecha FROM preguntas JOIN etiquetas on preguntas.id = etiquetas.id_preg JOIN usuarios on preguntas.id_usu = usuarios.id WHERE etiquetas.etiqueta = ?;";
                 connection.query(
                     query,
                     [etiqueta],
@@ -169,6 +169,55 @@ class DAOPreguntas {
             }
         })
     }
+ 
+
+    leerVisitas(id_pregunta, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT  preguntas.visitas FROM preguntas WHERE preguntas.id = ?;";
+                connection.query(
+                    query,
+                    [id_pregunta],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            callback(null, rows);
+                        }
+                    }
+                )
+            }
+        })
+    }
+
+
+    
+
+    actualizarVisitas(id_pregunta, visitas, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "UPDATE `preguntas` SET visitas = ? WHERE preguntas.id = ?;";
+                connection.query(
+                    query,
+                    [visitas, id_pregunta],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            callback(null, rows);
+                        }
+                    }
+                )
+            }
+        })
+    }
+
 }
 
 

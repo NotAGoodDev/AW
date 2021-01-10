@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <title>404 grupo 26</title>
         <meta charset="utf-8" />
@@ -14,85 +13,101 @@
             <div class="header-buttons">
                 <a href="/preguntas" class="button-long green text-white">Preguntas</a>
                 <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
-                <a href="../usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
+                <a href="/usuarios" class="button-long green text-white">Usuarios</a>
             </div>
     
-            <a href="../index.html"><img src="/img/logo.png" alt="" class="header-logo"></a>
+            <a href="/"><img src="/img/logo.png" alt="" class="header-logo"></a>
     
             <div class="header-user">
-                <img src="/img/users/U1.png" alt="">
-                <p class="titule-page text-white">Midoriya I.</p>
-                <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
+                <img src="<%= usuario.imagen %>" alt="">
+                <p class="titule-page text-white"> <%= usuario.nombre %> </p>
+                <a href="/loginout/login.html" class="button red text-white">Cerrar sesión</a>
             </div>
         </div>
 
     <div class="container">
         <div class="search-container">
-            <a href="" class="button-special green text-white">Buscar</a>
-            <input type="text" name="" id="" class="search">
+            <form action="/preguntas/busqueda" method="post" class="formSearch">
+                <input type="submit" class="button-special green text-white" value="Buscar">
+                <input type="text" name="busqueda" id="" class="search">
+            </form>
         </div>
 
         <div class="title big spaced">
-            
+            <%= pregunta.titulo %>
         </div>
 
         <div class="question-container">
             <div class="visit-votes-container spaced">
                 <div class="votes-container">
-                    <p>0 votos</p>
+                    <p><%= n_votos_preg %> votos</p>
+                    <% let ruta1positivo = "/preguntas/votarPregunta/" + pregunta.id + "/1" ; %>
+                    <% let ruta1negativo = "/preguntas/votarPregunta/" + pregunta.id + "/0" ; %>
                     <div class="vote-icon">
-                        <img src="../images/positive.png" alt="">
+                        <a href=<%= ruta1positivo %>><img src="/img/positive.png" alt=""></a>
                     </div>
                     <div class="vote-icon">
-                        <img src="../images/negative.png" alt="">
+                        <a href=<%= ruta1negativo %>><img src="/img/negative.png" alt=""></a>
                     </div>
                 </div>
-                <p>Vista 1 veces</p>
+                <p>Vista <%= pregunta.visitas %> veces</p>
             </div>
 
             <div class="answer-question-text small">
-                No acabo de comprender muy bien que hace exactamente
-                y que usos prácticos puede tener
+                <%= pregunta.cuerpo %>
             </div>
 
             <div class="tags-container">
-                <a class="tag red text-white" href="etiquetadas.html">css</a>
-                <a class="tag red text-white" href="etiquetadas.html">html</a>
+                <%if(etiquetas != undefined){ %>
+                    <% etiquetas.forEach(etiq =>{ let ruta = "/preguntas/etiquetadas/" + etiq; %>
+                    <a class="tag red text-white" href=<%=ruta%>  ><%=etiq%></a>
+                    <% }); %>
+                <% }; %>
             </div>
 
             <div class="info-container">
                 <div class="userquestion-info">
-                    <p class="small">Formulada el 5/11/2020</p>
-                    <img src="../images/users/U1.png" alt="">
-                    <p class="very-small">Roberto</p>
+                    <p class="small">Formulada el <%= pregunta.fecha.getDate() %>/<%= pregunta.fecha.getMonth()+1 %>/<%= pregunta.fecha.getFullYear() %> </p>
+                    <img src= <%= pregunta.imagen %> alt="">
+                    <% let ruta3= "/usuarios/perfil/" + pregunta.id_usu ; %>
+                    <a class="very-small titulo" href=<%= ruta3 %>><%= pregunta.nombre %></a>
                 </div>
             </div>
         </div>
 
         <div class="spaced">
-            <p class="big">1 Respuestas</p>
+            <p class="big"><%= respuestas.length %> Respuestas</p>
         </div>
-
+        <% respuestas.forEach((respuesta, indice) => { %>
         <div class="answer-container">
             <div class="visit-votes-container spaced">
                 <div class="votes-container">
-                    <p>0 votos</p>
+                    <p><%= n_votos_resp_positivos[indice] - n_votos_resp_negativos[indice] %> votos</p>
+                    <% let ruta2positivo = "/preguntas/votarRespuesta/" + respuesta.id + "/1/" + pregunta.id; %>
+                    <% let ruta2negativo = "/preguntas/votarRespuesta/" + respuesta.id + "/0/" + pregunta.id; %>
                     <div class="vote-icon">
-                        <img src="../images/positive.png" alt="">
+                        <a href=<%= ruta2positivo %>><img src="/img/positive.png" alt=""></a>
                     </div>
                     <div class="vote-icon">
-                        <img src="../images/negative.png" alt="">
+                        <a href=<%= ruta2negativo %>><img src="/img/negative.png" alt=""></a>
                     </div>
                 </div>
             </div>
 
             <div class="answer-question-text verysmall">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eligendi facilis repellat. Voluptatibus,
-                delectus? Ut quisquam architecto tempora, sapiente perferendis officiis voluptatibus voluptates porro
-                recusandae sint odit. Non, reiciendis fugit!
+                <%= respuesta.texto %>
             </div>
 
+            <div class="info-container">
+                <div class="userquestion-info">
+                    <p class="small">Respondida el <%= respuesta.fecha.getDate() %>/<%= respuesta.fecha.getMonth()+1 %>/<%= respuesta.fecha.getFullYear() %> </p>
+                    <img src= <%= respuesta.imagen %> alt="">
+                    <% let ruta4= "/usuarios/perfil/" + respuesta.id_usu ; %>
+                    <a class="very-small titulo" href=<%= ruta4 %>><%= respuesta.nombre %></a>
+                </div>
+            </div>
         </div>
+        <% }); %>
     </div>
 </body>
 

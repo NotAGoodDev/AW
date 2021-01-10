@@ -12,6 +12,30 @@ class DAOEtiquetas {
         this.pool = pool;
     }
 
+
+
+    etiquetaMasRepetida(id_usuario, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT etiquetas.etiqueta, COUNT(etiquetas.etiqueta) AS etiquetaMax FROM etiquetas JOIN preguntas on etiquetas.id_preg=preguntas.id WHERE preguntas.id_usu = ? group by etiquetas.etiqueta ORDER BY etiquetaMax DESC;";
+                connection.query(
+                    query,
+                    [id_usuario],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            callback(null, rows[0]);
+                        }
+                    }
+                )
+            }
+        })
+    }
+
     listarEtiquetas(callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {

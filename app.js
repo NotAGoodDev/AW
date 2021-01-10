@@ -112,6 +112,7 @@ app.post("/loginout/registro", function (request, response) {
 
 /* QUITAMOS ESTA VARIABLE CUANDO INICIEMOS SESIÓN */
 const email = "alex@404.COM";
+const id_usuario = 1;
 
 app.get("/index", function (request, response) {
     response.status(200);
@@ -140,7 +141,7 @@ app.get("/preguntas", function (request, response) {
                 if(err) {
                     console.warn(err);
                 } else {
-                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas:etiquetas, titulo:"Todas las preguntas"});
+                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas:etiquetas, titulo:"Todas las preguntas", usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
                 }
             });
         }
@@ -153,7 +154,7 @@ app.post("/preguntas/busqueda", function (request, response){
         let ruta="/preguntas/buscar/"+request.body.busqueda;
         response.redirect(ruta);
     }else{
-        response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+        response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
     }
 });
 
@@ -166,7 +167,7 @@ app.get("/preguntas/buscar/:id", function (request, response) {
             console.warn(err);
         } else {
             if(preguntas.length == 0){
-                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"} });
             }else{
                 let etiquetasALeer = "";
                 preguntas.forEach(pregunta => {
@@ -178,7 +179,7 @@ app.get("/preguntas/buscar/:id", function (request, response) {
                         console.warn(err);
                     } else {
                         preguntas = utils.reducirCuerpoA150(preguntas);  
-                        response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas, titulo:"Resultado de las búsqueda '" + request.params.id + "'" });
+                        response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas, titulo:"Resultado de las búsqueda '" + request.params.id + "'" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
                     }
                 });
             }
@@ -202,7 +203,7 @@ app.get("/preguntas/sinResponder", function (request, response) {
                     console.warn(err);
                 } else {
                     preguntas = utils.reducirCuerpoA150(preguntas);  
-                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas , titulo:"Preguntas sin responder"});
+                    response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas , titulo:"Preguntas sin responder" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
                 }
             });
         }
@@ -215,7 +216,7 @@ app.get("/preguntas/etiquetadas/:etiqueta", function (request, response) {
             console.warn(err);
         } else {
             if(preguntas.length == 0){
-                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
             }else{
                 let etiquetasALeer = "";
                 preguntas.forEach(pregunta => {
@@ -227,7 +228,7 @@ app.get("/preguntas/etiquetadas/:etiqueta", function (request, response) {
                         console.warn(err);
                     } else {
                         preguntas = utils.reducirCuerpoA150(preguntas);  
-                        response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas, titulo:"Preguntas con la etiqueta [" + request.params.etiqueta + "]" });
+                        response.render("preguntas/preguntas", {preguntas: preguntas, etiquetas: etiquetas, titulo:"Preguntas con la etiqueta [" + request.params.etiqueta + "]" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
                     }
                 });
             }
@@ -237,25 +238,20 @@ app.get("/preguntas/etiquetadas/:etiqueta", function (request, response) {
 
 
 app.get("/preguntas/formular", function (request, response) {
-    response.render("preguntas/formular");
+    response.render("preguntas/formular",  {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
 });
 
-app.get("/preguntas/prueba", function (request, response) {
-    response.render("/preguntas/mostrar", {});
-});
 
 app.post("/preguntas/formular/procesar", function (request, response){
     response.status(200);
     if(request.body.titulo !== "" && request.body.cuerpo !== ""){
         
-            daoPreguntas.insertarPregunta(0,request.body.titulo, request.body.cuerpo, (err, rows) => {
+            daoPreguntas.insertarPregunta(2,request.body.titulo, request.body.cuerpo, (err, rows) => {
                 if(err) {
                     console.warn(err);
                 } else {
                     if(request.body.etiquetas !== ""){
-                        console.log("ahora a etiquetas");
                         let etiquetas = utils.procesarEtiquetas(request.body.etiquetas);
-                        console.log(etiquetas);
                         etiquetas.forEach(etiqueta => {
                             daoEtiquetas.insertarEtiqueta(rows.insertId, etiqueta, (err, ok) => {
                                 if(err) {
@@ -270,11 +266,29 @@ app.post("/preguntas/formular/procesar", function (request, response){
         
 
     }else{
-        response.render("preguntas/formular"); //hacemos algo más?
+        response.render("preguntas/formular", {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}}); //hacemos algo más?
     }
 });
 
-
+app.get("/preguntas/visitas/:id", function (request, response) {
+    response.status(200);
+    daoPreguntas.leerVisitas(request.params.id, (err, visitas) => {
+        if(err) {
+            console.warn(err);
+        } else {
+            if(visitas[0] !== undefined){
+                let visit = visitas[0].visitas +1;
+                daoPreguntas.actualizarVisitas(request.params.id,visit, (err, rows) => {
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        response.redirect("/preguntas/vista/" + request.params.id);   
+                    }
+                }); 
+            }
+        }
+    });
+});
 app.get("/preguntas/vista/:id", function (request, response) {
     response.status(200);
     daoPreguntas.buscarPorId(request.params.id, (err, pregunta) => {
@@ -282,38 +296,199 @@ app.get("/preguntas/vista/:id", function (request, response) {
             console.warn(err);
         } else {
             if(pregunta.length == 0){
-                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" });
+                response.render("preguntas/preguntas", {preguntas: [], etiquetas: [], titulo:"Ningún resultado" , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});
             }else{
                 daoEtiquetas.leerPorIdEtiquetas(pregunta[0].id, (err, etiquetas) => {
                     if(err) {
                         console.warn(err);
                     } else {
-                        daoVotos.contarDePreguntas(pregunta[0].id, (err, n_votos) => {
+                        daoVotos.contarDePreguntas(pregunta[0].id,1, (err, n_votos_pos) => {
                             if(err) {
                                 console.warn(err);
                             } else {
-                                daoRespuestas.listarRespuestas(pregunta[0].id,(err, respuestas) => {
+                                daoVotos.contarDePreguntas(pregunta[0].id,0, (err, n_votos_neg) => {
                                     if(err) {
                                         console.warn(err);
                                     } else {
-                                        response.render("preguntas/funciona", {pregunta: pregunta[0], n_votos_preg: n_votos[0].n_votos, etiquetas: etiquetas, respuestas: respuestas});
-                                        /*let n_votos_resp = [];
-                                        respuestas.forEach(respuesta =>{
-                                            daoVotos.contarDeRespuestas(respuesta.id,(err, votos) => {
-                                                if(err) {
-                                                    console.warn(err);
-                                                } else {
-                                                    n_votos_resp.push(votos[0].n_votos);
-                                                }
-                                            });
-                                        })*/
-                                       
+                                        daoRespuestas.listarRespuestas(pregunta[0].id,(err, respuestas) => {
+                                            if(err) {
+                                                console.warn(err);
+                                            } else {
+                                                let entra=false;
+                                                let n_votos_resp_negativos = [];
+                                                let n_votos_resp_positivos = [];
+                                                respuestas.forEach((respuesta, indice, array) =>{
+                                                    daoVotos.contarDeRespuestas(respuesta.id, 1,(err, votos) => {
+                                                        if(err) {
+                                                            console.warn(err);
+                                                        } else {
+                                                            n_votos_resp_positivos.push(votos[0].n_votos);
+                                                            if(indice == array.length-1){
+                                                                respuestas.forEach((respuesta2, indice2, array2) =>{
+                                                                    daoVotos.contarDeRespuestas(respuesta2.id, 0,(err2, votos2) => {
+                                                                        if(err2) {
+                                                                            console.warn(err2);
+                                                                        } else {
+                                                                            n_votos_resp_negativos.push(votos2[0].n_votos);
+                                                                            if(indice2 == array2.length-1){
+                                                                                entra = true;
+                                                                                response.render("preguntas/mostrar", {pregunta: pregunta[0], n_votos_preg: (n_votos_pos[0].n_votos - n_votos_neg[0].n_votos), etiquetas: etiquetas[pregunta[0].id], respuestas: respuestas, n_votos_resp_positivos:n_votos_resp_positivos, n_votos_resp_negativos:n_votos_resp_negativos , usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}} );
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                })
+                                                            }
+                                                        }
+                                                    });
+                                                })
+                                                setTimeout(()=>{
+                                                    console.log("entro en el timeout");
+                                                    if(!entra){
+                                                        console.log("lanzo el render");
+                                                        response.render("preguntas/mostrar", {pregunta: pregunta[0], n_votos_preg: (n_votos_pos[0].n_votos - n_votos_neg[0].n_votos), etiquetas: etiquetas[pregunta[0].id], respuestas: respuestas, n_votos_resp_positivos:n_votos_resp_positivos, n_votos_resp_negativos:n_votos_resp_negativos,  usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}});                        
+                                                    }
+                                                },3000);
+                                            }
+                                        });
                                     }
-                                });
+                                });         
                             }
                         });
                     }
                 });
+            }
+        }
+    });
+});
+
+
+app.get("/preguntas/votarPregunta/:idPregunta/:voto", function (request, response) {
+    daoVotos.existeVotoPregunta(request.params.idPregunta, id_usuario,(err, voto) =>{
+        if(err) {
+            console.warn(err);
+        } else {
+            if(voto[0] === undefined){
+                daoVotos.insertarVotoPregunta(request.params.idPregunta, id_usuario,request.params.voto,(err, voto) =>{
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        response.redirect("/preguntas/vista/" + request.params.idPregunta);
+                    }
+                });
+            }else if(voto[0].voto == request.params.voto){
+                response.redirect("/preguntas/vista/" + request.params.idPregunta);
+            }else{
+                daoVotos.modificarVotoPregunta(request.params.idPregunta, id_usuario,request.params.voto,(err, voto) =>{
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        response.redirect("/preguntas/vista/" + request.params.idPregunta);
+                    }
+                });
+            }
+        }
+    });
+});
+
+
+app.get("/preguntas/votarRespuesta/:idRespuesta/:voto/:idPregunta", function (request, response) {
+    console.log("entro por lo mnos");
+    daoVotos.existeVotoRespuesta(request.params.idRespuesta, id_usuario,(err, voto) =>{
+        if(err) {
+            console.warn(err);
+        } else {
+            if(voto[0] === undefined){
+                console.log("insertamos");
+                daoVotos.insertarVotoRespuesta(request.params.idRespuesta, id_usuario,request.params.voto,(err, voto) =>{
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        response.redirect("/preguntas/vista/" + request.params.idPregunta);
+                    }
+                });
+            }else if(voto[0].voto == request.params.voto){
+                console.log("es igual");
+                response.redirect("/preguntas/vista/" + request.params.idPregunta);
+            }else{
+                console.log("lo cambiamos");
+                daoVotos.modificarVotoRespuesta(request.params.idRespuesta, id_usuario,request.params.voto,(err, voto) =>{
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        response.redirect("/preguntas/vista/" + request.params.idPregunta);
+                    }
+                });
+            }
+        }
+    });
+});
+
+
+
+app.get("/usuarios", function (request, response) {
+    daoUsuarios.listarUsuarios((err, usuarios) => {
+        if(err) {
+            console.warn(err);
+        } else {
+            let etiquetas =[];
+            let i = -1;
+            usuarios.forEach((usuario, indice, array) => {
+                daoEtiquetas.etiquetaMasRepetida(usuario.id, (err, etiqueta) => {
+                    i++;
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        etiquetas[usuario.id] = etiqueta;
+                        if(i === array.length-1){
+                            response.render("usuarios/usuarios",  {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}, titulo:"Usuarios", usuarios:usuarios, etiquetas:etiquetas});   
+                        }
+                    }
+                }); 
+            });
+            if(usuarios.length == 0){
+                response.render("usuarios/usuarios",  {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}, titulo:"No hay usuarios", usuarios:usuarios, etiquetas:[]});   
+            }
+        }
+    }); 
+});
+
+
+
+app.post("/usuarios/busqueda", function (request, response){
+    response.status(200);
+    if(request.body.busqueda !== ""){
+        let ruta="/usuarios/buscar/"+request.body.busqueda;
+        response.redirect(ruta);
+    }else{
+        response.render("usuarios/usuarios",  {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}, titulo:"No hay usuarios", usuarios:[], etiquetas:[]});
+    }
+});
+
+
+app.get("/usuarios/buscar/:busqueda", function (request, response) {
+    response.status(200);
+
+    daoUsuarios.buscarUsuariosPorNombre(request.params.busqueda, (err, usuarios) => {
+        if(err) {
+            console.warn(err);
+        } else {
+            let etiquetas =[];
+            let i = -1;
+            usuarios.forEach((usuario, indice, array) => {
+                daoEtiquetas.etiquetaMasRepetida(usuario.id, (err, etiqueta) => {
+                    i++;
+                    if(err) {
+                        console.warn(err);
+                    } else {
+                        etiquetas[usuario.id] = etiqueta;
+                        if(i === array.length-1){
+                            response.render("usuarios/usuarios",  {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}, titulo:"Usuarios filtrados por ['" + request.params.busqueda + "']", usuarios:usuarios, etiquetas:etiquetas});   
+                        }
+                    }
+                }); 
+            });
+            if(usuarios.length == 0){
+                response.render("usuarios/usuarios",  {usuario:{imagen: "/img/users/U1.png", nombre: "Alex"}, titulo:"No hay usuarios", usuarios:usuarios, etiquetas:[]});   
             }
         }
     });

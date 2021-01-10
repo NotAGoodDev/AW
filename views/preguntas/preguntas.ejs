@@ -13,15 +13,15 @@
         <div class="header-buttons">
             <a href="/preguntas" class="button-long green text-white">Preguntas</a>
             <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
-            <a href="../usuarios/usuarios.html" class="button-long green text-white">Usuarios</a>
+            <a href="/usuarios" class="button-long green text-white">Usuarios</a>
         </div>
 
-        <a href="../index.html"><img src="/img/logo.png" alt="" class="header-logo"></a>
+        <a href="/"><img src="/img/logo.png" alt="" class="header-logo"></a>
 
         <div class="header-user">
-            <img src="/img/users/U1.png" alt="">
-            <p class="titule-page text-white">Midoriya I.</p>
-            <a href="../loginout/login.html" class="button red text-white">Cerrar sesión</a>
+            <img src="<%= usuario.imagen %>" alt="">
+            <p class="titule-page text-white"> <%= usuario.nombre %> </p>
+            <a href="/loginout/login.html" class="button red text-white">Cerrar sesión</a>
         </div>
     </div>
 
@@ -47,7 +47,8 @@
             <div class="unanswered-container">
                 <div class="unanswered">
                     <div class="normal">
-                        <%= preg.titulo %>
+                        <% let ruta = "/preguntas/visitas/" + preg.id;  %>
+                        <a class="titulo" href=<%= ruta %>><%= preg.titulo %></a>
                     </div>
                     <div class="answer-question-text very-small">
                         <%= preg.cuerpo %>
@@ -64,7 +65,8 @@
                     <div class="userquestion-info">
                         <p class="small">Formulada el <%= preg.fecha.getDate() %>/<%= preg.fecha.getMonth()+1 %>/<%= preg.fecha.getFullYear() %> </p>
                         <img src= <%= preg.imagen %> alt="">
-                        <p class="very-small"><%= preg.nombre %></p>
+                        <% let ruta3= "/usuarios/perfil/" + preg.id_usu ; %>
+                        <a class="very-small titulo" href=<%= ruta3 %>><%= preg.nombre %></a>
                     </div>
                 </div>
             </div>

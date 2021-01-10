@@ -402,6 +402,14 @@ img[src$="tive.png"]:hover {
     justify-content: space-between;
 }
 
+.titulo{
+    color:#070505;
+}
+
+.titulo:hover{
+    color:#388e3c;
+}
+
 /* ---------- ETIQUETAS EN PREGUNTAS---------- */
 
 .tags-container {

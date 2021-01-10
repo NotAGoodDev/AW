@@ -34,6 +34,53 @@ class DAOUsuarios {
         })
     }
 
+
+
+
+    buscarUsuariosPorNombre(texto, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT id, imagen, nombre, reputacion FROM `usuarios` WHERE nombre LIKE ? ORDER BY id ASC;";
+                connection.query(
+                    query,
+                    ['%' + texto + '%'],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            callback(null, rows);
+                        }
+                    }
+                )
+            }
+        })
+    }
+
+
+    listarUsuarios(callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT id, imagen, nombre, reputacion FROM `usuarios` ORDER BY id ASC;";
+                connection.query(
+                    query,
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            callback(null, rows);
+                        }
+                    }
+                )
+            }
+        })
+    }
+
     existe(email, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {

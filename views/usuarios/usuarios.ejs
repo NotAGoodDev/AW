@@ -1,4 +1,4 @@
-<!-- Figura 5 -->
+<!-- Figura 11 -->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -24,7 +24,6 @@
             <a href="/loginout/login.html" class="button red text-white">Cerrar sesión</a>
         </div>
     </div>
-
     <div class="container">
         <div class="search-container">
             <form action="/preguntas/busqueda" method="post" class="formSearch">
@@ -33,22 +32,33 @@
             </form>
         </div>
 
-        <div class="title big spaced">Formular una pregunta</div>
+        <div class="title big spaced">
+            <%= titulo %>
+        </div>
 
-        <form action="/preguntas/formular/procesar" method="post" >
-            <label for="titulo">Título</label>
-            <p class="spaced-form verysmall">Sé especifico e imagina que estás haciendo la pregunta a otra persona</p>
-            <input type="text" name="titulo" id="titulo" placeholder="¿Cuál es tu pregunta sobre programación de aplicaciones web?" class="spaced-form">
-            <label for="cuerpo" >Cuerpo</label>
-            Incluye toda la información que alguien necesitaría para responder tu pregunta
-            <textarea name="cuerpo" id="cuerpo" cols="30" rows="10"></textarea>            
-            <label for="etiquetas" >Etiquetas</label>
-            <p class="spaced-form verysmall">Añade hasta 5 etiquetas para describir sobre qué trata tu pregunta</p>
-            <input type="text" name="etiquetas" id="etiquetas" placeholder="Por ejemplo: @node@express" class="textForm"> 
-            <input type="submit" value="Publica tu pregunta" class="button-long green text-white center" id="loginB">
-        </form>
+        <div class="search-user-container">
+            <form action="/usuarios/busqueda" method="post" class="formSearch">
+                <input type="submit" class="button-special green text-white" value="Filtrar">
+                <input type="text" name="busqueda" id="" class="search-user" placeholder="Filtrar por usuario">
+            </form>
+        </div>
+        <div class="spaced"></div>
+
+        <div class="users-container">
+            <% usuarios.forEach(usuario => { %>
+            <div class="filter-user">
+                <img src=<%= usuario.imagen%> alt="" class="spaced-form img-user">
+                <p class="spaced-form"><%= usuario.nombre%></p>
+                <p class="spaced-form"><%= usuario.reputacion%></p>
+                <% if (etiquetas[usuario.id] !== undefined){ %>
+                <% let ruta = "/preguntas/etiquetadas/" + etiquetas[usuario.id].etiqueta; %>
+                <a href=<%= ruta%> class="filter-tag green text-white"><%=etiquetas[usuario.id].etiqueta%></a>
+                <% }; %>
+            </div>
+            <% }); %>
+        </div>
     </div>
-        
     
+
 </body>
 </html>
