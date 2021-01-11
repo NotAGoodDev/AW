@@ -470,6 +470,10 @@ img[src$="tive.png"]:hover {
     margin:0 0 20px 0;
 } */
 
+.formError{
+    border: #ea0c0a 1px solid;
+}
+
 /* ----------FILTRO---------- */
 
 .filter-user-container{

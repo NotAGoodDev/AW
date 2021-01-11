@@ -40,7 +40,7 @@ CREATE TABLE preguntas (
    );
 
   CREATE TABLE respuestas (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_preg INT NOT NULL,
     id_usu_resp INT NOT NULL,
     texto VARCHAR(1000) NOT NULL,
@@ -108,9 +108,9 @@ INSERT INTO `preguntas` VALUES (0, 1, 'jbxdfvius', 'orem Ipsum es simplemente el
 INSERT INTO `preguntas` VALUES (0, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
 
 INSERT INTO `respuestas` VALUES (0, 1, 2, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
-INSERT INTO `respuestas` VALUES (1, 1, 0, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04');
-INSERT INTO `respuestas` VALUES (2, 3, 0, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
-INSERT INTO `respuestas` VALUES (3, 3, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
+INSERT INTO `respuestas` VALUES (0, 1, 0, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04');
+INSERT INTO `respuestas` VALUES (0, 3, 0, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
+INSERT INTO `respuestas` VALUES (0, 3, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
 
 INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
 INSERT INTO `etiquetas` VALUES (0, 1, 'html');

@@ -34,17 +34,29 @@
         </div>
 
         <div class="title big spaced">Formular una pregunta</div>
-
         <form action="/preguntas/formular/procesar" method="post" >
+           
+            <% let claseTitulo = ""; %>
+            <% let claseCuerpo = ""; %>
+            <% let claseEtiquetas = ""; %>
+            <% if(errorM==="titulo"){ claseTitulo ="formError"; claseCuerpo ="formError";claseEtiquetas= "textForm"; %>
+                <p class="spaced-form verysmall text-red"><%=errorMsg %></p>
+            <% }; %>
+            <% if(errorM==="etiquetas"){ claseTitulo ="spaced-form"; claseEtiquetas="formError" %>
+                <p class="spaced-form verysmall text-red"><%=errorMsg %></p>
+            <% }; %>
+            <% if(errorM==="nada"){ claseTitulo ="spaced-form"; claseEtiquetas= "textForm"; %>
+
+            <% }; %>
             <label for="titulo">Título</label>
-            <p class="spaced-form verysmall">Sé especifico e imagina que estás haciendo la pregunta a otra persona</p>
-            <input type="text" name="titulo" id="titulo" placeholder="¿Cuál es tu pregunta sobre programación de aplicaciones web?" class="spaced-form">
+            <p class="verysmall">Sé especifico e imagina que estás haciendo la pregunta a otra persona</p>
+            <input type="text" name="titulo" id="titulo" placeholder="¿Cuál es tu pregunta sobre programación de aplicaciones web?" class=<%=claseTitulo%>>
             <label for="cuerpo" >Cuerpo</label>
             Incluye toda la información que alguien necesitaría para responder tu pregunta
-            <textarea name="cuerpo" id="cuerpo" cols="30" rows="10"></textarea>            
+            <textarea name="cuerpo" id="cuerpo" cols="30" rows="10" class=<%=claseCuerpo%>></textarea>            
             <label for="etiquetas" >Etiquetas</label>
             <p class="spaced-form verysmall">Añade hasta 5 etiquetas para describir sobre qué trata tu pregunta</p>
-            <input type="text" name="etiquetas" id="etiquetas" placeholder="Por ejemplo: @node@express" class="textForm"> 
+            <input type="text" name="etiquetas" id="etiquetas" placeholder="Por ejemplo: @node@express" class=<%=claseEtiquetas%>> 
             <input type="submit" value="Publica tu pregunta" class="button-long green text-white center" id="loginB">
         </form>
     </div>

@@ -60,17 +60,47 @@ function reducirCuerpoA150(array){
 
 function procesarEtiquetas (texto){
     let etiquetasProcesadas= [];
-    console.log(texto);
+    let ok = true;
+    let errorMsg = "";
+    
     if(texto.length > 0){
-        texto.split("@").forEach( x => {                //Dividimos por espacios y recorremos
-            etiquetasProcesadas.push(x.trim());
-        })
-        etiquetasProcesadas.shift();  //hay un valor basura al principio
+        let comprobar = texto.trim();
+        if(comprobar[0]==="@"){
+            texto.split("@").forEach( x => {                //Dividimos por espacios y recorremos
+                etiquetasProcesadas.push(x.trim());
+            })
+            etiquetasProcesadas.shift();  //hay un valor basura al principio
+        }else{
+            errorMsg = " las etiquetas tienen que empezar por @ ";
+            ok=false;
+        }
+        
+    }else{
+        return {etiquetas:etiquetasProcesadas, ok:ok, errorMsg:errorMsg};
     }
+    if(etiquetasProcesadas.length > 5){
+        errorMsg = " demasiadas etiquetas ";
+        ok=false;
+    }
+    etiquetasProcesadas.forEach((etiqueta, indice, array) => {
+        if(etiqueta.length < 2){
+            ok = false;
+            errorMsg = " etiquetas demasiadas cortas ";
+        }
+        if(estaRepetido(etiqueta, indice, array)){
+            ok = false;
+            errorMsg = " etiquetas repetidas ";
+        }
+        
 
-    return etiquetasProcesadas;
+    });
+
+    return {etiquetas:etiquetasProcesadas, ok:ok, errorMsg:errorMsg};
 }
-
+ function estaRepetido(etiqueta, indice, lista){
+    return !(lista.indexOf(etiqueta) === indice);
+    
+}
 module.exports = {
     informar,
     passCoincide,
