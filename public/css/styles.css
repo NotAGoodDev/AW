@@ -196,7 +196,7 @@ a {
     align-items: center;
 }
 
-img[src*="user"] {
+img[src="/imagenUsuario"] {
     height: 75px;
     width: 75px;
     border-radius: 50px;
@@ -385,6 +385,7 @@ img[src$="tive.png"]:hover {
 
 
 .unanswered-container { /* ESTILO ALEX DOUBLE DASH*/    /* caja de preguntas verder*/
+    height: 120px;
     display: flex;
     justify-content: space-between;
     padding: 1.5%;

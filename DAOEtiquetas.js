@@ -12,8 +12,6 @@ class DAOEtiquetas {
         this.pool = pool;
     }
 
-
-
     etiquetaMasRepetida(id_usuario, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {
@@ -65,6 +63,8 @@ class DAOEtiquetas {
             }
         })
     }
+
+
     leerPorIdEtiquetas(idsEtiquetas, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {

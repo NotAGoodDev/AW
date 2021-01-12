@@ -1,6 +1,11 @@
 //Funciones LOGICAS
 
+const config = require("./config");
+
 const { text } = require("body-parser");
+const mysql = require("mysql");
+const pool = mysql.createPool(config.mysqlConfig);
+
 
 function informar(texto){
     let guiones = "";
@@ -32,11 +37,11 @@ function passCorrecta(pwd) {
 
 function gestionarImagen(imagen, email) {
     if(!imagen) {
-        return "/img/users/u"
+        return "/profile_imgs/u"
             + Math.floor(Math.random() * 8 + 1) //Del 1 al 8
             + ".png";
     } else {
-        return "/img/users/"
+        return "/profile_imgs/"
             + email.split('@')[0].toLowerCase()
             + ".png";
     }
@@ -107,5 +112,6 @@ module.exports = {
     passCorrecta,
     gestionarImagen,
     reducirCuerpoA150,
-    procesarEtiquetas
+    procesarEtiquetas,
+    pool
 }

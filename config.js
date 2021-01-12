@@ -20,7 +20,7 @@ CREATE DATABASE P404;
 USE P404;
 
 CREATE TABLE usuarios (
-    id INT PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     email VARCHAR(20) UNIQUE NOT NULL,
     reputacion INT NOT NULL,
     contrasena VARCHAR(20) NOT NULL,
@@ -95,22 +95,22 @@ CREATE TABLE voto_resp (
 
 
 
-INSERT INTO `usuarios` VALUES (0, 'alex@404.com', 30, 'AAAAAAAA', 'alex', '/img/users/U1.png', '2020/12/24');
-INSERT INTO `usuarios` VALUES (1, 'alvaro03@404.com', -49, 'BBBBBBBB', 'alvaro', '/img/users/U2.png', '2010/10/13');
-INSERT INTO `usuarios` VALUES (2, 'pedro404@404.com', 70, 'CCCCCCCC', 'pedro', '/img/users/U3.png', '2011/09/22');
-INSERT INTO `usuarios` VALUES (3, 'anamaria@404.com', 300, 'DDDDDDDD', 'ana', '/img/users/ana.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (1, 'alex@404.com', 30, '12345678', 'alex', '/profile_imgs/U1.png', '2020/12/24');
+INSERT INTO `usuarios` VALUES (2, 'alvaro@404.com', -49, '12345678', 'alvaro', '/profile_imgs/U2.png', '2010/10/13');
+INSERT INTO `usuarios` VALUES (3, 'pedro@404.com', 70, '12345678', 'pedro', '/profile_imgs/u3.png', '2011/09/22');
+INSERT INTO `usuarios` VALUES (4, 'ana@404.com', 300, '12345678', 'ana', '/profile_imgs/u4.png', '1990/06/04');
 
 
-INSERT INTO `preguntas` VALUES (0, 0, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0);
-INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
-INSERT INTO `preguntas` VALUES (0, 3, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
-INSERT INTO `preguntas` VALUES (0, 1, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0);
 INSERT INTO `preguntas` VALUES (0, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 4, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
+INSERT INTO `preguntas` VALUES (0, 2, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 3, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
 
-INSERT INTO `respuestas` VALUES (0, 1, 2, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
-INSERT INTO `respuestas` VALUES (0, 1, 0, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04');
-INSERT INTO `respuestas` VALUES (0, 3, 0, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
-INSERT INTO `respuestas` VALUES (0, 3, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
+INSERT INTO `respuestas` VALUES (0, 1, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
+INSERT INTO `respuestas` VALUES (0, 1, 1, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04');
+INSERT INTO `respuestas` VALUES (0, 3, 1, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
+INSERT INTO `respuestas` VALUES (0, 3, 4, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
 
 INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
 INSERT INTO `etiquetas` VALUES (0, 1, 'html');
@@ -133,49 +133,49 @@ INSERT INTO `medallas` VALUES (7, 'Respuesta interesante', 'bronce');
 INSERT INTO `medallas` VALUES (8, 'Buena respuesta', 'plata');
 INSERT INTO `medallas` VALUES (9, 'Respuesta famosa', 'oro');
 
-INSERT INTO `usuario_medallas` VALUES (0, 0, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (0, 0, CURDATE() + 1);
 INSERT INTO `usuario_medallas` VALUES (0, 1, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (0, 1, CURDATE() + 1);
 INSERT INTO `usuario_medallas` VALUES (0, 2, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (0, 3, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (1, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (0, 4, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (1, 1, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (1, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (2, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (1, 3, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (2, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (3, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (2, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (3, 1, CURDATE());
 
-INSERT INTO `usuario_medallas` VALUES (4, 0, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (4, 1, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (4, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (5, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (4, 3, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (5, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (6, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (5, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (6, 1, CURDATE());
 
-INSERT INTO `usuario_medallas` VALUES (7, 0, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (7, 1, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (7, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (8, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (7, 3, CURDATE());
 INSERT INTO `usuario_medallas` VALUES (8, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (9, 0, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (8, 2, CURDATE());
+INSERT INTO `usuario_medallas` VALUES (9, 1, CURDATE());
 
-INSERT INTO `voto_preg` VALUES (2, 1, 0);
-INSERT INTO `voto_preg` VALUES (2, 2, 0);
-INSERT INTO `voto_preg` VALUES (3, 3, 1);
+INSERT INTO `voto_preg` VALUES (3, 1, 0);
 INSERT INTO `voto_preg` VALUES (3, 2, 0);
-INSERT INTO `voto_preg` VALUES (1, 1, 1);
-INSERT INTO `voto_preg` VALUES (1, 2, 1);
-INSERT INTO `voto_preg` VALUES (1, 3, 1);
-INSERT INTO `voto_preg` VALUES (1, 4, 1);
+INSERT INTO `voto_preg` VALUES (4, 3, 1);
+INSERT INTO `voto_preg` VALUES (4, 2, 0);
+INSERT INTO `voto_preg` VALUES (2, 1, 1);
+INSERT INTO `voto_preg` VALUES (2, 2, 1);
+INSERT INTO `voto_preg` VALUES (2, 3, 1);
+INSERT INTO `voto_preg` VALUES (2, 4, 1);
 
-INSERT INTO `voto_resp` VALUES (2, 1, 0);
-INSERT INTO `voto_resp` VALUES (2, 2, 0);
-INSERT INTO `voto_resp` VALUES (3, 3, 1);
+INSERT INTO `voto_resp` VALUES (3, 1, 0);
 INSERT INTO `voto_resp` VALUES (3, 2, 0);
-INSERT INTO `voto_resp` VALUES (1, 1, 1);
-INSERT INTO `voto_resp` VALUES (1, 2, 1);
-INSERT INTO `voto_resp` VALUES (1, 3, 1);
-INSERT INTO `voto_resp` VALUES (1, 4, 1);
+INSERT INTO `voto_resp` VALUES (4, 3, 1);
+INSERT INTO `voto_resp` VALUES (4, 2, 0);
+INSERT INTO `voto_resp` VALUES (2, 1, 1);
+INSERT INTO `voto_resp` VALUES (2, 2, 1);
+INSERT INTO `voto_resp` VALUES (2, 3, 1);
+INSERT INTO `voto_resp` VALUES (2, 4, 1);
 
 
 */

@@ -34,9 +34,6 @@ class DAOUsuarios {
         })
     }
 
-
-
-
     buscarUsuariosPorNombre(texto, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {
@@ -113,9 +110,7 @@ class DAOUsuarios {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                // daoUser.insertar("A@404.COM", 0, 0, "CONTRASEÑA", "NOMBRE", "IMAGEN", 01/01/1990, (err, result) => {
-
-                const query = "INSERT INTO USUARIOS VALUES (?, 0, 0, ?, ?, ?, CURDATE())";
+                const query = "INSERT INTO USUARIOS VALUES (0, ?, 0, ?, ?, ?, CURDATE())";
 
                 connection.query(
                     query,
@@ -136,6 +131,36 @@ class DAOUsuarios {
             }
         })
     }
+
+    esCorrecto(email, pass, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT EMAIL FROM USUARIOS"
+                + " WHERE EMAIL = ?"
+                + " AND CONTRASENA = ?";
+
+                connection.query(
+                    query,
+                    [email, pass],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            if(rows.length === 0) {
+                                callback(null, false);
+                            } else {
+                                callback(null, true);
+                            }
+                        }
+                    }
+                )
+            }
+        })
+    }
+
 
     leerPorEmail(email, callback) {
         this.pool.getConnection( function(err, connection) {
@@ -234,6 +259,36 @@ class DAOUsuarios {
             }
         })
     }
+
+    imagen(email, callback) {
+        this.pool.getConnection( function(err, connection) {
+            if(err) {
+                callback(new Error("Error de conexión a la base de datos"))
+            } else {
+                const query = "SELECT imagen FROM USUARIOS"
+                + " WHERE EMAIL = ?";
+                connection.query(
+                    query,
+                    [email],
+                    (err, rows) => {
+                        connection.release();
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"))
+                        } else {
+                            if(rows[0].imagen == "") {
+                                callback(null, null);
+                            } else {
+                                callback(null, rows[0].imagen);
+                            }
+                        }
+                    }
+                )
+            }
+        })
+    }
+
 }
+
+
 
 module.exports = DAOUsuarios;
