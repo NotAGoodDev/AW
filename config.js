@@ -95,10 +95,10 @@ CREATE TABLE voto_resp (
 
 
 
-INSERT INTO `usuarios` VALUES (1, 'alex@404.com', 30, '12345678', 'alex', '/profile_imgs/U1.png', '2020/12/24');
-INSERT INTO `usuarios` VALUES (2, 'alvaro@404.com', -49, '12345678', 'alvaro', '/profile_imgs/U2.png', '2010/10/13');
-INSERT INTO `usuarios` VALUES (3, 'pedro@404.com', 70, '12345678', 'pedro', '/profile_imgs/u3.png', '2011/09/22');
-INSERT INTO `usuarios` VALUES (4, 'ana@404.com', 300, '12345678', 'ana', '/profile_imgs/u4.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (1, 'alex@404.com',0 , '12345678', 'alex', '/profile_imgs/U1.png', '2020/12/24');
+INSERT INTO `usuarios` VALUES (2, 'alvaro@404.com',0 , '12345678', 'alvaro', '/profile_imgs/U2.png', '2010/10/13');
+INSERT INTO `usuarios` VALUES (3, 'pedro@404.com', 0, '12345678', 'pedro', '/profile_imgs/u3.png', '2011/09/22');
+INSERT INTO `usuarios` VALUES (4, 'ana@404.com', 0, '12345678', 'ana', '/profile_imgs/u4.png', '1990/06/04');
 
 
 INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0);
@@ -176,6 +176,75 @@ INSERT INTO `voto_resp` VALUES (2, 1, 1);
 INSERT INTO `voto_resp` VALUES (2, 2, 1);
 INSERT INTO `voto_resp` VALUES (2, 3, 1);
 INSERT INTO `voto_resp` VALUES (2, 4, 1);
+
+DELIMITER $$
+CREATE TRIGGER `Reputacion_Usuarios_AU` AFTER UPDATE ON `voto_preg`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1 && NEW.voto != OLD.voto
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion + 10
+      WHERE usuarios.id= 
+      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta);
+   ELSEIF NEW.voto = 0 && NEW.voto != OLD.voto
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
+      WHERE usuarios.id= 
+      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta) && usuarios.reputacion > 0;
+  END IF ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `Reputacion_Usuarios_AI` AFTER INSERT ON `voto_preg`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion + 10
+      WHERE usuarios.id= 
+      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta);
+   ELSEIF NEW.voto = 0
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
+      WHERE usuarios.id= 
+      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta) && usuarios.reputacion > 0;
+  END IF ;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER `Reputacion_Usuarios_Respuesta_AU` AFTER UPDATE ON `voto_resp`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1 && NEW.voto != OLD.voto
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion + 10
+      WHERE usuarios.id= 
+      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta);
+   ELSEIF NEW.voto = 0 && NEW.voto != OLD.voto
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
+      WHERE usuarios.id= 
+      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 0;
+  END IF ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `Reputacion_Usuarios_Respuesta_AI` AFTER INSERT ON `voto_resp`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion + 10
+      WHERE usuarios.id= 
+      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta);
+   ELSEIF NEW.voto = 0
+    THEN
+      UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
+      WHERE usuarios.id= 
+      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 0;
+  END IF ;
+END$$
+DELIMITER ;
 
 
 */
