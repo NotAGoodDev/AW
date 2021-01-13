@@ -62,8 +62,8 @@ function imagenPerfil(request, response) {
     modelUsuarios.imagen(response.locals.userEmail, function (err, image) {
         if (err) {
             console.warn(err);
-        } else {    //Siempre tiene imagen
-            let ruta = path.join(__dirname, "../", image);
+        } else {
+            let ruta = path.join(__dirname, "../profile_imgs", image);
             response.sendFile(ruta);
         }
     })
@@ -79,7 +79,7 @@ function imagenPorId(request, response) {
                 if (err) {
                     console.warn(err);
                 } else {    //Siempre tiene imagen
-                    let ruta = path.join(__dirname, "../", image);
+                    let ruta = path.join(__dirname, "../profile_imgs", image);
                     response.sendFile(ruta);
                 }
             })

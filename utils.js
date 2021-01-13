@@ -35,18 +35,6 @@ function passCorrecta(pwd) {
     }
 }
 
-function gestionarImagen(imagen, email) {
-    if(!imagen) {
-        return "/profile_imgs/u"
-            + Math.floor(Math.random() * 8 + 1) //Del 1 al 8
-            + ".png";
-    } else {
-        return "/profile_imgs/"
-            + email.split('@')[0].toLowerCase()
-            + ".png";
-    }
-}
-
 function reducirCuerpoA150(array){
 
     if(array instanceof Array && array.length > 0) {
@@ -111,7 +99,6 @@ module.exports = {
     informar,
     passCoincide,
     passCorrecta,
-    gestionarImagen,
     reducirCuerpoA150,
     procesarEtiquetas,
     pool

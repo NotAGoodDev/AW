@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <img src="../img/logo.png" alt="" class="logo"/>
-        <form action="/loginout/registro" method="post">
+        <form action="/loginout/registro" method="post" enctype="multipart/form-data">
             <label for="email" class="text-black">Correo * </label>
             <input type="email" name="email" id="email">
 
@@ -25,7 +25,7 @@
             <input type="text" name="name" id="name">
             
             <label for="photo" class="text-black">Imagen de perfil</label>
-            <input type="file" name="photo" id="photo" accept=".jpg,.png" >
+            <input type="file" name="photo" id="photo" accept=".png" >
             
             <input type="submit" value="Crear cuenta" class="button green text-white small">
         </form>

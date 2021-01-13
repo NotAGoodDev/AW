@@ -13,28 +13,28 @@ const controllerPreguntas = require("../controllers/controllerPreguntas");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/", middlewares.controlAcceso, controllerPreguntas.listarPreguntas);
+router.get("/", controllerPreguntas.listarPreguntas);
 
-router.post("/busqueda", middlewares.controlAcceso, controllerPreguntas.buscarPorTexto);
+router.post("/busqueda", controllerPreguntas.buscarPorTexto);
 
-router.get("/buscar/:id", middlewares.controlAcceso, controllerPreguntas.buscarPorID);
+router.get("/buscar/:id", controllerPreguntas.buscarPorID);
 
-router.get("/etiquetadas/:etiqueta", middlewares.controlAcceso, controllerPreguntas.buscarPorEtiqueta);
+router.get("/etiquetadas/:etiqueta", controllerPreguntas.buscarPorEtiqueta);
 
-router.get("/formular", middlewares.controlAcceso, controllerPreguntas.formularPregunta);
+router.get("/formular", controllerPreguntas.formularPregunta);
 
-router.get("/sinResponder", middlewares.controlAcceso, controllerPreguntas.mostrarSinResponder);
+router.get("/sinResponder", controllerPreguntas.mostrarSinResponder);
 
-router.post("/formular/procesar", middlewares.controlAcceso, controllerPreguntas.procesarPregunta);
+router.post("/formular/procesar", controllerPreguntas.procesarPregunta);
 
-router.get("/visitas/:id", middlewares.controlAcceso, controllerPreguntas.visitasPorId);
+router.get("/visitas/:id", controllerPreguntas.visitasPorId);
 
-router.post("/procesarRespuesta", middlewares.controlAcceso, controllerPreguntas.procesarRespuesta);
+router.post("/procesarRespuesta", controllerPreguntas.procesarRespuesta);
 
-router.get("/vista/:id", middlewares.controlAcceso, controllerPreguntas.preguntaDetalle);
+router.get("/vista/:id", controllerPreguntas.preguntaDetalle);
 
-router.get("/votarPregunta/:idPregunta/:voto", middlewares.controlAcceso, controllerPreguntas.votarPregunta);
+router.get("/votarPregunta/:idPregunta/:voto", controllerPreguntas.votarPregunta);
 
-router.get("/votarRespuesta/:idRespuesta/:voto/:idPregunta", middlewares.controlAcceso, controllerPreguntas.votarRespuesta);
+router.get("/votarRespuesta/:idRespuesta/:voto/:idPregunta", controllerPreguntas.votarRespuesta);
 
 module.exports = router;

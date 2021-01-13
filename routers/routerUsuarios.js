@@ -8,17 +8,17 @@ const controllerUsuarios = require("../controllers/controllerUsuarios");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/", middlewares.controlAcceso, controllerUsuarios.listarUsuarios);
+router.get("/", controllerUsuarios.listarUsuarios);
 
-router.get("/imagenPerfil", middlewares.controlAcceso, controllerUsuarios.imagenPerfil);
+router.get("/imagenPerfil", controllerUsuarios.imagenPerfil);
 
-router.get("/imagen/:id", middlewares.controlAcceso, controllerUsuarios.imagenPorId);
+router.get("/imagen/:id", controllerUsuarios.imagenPorId);
 
-router.post("/busqueda", middlewares.controlAcceso, controllerUsuarios.buscar);
+router.post("/busqueda", controllerUsuarios.buscar);
 
-router.get("/buscar/:busqueda", middlewares.controlAcceso, controllerUsuarios.buscarPorNombre);
+router.get("/buscar/:busqueda", controllerUsuarios.buscarPorNombre);
 
-router.get("/perfil/:id", middlewares.controlAcceso, controllerUsuarios.mostrarPerfil);
+router.get("/perfil/:id", controllerUsuarios.mostrarPerfil);
 
 
 module.exports = router;

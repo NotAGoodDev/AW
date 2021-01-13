@@ -7,10 +7,8 @@
 const utils = require("../utils");
 const pool = utils.pool;
 
-/////////////////////////
 const MODELUsuarios = require("../models/modelUsuarios");
 const modelUsuarios = new MODELUsuarios(pool);
-/////////////////////////
 
 function mostrarLogin(request, response) {
     response.status(200);
@@ -65,8 +63,15 @@ function altaUsuario(request, response) {
 
         modelUsuarios.existe(request.body.email, (err, existe) => {
 
-            if(!existe) {    
-                let img = utils.gestionarImagen(request.body.photo, request.body.email);
+            if(!existe) {
+                let img = "";
+
+                if(request.file === undefined) {
+                    img = "/u" + Math.floor(Math.random() * 8 + 1) + ".png";
+                } else {
+                    img = request.file.filename;
+                }
+                    
 
                 modelUsuarios.insertar(request.body.email, request.body.pwd, request.body.name, img, (err, insertado) => {
                     if(insertado) {

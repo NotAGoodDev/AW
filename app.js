@@ -57,8 +57,8 @@ app.listen(config.port, function(err) {
 
 /* CONTROLADOR */
 app.use("/loginout", routerLogin);
-app.use("/preguntas", routerPreguntas);
-app.use("/usuarios", routerUsuarios);
+app.use("/preguntas", middlewares.controlAcceso, routerPreguntas);
+app.use("/usuarios", middlewares.controlAcceso, routerUsuarios);
 
 
 app.get("/index", middlewares.controlAcceso, function (request, response) {

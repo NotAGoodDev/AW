@@ -63,10 +63,9 @@
                 </div>
                 <div class="info-container">
                     <div class="userquestion-info">
-                        <p class="small">Formulada el <%= preg.fecha.getDate() %>/<%= preg.fecha.getMonth()+1 %>/<%= preg.fecha.getFullYear() %> </p>
-                        <img src= <%= preg.imagen %> alt="">
-                        <% let ruta3= "/usuarios/perfil/" + preg.id_usu ; %>
-                        <a class="very-small titulo" href=<%= ruta3 %>><%= preg.nombre %></a>
+                        <p class="verysmall">Formulada el <%= preg.fecha.getDate() %>/<%= preg.fecha.getMonth()+1 %>/<%= preg.fecha.getFullYear() %> </p>
+                        <img src= "/usuarios/imagen/<%= preg.id_usu %>" alt="">
+                        <a class="very-small titulo" href="/usuarios/perfil/<%= preg.id_usu %>"><%= preg.nombre %></a>
                     </div>
                 </div>
             </div>

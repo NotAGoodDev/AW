@@ -68,9 +68,8 @@
             <div class="info-container">
                 <div class="userquestion-info">
                     <p class="small">Formulada el <%= pregunta.fecha.getDate() %>/<%= pregunta.fecha.getMonth()+1 %>/<%= pregunta.fecha.getFullYear() %> </p>
-                    <img src= <%= pregunta.imagen %> alt="">
-                    <% let ruta3= "/usuarios/perfil/" + pregunta.id_usu ; %>
-                    <a class="very-small titulo" href=<%= ruta3 %>><%= pregunta.nombre %></a>
+                    <img src="/usuarios/imagen/<%= pregunta.id_usu %>" alt="">
+                    <a class="very-small titulo" href="/usuarios/perfil/<%= pregunta.id_usu %>"><%= pregunta.nombre %></a>
                 </div>
             </div>
         </div>
@@ -101,9 +100,8 @@
             <div class="info-container">
                 <div class="userquestion-info">
                     <p class="small">Respondida el <%= respuesta.fecha.getDate() %>/<%= respuesta.fecha.getMonth()+1 %>/<%= respuesta.fecha.getFullYear() %> </p>
-                    <img src= <%= respuesta.imagen %> alt="">
-                    <% let ruta4= "/usuarios/perfil/" + respuesta.id_usu ; %>
-                    <a class="very-small titulo" href=<%= ruta4 %>><%= respuesta.nombre %></a>
+                    <img src="/usuarios/imagen/<%= respuesta.id_usu %>" alt="">
+                    <a class="very-small titulo" href="/usuarios/perfil/<%= respuesta.id_usu %>"><%= respuesta.nombre %></a>
                 </div>
             </div>
         </div>
