@@ -106,6 +106,7 @@ function procesarEtiquetas (texto){
     return !(lista.indexOf(etiqueta) === indice);
     
 }
+
 module.exports = {
     informar,
     passCoincide,

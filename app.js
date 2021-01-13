@@ -14,17 +14,13 @@ const bodyParser = require("body-parser");
 
 /* IMPORTS PROPIOS */
 const config = require("./config");
-const utils = require("./utils");
 const middlewares = require("./middlewares");
 const routerUsuarios = require("./routers/routerUsuarios");
 const routerPreguntas = require("./routers/routerPreguntas");
 const routerLogin = require("./routers/routerLogin");
+const utils = require("./utils");
 
-const DAOUsuarios = require("./DAOUsuarios");
-const DAOPreguntas = require("./DAOPreguntas");
-const DAORespuestas = require("./DAORespuestas");
-const DAOEtiquetas = require("./DAOEtiquetas");
-const DAOVotos = require("./DAOVotos");
+const MODELUsuarios = require("./models/modelUsuarios");
 const { request } = require("http");
 const { response } = require("express");
 
@@ -38,14 +34,10 @@ app.set("views", path.join(__dirname, "views"));
 const staticFiles = path.join(__dirname, "public");
 
 /* POOL */
-const pool = mysql.createPool(config.mysqlConfig);
+const pool = utils.pool;
 
 /* DAOS CON POOL*/
-const daoUsuarios = new DAOUsuarios(pool);
-const daoPreguntas = new DAOPreguntas(pool);
-const daoRespuestas = new DAORespuestas(pool);
-const daoEtiquetas = new DAOEtiquetas(pool);
-const daoVotos = new DAOVotos(pool);
+const modelUsuarios = new MODELUsuarios(pool);
 
 /* USO DE MIDDLEWARES */
 app.use(express.static(staticFiles));       //RECURSOS ESTÁTICOS
@@ -71,7 +63,7 @@ app.use("/usuarios", routerUsuarios);
 
 app.get("/index", middlewares.controlAcceso, function (request, response) {
     response.status(200);
-    daoUsuarios.leerPorEmail(response.locals.userEmail, (err, usuario) => {
+    modelUsuarios.leerPorEmail(response.locals.userEmail, (err, usuario) => {
         response.render("index", { usuario: usuario[0] });
     })
 });

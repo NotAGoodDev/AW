@@ -16,12 +16,12 @@
             <a href="/usuarios" class="button-long green text-white">Usuarios</a>
         </div>
 
-        <a href="/"><img src="/img/logo.png" alt="" class="header-logo"></a>
+        <a href="/index"><img src="/img/logo.png" alt="" class="header-logo"></a>
 
         <div class="header-user">
-            <img src="<%= usuario.imagen %>" alt="">
-            <p class="titule-page text-white"> <%= usuario.nombre %> </p>
-            <a href="/loginout/login.html" class="button red text-white">Cerrar sesión</a>
+            <img src="/usuarios/imagenPerfil" alt="Imagen de Perfil">
+            <p class="titule-page text-white"> <%= nombre %> </p>
+            <a href="/loginout/logout" class="button red text-white">Cerrar sesión</a>
         </div>
     </div>
     <div class="container">
@@ -47,12 +47,12 @@
         <div class="users-container">
             <% usuarios.forEach(usuario => { %>
             <div class="filter-user">
-                <img src=<%= usuario.imagen%> alt="" class="spaced-form img-user">
-                <p class="spaced-form"><%= usuario.nombre%></p>
-                <p class="spaced-form"><%= usuario.reputacion%></p>
+                <img src="/usuarios/imagen/<%= usuario.id %>" alt="" class="spaced-form img-user">
+                <p class="spaced-form"><%= usuario.nombre %></p>
+                <p class="spaced-form"><%= usuario.reputacion %></p>
                 <% if (etiquetas[usuario.id] !== undefined){ %>
                 <% let ruta = "/preguntas/etiquetadas/" + etiquetas[usuario.id].etiqueta; %>
-                <a href=<%= ruta%> class="filter-tag green text-white"><%=etiquetas[usuario.id].etiqueta%></a>
+                <a href=<%= ruta %> class="filter-tag green text-white"><%=etiquetas[usuario.id].etiqueta %></a>
                 <% }; %>
             </div>
             <% }); %>

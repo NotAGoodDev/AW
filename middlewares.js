@@ -19,6 +19,9 @@ function controlAcceso (request, response, next) {
         response.redirect("/loginout/login");
     } else {
         response.locals.userEmail = request.session.currentUser;
+        response.locals.id = request.session.idUsuario;
+        response.locals.nombre = request.session.nombre;
+
         next();
     }
 }
