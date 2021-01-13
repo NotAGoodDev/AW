@@ -10,29 +10,11 @@
     <link href="https://www.dafont.com/es/forum/read/249632/my-hero-academia-font?family=Roboto" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <div class="header-buttons">
-            <a href="/preguntas" class="button-long green text-white">Preguntas</a>
-            <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
-            <a href="/usuarios" class="button-long green text-white">Usuarios</a>
-        </div>
 
-        <a href="/index"><img src="/img/logo.png" alt="" class="header-logo"></a>
-
-        <div class="header-user">
-            <img src="/usuarios/imagenPerfil" alt="Imagen de Perfil">
-            <p class="titule-page text-white"> <%= nombre %> </p>
-            <a href="/loginout/logout" class="button red text-white">Cerrar sesión</a>
-        </div>
-    </div>
+    <%- include("../header") %>
 
     <div class="container">
-        <div >
-            <form class="search-container" action="/preguntas/buscar" method="GET">
-                <input type="submit" class="button-special green text-white small" value="Buscar"/>
-                <input type="text" name="busqueda" class="search" placeholder="Buscar por título/cuerpo de la pregunta">
-            </form>
-        </div>
+
 
         <div class="profile-container spaced">
             <div class="filter-user">

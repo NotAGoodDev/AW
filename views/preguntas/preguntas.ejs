@@ -9,30 +9,11 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
 </head>
 <body>
-    <div class="header">
-        <div class="header-buttons">
-            <a href="/preguntas" class="button-long green text-white">Preguntas</a>
-            <a href="/preguntas/sinResponder" class="button-long green text-white">Sin responder</a>
-            <a href="/usuarios" class="button-long green text-white">Usuarios</a>
-        </div>
 
-        <a href="/index"><img src="/img/logo.png" alt="" class="header-logo"></a>
+    <%- include("../header") %>
 
-        <div class="header-user">
-            <img src="/usuarios/imagenPerfil" alt="Imagen de Perfil">
-            <p class="titule-page text-white"> <%= nombre %> </p>
-            <a href="/loginout/logout" class="button red text-white">Cerrar sesión</a>
-        </div>
-    </div>
 
     <div class="container">
-        <div class="search-container">
-            <form action="/preguntas/busqueda" method="post" class="formSearch">
-                <input type="submit" class="button-special green text-white" value="Buscar">
-                <input type="text" name="busqueda" id="" class="search">
-            </form>
-        </div>
-
         <div class="title big spaced">
             <%= titulo %>
         </div>
