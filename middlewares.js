@@ -2,6 +2,7 @@
 /* IMPORT SESIONES */
 const config = require("./config")
 const sess = require("express-session");
+const fs = require("fs");
 const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(sess);
 const sessionStore = new MySQLStore(config.mysqlConfig);
@@ -26,9 +27,18 @@ function controlAcceso (request, response, next) {
     }
 }
 
+function error404(request, response, next) {
+    console.log("404");
+    next();
+}
 
+function error500(request, response, next) {
+    console.log(request.err);
+}
 
 module.exports = {
     session,
-    controlAcceso
+    controlAcceso,
+    error404,
+    error500
 }

@@ -10,20 +10,22 @@ const pool = utils.pool;
 const MODELUsuarios = require("../models/modelUsuarios");
 const modelUsuarios = new MODELUsuarios(pool);
 
-function mostrarLogin(request, response) {
+function mostrarLogin(request, response, next) {
     response.status(200);
     response.render("loginout/login", { 
-        errorMsg : null
+        error : null
      });
 }
 
-function accesoUsuario(request, response) {
+function accesoUsuario(request, response, next) {
     modelUsuarios.esCorrecto(request.body.email, request.body.pass, function (err, existe) {
-
-        if (err || !existe) {
+        if (err) {
+            response.status(500);
+            next();
+        } else if (!existe) {
             response.status(200);
             response.render("loginout/login", {
-                errorMsg : "Direccion de correo y/o contraseña no válidos"
+                error : "Direccion de correo y/o contraseña no válidos"
             })
 
         } else {
@@ -31,7 +33,8 @@ function accesoUsuario(request, response) {
 
             modelUsuarios.leerPorEmail(request.body.email, function(err, usuario) {
                 if(err) {
-                    console.warn(err);
+                    response.status(500);
+                    next();
                 } else {
                     request.session.currentUser = usuario[0].email;
                     request.session.nombre = usuario[0].nombre;
@@ -44,26 +47,32 @@ function accesoUsuario(request, response) {
     })
 }
 
-function cerrarSesion(request, response) {  
+function cerrarSesion(request, response, next) {  
     response.status(200);
     request.session.destroy();
-    response.redirect("/loginout/login")
+    response.redirect("/loginout/login", {
+        error: null
+    })
 }
 
-function mostrarRegistro(request, response) {
+function mostrarRegistro(request, response, next) {
     response.status(200);
-    response.render("loginout/registro");
+    response.render("loginout/registro", {
+        error: null
+    });
 }
 
-function altaUsuario(request, response) {
+function altaUsuario(request, response, next) {
     response.status(200);
 
     if (utils.passCoincide(request.body.pwd, request.body.pwd2)
     && utils.passCorrecta(request.body.pwd)) {
 
         modelUsuarios.existe(request.body.email, (err, existe) => {
-
-            if(!existe) {
+            if(err) {
+                response.status(500);
+                next();
+            } else if(!existe) {
                 let img = "";
 
                 if(request.file === undefined) {
@@ -74,22 +83,30 @@ function altaUsuario(request, response) {
                     
 
                 modelUsuarios.insertar(request.body.email, request.body.pwd, request.body.name, img, (err, insertado) => {
-                    if(insertado) {
-                        utils.informar("EL USUARIO SE HA DADO DE ALTA CON EXITO")
-                        response.render("loginout/login");
+                    if(err) {
+                        response.status(500);
+                        next();
+                    } else if(insertado) {
+                        response.render("loginout/login", {
+                            error: null
+                        });
                         
                     } else {
-                        utils.informar("EL USUARIO NO SE HA DADO DE ALTA")
-                        response.render("loginout/registro");
+                        response.render("loginout/registro", {
+                            error: "Prueba con otro usuario"
+                        });
                     }
                 })
             } else {
-                utils.informar("EL USUARIO YA ESTA DADO DE ALTA");
-                response.render("loginout/login");
+                response.render("loginout/login", {
+                    error: "Usuario ya existe"
+                });
             }
         })
     } else {
-        response.render("loginout/registro");
+        response.render("loginout/registro", {
+            error: "¿Contraseñas correctas?"
+        });
     }
 }
 

@@ -43,6 +43,16 @@ const modelUsuarios = new MODELUsuarios(pool);
 app.use(express.static(staticFiles));       //RECURSOS ESTÁTICOS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(middlewares.session);
+app.use("/loginout", routerLogin);
+app.use("/preguntas", middlewares.controlAcceso, routerPreguntas);
+app.use("/usuarios", middlewares.controlAcceso, routerUsuarios);
+
+app.use(function(request, response, next) {
+    if(response.statusCode == 500) {
+        console.log("Server Internal Error")
+    }
+    response.render("error");
+})
 
 /* ARRANCAR SERVIDOR */ 
 app.listen(config.port, function(err) {
@@ -56,11 +66,6 @@ app.listen(config.port, function(err) {
 
 
 /* CONTROLADOR */
-app.use("/loginout", routerLogin);
-app.use("/preguntas", middlewares.controlAcceso, routerPreguntas);
-app.use("/usuarios", middlewares.controlAcceso, routerUsuarios);
-
-
 app.get("/index", middlewares.controlAcceso, function (request, response) {
     response.status(200);
     modelUsuarios.leerPorEmail(response.locals.userEmail, (err, usuario) => {
@@ -72,3 +77,4 @@ app.get("/", middlewares.controlAcceso, function (request, response) {
     response.status(302);
     response.redirect("/index");
 });
+
