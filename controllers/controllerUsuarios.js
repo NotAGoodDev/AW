@@ -93,39 +93,29 @@ function buscar(request, response, next) {
 function buscarPorNombre(request, response, next) {
     response.status(200);
 
-    modelUsuarios.buscarUsuariosPorNombre(request.params.busqueda, (err, usuarios) => {
+    modelUsuarios.listarUsuarios((err, usuarios) => {
         if (err) {
             response.status(500);
             next();
         } else {
-            let etiquetas = [];
-            let i = -1;
-            usuarios.forEach((usuario, indice, array) => {
-                modelEtiquetas.etiquetaMasRepetida(usuario.id, (err, etiqueta) => {
-                    i++;
-                    if (err) {
-                        response.status(500);
-                        next();
-                    } else {
-                        etiquetas[usuario.id] = etiqueta;
-                        if (i === array.length - 1) {
-                            response.render("usuarios/usuarios", {
-                                nombre: response.locals.nombre,
-                                titulo: "Usuarios filtrados por ['" + request.params.busqueda + "']",
-                                usuarios: usuarios,
-                                etiquetas: etiquetas
-                            });
-                        }
-                    }
-                });
-            });
-
             if (usuarios.length == 0) {
                 response.render("usuarios/usuarios", {
                     nombre: response.locals.nombre,
                     titulo: "No hay usuarios",
-                    usuarios: usuarios,
-                    etiquetas: []
+                    usuarios: usuarios
+                });
+            } else {
+                let u = usuarios.filter( usuario => {
+                    if(usuario.nombre.toLowerCase()
+                    .includes(request.params.busqueda.toLowerCase())) {
+                        return usuario;
+                    }
+                })
+                
+                response.render("usuarios/usuarios", {
+                    nombre: response.locals.nombre,
+                    titulo: "Usuarios filtrados por ['" + request.params.busqueda + "']",
+                    usuarios: u
                 });
             }
         }
