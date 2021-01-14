@@ -2,14 +2,14 @@
 
 module.exports = {
     mysqlConfig: {
-            host: "localhost",     // Ordenador que ejecuta el SGBD
-            user: "root",          // Usuario que accede a la BD
-            password: "",          // Contraseña con la que se accede a la BD
-            database: "p404"     // Nombre de la base de datos
+        host: "localhost", // Ordenador que ejecuta el SGBD
+        user: "root", // Usuario que accede a la BD
+        password: "", // Contraseña con la que se accede a la BD
+        database: "p404" // Nombre de la base de datos
     },
-      port: 3000                   // Puerto en el que escucha el servidor
- }
- 
+    port: 3000 // Puerto en el que escucha el servidor
+}
+
 
 /*
 
@@ -36,6 +36,7 @@ CREATE TABLE preguntas (
     cuerpo VARCHAR(1000) NOT NULL,
     fecha DATE NOT NULL,
     visitas INT NOT NULL DEFAULT 0,
+    puntos INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_usu) REFERENCES usuarios(id)
    );
 
@@ -45,6 +46,7 @@ CREATE TABLE preguntas (
     id_usu_resp INT NOT NULL,
     texto VARCHAR(1000) NOT NULL,
     fecha DATE NOT NULL,
+    puntos INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_preg) REFERENCES preguntas(id),
     FOREIGN KEY (id_usu_resp) REFERENCES usuarios(id)
    );
@@ -101,16 +103,16 @@ INSERT INTO `usuarios` VALUES (3, 'pedro@404.com', 0, '12345678', 'pedro', '/pro
 INSERT INTO `usuarios` VALUES (4, 'ana@404.com', 0, '12345678', 'ana', '/profile_imgs/u4.png', '1990/06/04');
 
 
-INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0);
-INSERT INTO `preguntas` VALUES (0, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
-INSERT INTO `preguntas` VALUES (0, 4, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
-INSERT INTO `preguntas` VALUES (0, 2, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
-INSERT INTO `preguntas` VALUES (0, 3, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0);
+INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0,0);
+INSERT INTO `preguntas` VALUES (0, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0,0);
+INSERT INTO `preguntas` VALUES (0, 4, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0,0);
+INSERT INTO `preguntas` VALUES (0, 2, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0,0);
+INSERT INTO `preguntas` VALUES (0, 3, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0,0);
 
-INSERT INTO `respuestas` VALUES (0, 1, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
-INSERT INTO `respuestas` VALUES (0, 1, 1, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04');
-INSERT INTO `respuestas` VALUES (0, 3, 1, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04');
-INSERT INTO `respuestas` VALUES (0, 3, 4, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE());
+INSERT INTO `respuestas` VALUES (0, 1, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE(), 0);
+INSERT INTO `respuestas` VALUES (0, 1, 1, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04', 0);
+INSERT INTO `respuestas` VALUES (0, 3, 1, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
+INSERT INTO `respuestas` VALUES (0, 3, 4, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE(), 0);
 
 INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
 INSERT INTO `etiquetas` VALUES (0, 1, 'html');
@@ -244,6 +246,90 @@ CREATE TRIGGER `Reputacion_Usuarios_Respuesta_AI` AFTER INSERT ON `voto_resp`
       (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 0;
   END IF ;
 END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER `Puntos_Preguntas_AU` AFTER UPDATE ON `voto_preg`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1 && NEW.voto != OLD.voto
+    THEN
+      UPDATE preguntas SET preguntas.puntos = preguntas.puntos + 1
+      WHERE preguntas.id= NEW.id_pregunta;
+   ELSEIF NEW.voto = 0 && NEW.voto != OLD.voto
+    THEN
+       UPDATE preguntas SET preguntas.puntos = preguntas.puntos - 1
+      WHERE preguntas.id= NEW.id_pregunta;
+  END IF ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `Puntos_Preguntas_AI` AFTER INSERT ON `voto_preg`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1
+    THEN
+      UPDATE preguntas SET preguntas.puntos = preguntas.puntos + 1
+      WHERE preguntas.id= NEW.id_pregunta;
+   ELSEIF NEW.voto = 0
+    THEN
+      UPDATE preguntas SET preguntas.puntos = preguntas.puntos - 1
+      WHERE preguntas.id= NEW.id_pregunta;
+  END IF ;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER `Puntos_Respuestas_AU` AFTER UPDATE ON `voto_resp`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1 && NEW.voto != OLD.voto
+    THEN
+      UPDATE respuestas SET respuestas.puntos = respuestas.puntos + 1
+      WHERE respuestas.id= NEW.id_respuesta;
+   ELSEIF NEW.voto = 0 && NEW.voto != OLD.voto
+    THEN
+     UPDATE respuestas SET respuestas.puntos = respuestas.puntos - 1
+      WHERE respuestas.id= NEW.id_respuesta;
+  END IF ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `Puntos_Respuestas_AI` AFTER INSERT ON `voto_resp`
+ FOR EACH ROW BEGIN
+  IF NEW.voto = 1
+    THEN
+      UPDATE respuestas SET respuestas.puntos = respuestas.puntos + 1
+      WHERE respuestas.id= NEW.id_respuesta;
+   ELSEIF NEW.voto = 0
+    THEN
+     UPDATE respuestas SET respuestas.puntos = respuestas.puntos - 1
+      WHERE respuestas.id= NEW.id_respuesta;
+  END IF ;
+END$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `Medallas_Preguntas_Votadas_AU` AFTER UPDATE ON `preguntas`
+ FOR EACH ROW BEGIN
+  IF NEW.puntos = 1 && OLD.fecha != CURRENT_DATE
+    THEN
+      INSERT INTO `usuario_medallas` VALUES (0, preguntas.id_usu, CURDATE());
+  ELSEIF NEW.puntos = 2 && OLD.fecha != CURRENT_DATE
+    THEN
+      INSERT INTO `usuario_medallas` VALUES (1, preguntas.id_usu, CURDATE());
+  ELSEIF NEW.puntos = 4 && OLD.fecha != CURRENT_DATE
+    THEN
+      INSERT INTO `usuario_medallas` VALUES (2, preguntas.id_usu, CURDATE());
+  ELSEIF NEW.puntos = 6 && OLD.fecha != CURRENT_DATE
+    THEN
+      INSERT INTO `usuario_medallas` VALUES (3, preguntas.id_usu, CURDATE());
+  END IF ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+$$
 DELIMITER ;
 
 

@@ -18,7 +18,7 @@ class DAORespuestas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "INSERT INTO `respuestas` VALUES (0, ?, ?, ?, CURDATE());";
+                const query = "INSERT INTO `respuestas` VALUES (0, ?, ?, ?, CURDATE(), 0);";
                 connection.query(
                     query,
                     [id_preg, id_usu_resp, texto],

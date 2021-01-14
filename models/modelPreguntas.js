@@ -153,7 +153,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "INSERT INTO `preguntas` VALUES (0, ?, ?, ?, CURDATE(), 0);";
+                const query = "INSERT INTO `preguntas` VALUES (0, ?, ?, ?, CURDATE(), 0, 0);";
                 connection.query(
                     query,
                     [id_usu, titulo, cuerpo],
