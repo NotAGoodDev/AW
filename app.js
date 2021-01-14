@@ -8,7 +8,6 @@
 
 /* IMPORTS SISTEMA */
 const path = require("path");
-const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -21,9 +20,6 @@ const routerLogin = require("./routers/routerLogin");
 const utils = require("./utils");
 
 const MODELUsuarios = require("./models/modelUsuarios");
-const { request } = require("http");
-const { response } = require("express");
-const { nextTick } = require("process");
 
 
 /* EXPRESS + EJS EN PUBLIC */

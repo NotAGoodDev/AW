@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
-const middlewares = require("../middlewares");
 const controllerUsuarios = require("../controllers/controllerUsuarios");
 
 

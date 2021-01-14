@@ -2,7 +2,6 @@
 /* IMPORT SESIONES */
 const config = require("./config")
 const sess = require("express-session");
-const fs = require("fs");
 const mysqlSession = require("express-mysql-session");
 const MySQLStore = mysqlSession(sess);
 const sessionStore = new MySQLStore(config.mysqlConfig);

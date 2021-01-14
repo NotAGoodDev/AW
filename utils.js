@@ -2,7 +2,6 @@
 
 const config = require("./config");
 
-const { text } = require("body-parser");
 const mysql = require("mysql");
 const pool = mysql.createPool(config.mysqlConfig);
 
