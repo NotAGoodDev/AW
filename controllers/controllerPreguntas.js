@@ -240,10 +240,11 @@ function procesarRespuesta(request, response, next) {
 }
 
 function preguntaDetalle(request, response, next) {
-    response.status(200);
+    response.status(200); 
     modelPreguntas.buscarPorId(request.params.id, (err, pregunta) => {
         if (err) {
             response.status(500);
+            console.warn(err);
             next();
         } else {
             if (pregunta.length == 0) {
@@ -258,80 +259,24 @@ function preguntaDetalle(request, response, next) {
                 modelEtiquetas.leerPorIdEtiquetas(pregunta[0].id, (err, etiquetas) => {
                     if (err) {
                         response.status(500);
+                        console.warn(err);
                         next();
-                    } else {
-                        modelVotos.contarDePreguntas(pregunta[0].id, 1, (err, n_votos_pos) => {
+                    } else { 
+                        modelRespuestas.listarRespuestas(pregunta[0].id, (err, respuestas) => {
                             if (err) {
                                 response.status(500);
+                                console.warn(err);
                                 next();
                             } else {
-                                modelVotos.contarDePreguntas(pregunta[0].id, 0, (err, n_votos_neg) => {
-                                    if (err) {
-                                        response.status(500);
-                                        next();
-                                    } else {
-                                        modelRespuestas.listarRespuestas(pregunta[0].id, (err, respuestas) => {
-                                            if (err) {
-                                                response.status(500);
-                                                next();
-                                            } else {
-                                                let entra = false;
-                                                let n_votos_resp_negativos = [];
-                                                let n_votos_resp_positivos = [];
-                                                respuestas.forEach((respuesta, indice, array) => {
-                                                    modelVotos.contarDeRespuestas(respuesta.id, 1, (err, votos) => {
-                                                        if (err) {
-                                                            response.status(500);
-                                                            next();
-                                                        } else {
-                                                            n_votos_resp_positivos.push(votos[0].n_votos);
-                                                            if (indice == array.length - 1) {
-                                                                respuestas.forEach((respuesta2, indice2, array2) => {
-                                                                    modelVotos.contarDeRespuestas(respuesta2.id, 0, (err2, votos2) => {
-                                                                        if (err2) {
-                                                                            response.status(500);
-                                                                            next();
-                                                                        } else {
-                                                                            n_votos_resp_negativos.push(votos2[0].n_votos);
-                                                                            if (indice2 == array2.length - 1) {
-                                                                                entra = true;
-                                                                                response.render("preguntas/mostrar", {
-                                                                                    pregunta: pregunta[0],
-                                                                                    n_votos_preg: (n_votos_pos[0].n_votos - n_votos_neg[0].n_votos),
-                                                                                    etiquetas: etiquetas[pregunta[0].id],
-                                                                                    respuestas: respuestas,
-                                                                                    n_votos_resp_positivos: n_votos_resp_positivos,
-                                                                                    n_votos_resp_negativos: n_votos_resp_negativos,
-                                                                                    nombre: response.locals.nombre
+             
+                            response.render("preguntas/mostrar", {
+                                pregunta: pregunta[0],
+                                n_votos_preg: pregunta[0].puntos,
+                                etiquetas: etiquetas[pregunta[0].id],
+                                respuestas: respuestas,
+                                nombre: response.locals.nombre });
 
-                                                                                });
-                                                                            }
-                                                                        }
-                                                                    });
-                                                                })
-                                                            }
-                                                        }
-                                                    });
-                                                })
 
-                                                setTimeout(() => {
-                                                    if (!entra) {
-                                                        response.render("preguntas/mostrar", {
-                                                            pregunta: pregunta[0],
-                                                            n_votos_preg: (n_votos_pos[0].n_votos - n_votos_neg[0].n_votos),
-                                                            etiquetas: etiquetas[pregunta[0].id],
-                                                            respuestas: respuestas,
-                                                            n_votos_resp_positivos: n_votos_resp_positivos,
-                                                            n_votos_resp_negativos: n_votos_resp_negativos,
-                                                            nombre: response.locals.nombre
-
-                                                        });
-                                                    }
-                                                }, 3000);
-                                            }
-                                        });
-                                    }
-                                });
                             }
                         });
                     }

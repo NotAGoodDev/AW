@@ -61,7 +61,7 @@
         <div class="answer-container">
             <div class="visit-votes-container spaced">
                 <div class="votes-container">
-                    <p><%= n_votos_resp_positivos[indice] - n_votos_resp_negativos[indice] %> votos</p>
+                    <p><%= respuesta.puntos %> votos</p>
                     <% let ruta2positivo = "/preguntas/votarRespuesta/" + respuesta.id + "/1/" + pregunta.id; %>
                     <% let ruta2negativo = "/preguntas/votarRespuesta/" + respuesta.id + "/0/" + pregunta.id; %>
                     <div class="vote-icon">

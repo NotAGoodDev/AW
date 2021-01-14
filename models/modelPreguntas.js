@@ -83,7 +83,7 @@ class DAOPreguntas {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT preguntas.visitas, preguntas.id, usuarios.id AS id_usu, preguntas.titulo, preguntas.cuerpo, preguntas.fecha, usuarios.nombre, usuarios.imagen FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id WHERE preguntas.id=?; ";
+                const query = "SELECT preguntas.visitas, preguntas.puntos, preguntas.id, usuarios.id AS id_usu, preguntas.titulo, preguntas.cuerpo, preguntas.fecha, usuarios.nombre, usuarios.imagen FROM usuarios JOIN preguntas on preguntas.id_usu = usuarios.id WHERE preguntas.id=?; ";
                 connection.query(
                     query,
                     [id],
