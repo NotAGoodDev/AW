@@ -59,13 +59,28 @@ CREATE TABLE preguntas (
     tipo ENUM('bronce', 'plata', 'oro')
    );
 
- CREATE TABLE usuario_medallas(
+ 
+
+    CREATE TABLE preguntas_medallas(
     id INT NOT NULL,
     id_usu INT NOT NULL,
+    id_preg INT NOT NULL,
     fecha DATE NOT NULL,
     FOREIGN KEY (id) REFERENCES medallas(id),
     FOREIGN KEY (id_usu) REFERENCES usuarios(id),
-    PRIMARY KEY(id, id_usu, fecha)
+    FOREIGN KEY (id_preg) REFERENCES preguntas(id),
+    PRIMARY KEY(id, id_usu, id_preg)
+    );
+
+    CREATE TABLE respuestas_medallas(
+    id INT NOT NULL,
+    id_usu INT NOT NULL,
+    id_resp INT NOT NULL,
+    fecha DATE NOT NULL,
+    FOREIGN KEY (id) REFERENCES medallas(id),
+    FOREIGN KEY (id_usu) REFERENCES usuarios(id),
+    FOREIGN KEY (id_resp) REFERENCES respuestas(id),
+    PRIMARY KEY(id, id_usu, id_resp)
     );
 
 
@@ -135,31 +150,6 @@ INSERT INTO `medallas` VALUES (7, 'Respuesta interesante', 'bronce');
 INSERT INTO `medallas` VALUES (8, 'Buena respuesta', 'plata');
 INSERT INTO `medallas` VALUES (9, 'Respuesta famosa', 'oro');
 
-INSERT INTO `usuario_medallas` VALUES (0, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (0, 1, CURDATE() + 1);
-INSERT INTO `usuario_medallas` VALUES (0, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (0, 3, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (0, 4, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (1, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (1, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (1, 3, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (2, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (2, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (3, 1, CURDATE());
-
-INSERT INTO `usuario_medallas` VALUES (4, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (4, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (4, 3, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (5, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (5, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (6, 1, CURDATE());
-
-INSERT INTO `usuario_medallas` VALUES (7, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (7, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (7, 3, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (8, 1, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (8, 2, CURDATE());
-INSERT INTO `usuario_medallas` VALUES (9, 1, CURDATE());
 
 INSERT INTO `voto_preg` VALUES (3, 1, 0);
 INSERT INTO `voto_preg` VALUES (3, 2, 0);
@@ -312,24 +302,53 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Medallas_Preguntas_Votadas_AU` AFTER UPDATE ON `preguntas`
  FOR EACH ROW BEGIN
-  IF NEW.puntos = 1 && OLD.fecha != CURRENT_DATE
+  IF NEW.puntos = 1 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 0)IS NULL
     THEN
-      INSERT INTO `usuario_medallas` VALUES (0, preguntas.id_usu, CURDATE());
-  ELSEIF NEW.puntos = 2 && OLD.fecha != CURRENT_DATE
+      INSERT INTO `preguntas_medallas` VALUES (0, OLD.id_usu,OLD.id, CURDATE());
+  ELSEIF NEW.puntos = 2 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 1)IS NULL
     THEN
-      INSERT INTO `usuario_medallas` VALUES (1, preguntas.id_usu, CURDATE());
-  ELSEIF NEW.puntos = 4 && OLD.fecha != CURRENT_DATE
+      INSERT INTO `preguntas_medallas` VALUES (1, OLD.id_usu,OLD.id, CURDATE());
+  ELSEIF NEW.puntos = 4 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 2)IS NULL
     THEN
-      INSERT INTO `usuario_medallas` VALUES (2, preguntas.id_usu, CURDATE());
-  ELSEIF NEW.puntos = 6 && OLD.fecha != CURRENT_DATE
+      INSERT INTO `preguntas_medallas` VALUES (2, OLD.id_usu,OLD.id, CURDATE());
+  ELSEIF NEW.puntos = 6 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 3)IS NULL
     THEN
-      INSERT INTO `usuario_medallas` VALUES (3, preguntas.id_usu, CURDATE());
+      INSERT INTO `preguntas_medallas` VALUES (3, OLD.id_usu,OLD.id, CURDATE());
+  END IF ;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER `Medallas_Respuestas_Votadas_AU` AFTER UPDATE ON `respuestas`
+ FOR EACH ROW BEGIN
+  IF NEW.puntos = 2 && (SELECT respuestas_medallas.id FROM respuestas_medallas WHERE respuestas_medallas.id_usu = OLD.id_usu_resp && respuestas_medallas.id_resp = OLD.id && respuestas_medallas.id = 7)IS NULL
+    THEN
+      INSERT INTO `respuestas_medallas` VALUES (7, OLD.id_usu_resp,OLD.id, CURDATE());
+  ELSEIF NEW.puntos = 4 && (SELECT respuestas_medallas.id FROM respuestas_medallas WHERE respuestas_medallas.id_usu = OLD.id_usu_resp && respuestas_medallas.id_resp = OLD.id && respuestas_medallas.id = 8)IS NULL
+    THEN
+      INSERT INTO `respuestas_medallas` VALUES (8, OLD.id_usu_resp,OLD.id, CURDATE());
+  ELSEIF NEW.puntos = 6 && (SELECT respuestas_medallas.id FROM respuestas_medallas WHERE respuestas_medallas.id_usu = OLD.id_usu_resp && respuestas_medallas.id_resp = OLD.id && respuestas_medallas.id = 9)IS NULL
+    THEN
+      INSERT INTO `respuestas_medallas` VALUES (9, OLD.id_usu_resp,OLD.id, CURDATE());
   END IF ;
 END$$
 DELIMITER ;
 
 DELIMITER $$
-$$
+CREATE TRIGGER `Medallas_Preguntas_Visitadas_AU` AFTER UPDATE ON `preguntas`
+ FOR EACH ROW BEGIN
+  IF NEW.visitas = 2 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 4)IS NULL
+    THEN
+      INSERT INTO `preguntas_medallas` VALUES (4, OLD.id_usu,OLD.id, CURDATE());
+  ELSEIF NEW.visitas = 4 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 5)IS NULL
+    THEN
+      INSERT INTO `preguntas_medallas` VALUES (5, OLD.id_usu,OLD.id, CURDATE());
+  ELSEIF NEW.visitas = 6 && (SELECT preguntas_medallas.id FROM preguntas_medallas WHERE preguntas_medallas.id_usu = OLD.id_usu && preguntas_medallas.id_preg = OLD.id && preguntas_medallas.id = 6)IS NULL
+    THEN
+      INSERT INTO `preguntas_medallas` VALUES (6, OLD.id_usu,OLD.id, CURDATE());
+  END IF ;
+END$$
 DELIMITER ;
 
 
