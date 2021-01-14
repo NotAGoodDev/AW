@@ -220,15 +220,22 @@ class DAOUsuarios {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
                 const query =
-                "SELECT UM.id, UM.fecha, M.descripcion, M.tipo FROM USUARIO_MEDALLAS AS UM"
-                + " JOIN MEDALLAS AS M"
-                + " ON UM.id = M.id"
-                + " WHERE id_usu = ?"
-                + " ORDER BY DESCRIPCION";
+                "SELECT U.ID, M.DESCRIPCION, M.TIPO, U.N"
+                + " FROM MEDALLAS AS M,"
+                + " ("
+                    + " ( SELECT ID, COUNT(ID) AS N FROM preguntas_medallas"
+                        + " WHERE id_usu = ?"
+                        + " GROUP BY ID"
+                    + " ) UNION ( SELECT ID, COUNT(ID) AS N FROM respuestas_medallas"
+                        + " WHERE id_usu = ?"
+                        + " GROUP BY ID"
+                    + " )"
+                + " ) AS U"
+                + " WHERE U.ID = M.ID";
 
                 connection.query(
                     query,
-                    [id],
+                    [id, id],
                     (err, rows) => {
                         connection.release();
                         if (err) {
@@ -240,18 +247,9 @@ class DAOUsuarios {
                             medallas["oro"] = [];
                             
                             rows.map((medalla, i) => {
-                                if( i == 0 || medalla.descripcion != rows[i - 1].descripcion) {
-                                    medalla.contador = 1;
-                                    medallas[ medalla.tipo ].push(medalla);
-                                }
-
-                                else {
-                                    let ultimaPosicion = medallas[ medalla.tipo ].length - 1;
-                                    medallas[ medalla.tipo ][ ultimaPosicion ].contador++;
-                                }
-
+                                medallas[ medalla.TIPO ].push(medalla);
                             })
-
+                            
                             callback(null, medallas);
                         }
                     }

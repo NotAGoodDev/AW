@@ -112,10 +112,10 @@ CREATE TABLE voto_resp (
 
 
 
-INSERT INTO `usuarios` VALUES (1, 'alex@404.com',0 , '12345678', 'alex', '/profile_imgs/U1.png', '2020/12/24');
-INSERT INTO `usuarios` VALUES (2, 'alvaro@404.com',0 , '12345678', 'alvaro', '/profile_imgs/U2.png', '2010/10/13');
-INSERT INTO `usuarios` VALUES (3, 'pedro@404.com', 0, '12345678', 'pedro', '/profile_imgs/u3.png', '2011/09/22');
-INSERT INTO `usuarios` VALUES (4, 'ana@404.com', 0, '12345678', 'ana', '/profile_imgs/u4.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (1, 'alex@404.com',0 , '12345678', 'alex', 'U1.png', '2020/12/24');
+INSERT INTO `usuarios` VALUES (2, 'alvaro@404.com',0 , '12345678', 'alvaro', 'U2.png', '2010/10/13');
+INSERT INTO `usuarios` VALUES (3, 'pedro@404.com', 0, '12345678', 'pedro', 'u3.png', '2011/09/22');
+INSERT INTO `usuarios` VALUES (4, 'ana@404.com', 0, '12345678', 'ana', 'u4.png', '1990/06/04');
 
 
 INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0,0);

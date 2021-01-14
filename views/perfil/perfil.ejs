@@ -59,16 +59,16 @@
                 <div class="medal-container">
                     <div class="medal-type bronze">
                         <p class="small">BRONCE</p>
-                        <p class="big"><%= medallasBronce.reduce((ac, medalla) => ac += medalla.contador, 0); %></p>
+                        <p class="big"><%= medallasBronce.reduce((ac, medalla) => ac += medalla.N, 0); %></p>
                     </div>
 
                     <% medallasBronce.map(medalla => { %>
                         <div class="medal-tag">
                             <p class="medal-in-medaltag bronze"></p>
-                            <p class="text-in-medaltag verysmall"> <%= medalla.descripcion %> </p>
+                            <p class="text-in-medaltag verysmall"> <%= medalla.DESCRIPCION %> </p>
 
-                            <% if(medalla.contador != 1) { %>
-                            <p class="times-in-medaltag"> x<%= medalla.contador %></p>
+                            <% if(medalla.N != 1) { %>
+                            <p class="times-in-medaltag"> x<%= medalla.N %></p>
                             <% } %>
 
 
@@ -81,16 +81,16 @@
                 <div class="medal-container">
                     <div class="medal-type silver">
                         <p class="small">PLATA</p>
-                        <p class="big"><%= medallasPlata.reduce((ac, medalla) => ac += medalla.contador, 0); %></p>
+                        <p class="big"><%= medallasPlata.reduce((ac, medalla) => ac += medalla.N, 0); %></p>
                     </div>
 
                     <% medallasPlata.map(medalla => { %>
                         <div class="medal-tag">
                             <p class="medal-in-medaltag silver"></p>
-                            <p class="text-in-medaltag verysmall"> <%= medalla.descripcion %> </p>
+                            <p class="text-in-medaltag verysmall"> <%= medalla.DESCRIPCION %> </p>
 
-                            <% if(medalla.contador != 1) { %>
-                            <p class="times-in-medaltag"> x<%= medalla.contador %></p>
+                            <% if(medalla.N != 1) { %>
+                            <p class="times-in-medaltag"> x<%= medalla.N %></p>
                             <% } %>
 
 
@@ -103,16 +103,16 @@
                 <div class="medal-container">
                     <div class="medal-type gold">
                         <p class="small">ORO</p>
-                        <p class="big"><%= medallasOro.reduce((ac, medalla) => ac += medalla.contador, 0); %></p>
+                        <p class="big"><%= medallasOro.reduce((ac, medalla) => ac += medalla.N, 0); %></p>
                     </div>
                     
                     <% medallasOro.map(medalla => { %>
                         <div class="medal-tag">
                             <p class="medal-in-medaltag gold"></p>
-                            <p class="text-in-medaltag verysmall"> <%= medalla.descripcion %> </p>
+                            <p class="text-in-medaltag verysmall"> <%= medalla.DESCRIPCION %> </p>
 
-                            <% if(medalla.contador != 1) { %>
-                            <p class="times-in-medaltag"> x<%= medalla.contador %></p>
+                            <% if(medalla.N != 1) { %>
+                            <p class="times-in-medaltag"> x<%= medalla.N %></p>
                             <% } %>
 
 

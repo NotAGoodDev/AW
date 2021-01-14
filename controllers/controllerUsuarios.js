@@ -155,6 +155,7 @@ function mostrarPerfil(request, response, next) {
     modelUsuarios.leerPorEmail(response.locals.userEmail, (err, usuario) => {
         modelUsuarios.leerPorId(request.params.id, (err, perfil) => {
             if (err) {
+                console.warn(err);
                 response.status(500);
                 next();
             } else {
@@ -162,6 +163,7 @@ function mostrarPerfil(request, response, next) {
 
                 modelPreguntas.contar(request.params.id, (err, preguntas) => {
                     if (err) {
+                        console.warn(err);
                         response.status(500);
                         next();
                     } else {
@@ -170,6 +172,7 @@ function mostrarPerfil(request, response, next) {
 
                         modelRespuestas.contar(request.params.id, (err, respuestas) => {
                             if (err) {
+                                console.warn(err);
                                 response.status(500);
                                 next();
                             } else {
@@ -177,6 +180,7 @@ function mostrarPerfil(request, response, next) {
 
                                 modelUsuarios.medallas(request.params.id, (err, medallas) => {
                                     if (err) {
+                                        console.warn(err);
                                         response.status(500);
                                         next();
                                     } else {
