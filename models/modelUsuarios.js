@@ -12,28 +12,6 @@ class DAOUsuarios {
         this.pool = pool;
     }
 
-    funcion(parametros, callback) {
-        this.pool.getConnection( function(err, connection) {
-            if(err) {
-                callback(new Error("Error de conexión a la base de datos"))
-            } else {
-                const query = "";
-                connection.query(
-                    query,
-                    [values],
-                    (err, rows) => {
-                        connection.release();
-                        if (err) {
-                            callback(new Error("Error de acceso a la base de datos"))
-                        } else {
-                            /* CODIGO */
-                        }
-                    }
-                )
-            }
-        })
-    }
-
     buscarUsuariosPorNombre(texto, callback) {
         this.pool.getConnection( function(err, connection) {
             if(err) {
@@ -62,7 +40,17 @@ class DAOUsuarios {
             if(err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "SELECT id, imagen, nombre, reputacion FROM `usuarios` ORDER BY id ASC;";
+                const query = "SELECT id, nombre, reputacion, etiqueta, TOTAL FROM USUARIOS AS U"
+                + " LEFT OUTER JOIN"
+                + " ("
+                    + " SELECT E.etiqueta, P.id_usu, COUNT(ETIQUETA) AS TOTAL FROM ETIQUETAS AS E,"
+                    + " PREGUNTAS AS P"
+                    + " WHERE E.ID_PREG = P.ID"
+                    + " GROUP BY P.ID_USU,E.ETIQUETA"
+                + " ) AS EP"
+                + " ON U.ID = EP.ID_USU"
+                + " ORDER BY U.ID, EP.TOTAL DESC;";
+
                 connection.query(
                     query,
                     (err, rows) => {
@@ -70,7 +58,14 @@ class DAOUsuarios {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"))
                         } else {
-                            callback(null, rows);
+                            let usuarios = [];
+                            rows.map((usuario, i, array) => {
+                                if(i == 0 || array[i - 1].id != usuario.id) {
+                                    usuarios.push(usuario);
+                                }
+                            });
+
+                            callback(null, usuarios);
                         }
                     }
                 )

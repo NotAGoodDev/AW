@@ -38,11 +38,12 @@
                         <p class="spaced-form">
                             <%= usuario.reputacion %>
                         </p>
-                        <% if (etiquetas[usuario.id] !==undefined){ %>
-                            <% let ruta="/preguntas/etiquetadas/" + etiquetas[usuario.id].etiqueta; %>
-                                <a href=<%=ruta %> class="filter-tag green text-white"><%=etiquetas[usuario.id].etiqueta
-                                        %></a>
-                                <% }; %>
+                        <% if (usuario.etiqueta !== null){ %>
+                            <% let ruta="/preguntas/etiquetadas/" + usuario.etiqueta; %>
+                            <a href="<%= ruta %>" class="filter-tag green text-white">
+                                <%= usuario.etiqueta %>
+                            </a>
+                        <% }; %>
                     </div>
                     <% }); %>
             </div>
