@@ -15,8 +15,10 @@
 </div>
 
 <div >
-    <form class="search-container" action="/preguntas/buscar" method="GET">
-        <input type="submit" class="button-special green text-white small" value="Buscar"/>
-        <input type="text" name="busqueda" class="search" placeholder="Buscar por título/cuerpo de la pregunta">
-    </form>
+    <div class="search-container">
+        <form action="/preguntas/busqueda" method="post" class="formSearch">
+            <input type="submit" class="button-special green text-white" value="Buscar">
+            <input type="text" name="busqueda" id="" class="search">
+        </form>
+    </div>
 </div>

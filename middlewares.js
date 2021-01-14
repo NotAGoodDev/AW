@@ -15,8 +15,8 @@ const session = sess({
     store: sessionStore
 })
 
-function controlAcceso (request, response, next) {
-    if(request.session.currentUser === undefined) {
+function controlAcceso(request, response, next) {
+    if (request.session.currentUser === undefined) {
         response.redirect("/loginout/login");
     } else {
         response.locals.userEmail = request.session.currentUser;
@@ -28,12 +28,27 @@ function controlAcceso (request, response, next) {
 }
 
 function error404(request, response, next) {
-    console.log("404");
+    if (response.statusCode != 500) {
+        response.render("error", {
+            tipo: 404,
+            descripcion: "La página a la que intentas acceder no está disponible"
+        });
+    }
+
     next();
 }
 
 function error500(request, response, next) {
-    console.log(request.err);
+    if(response.statusCode == 500) {
+        response.render("error", {
+            tipo: 500,
+            descripcion: "Error interno del servidor, por favor póngase en contacto con el administrador del sitio"
+        });
+    }
+
+    else {
+        response.end();
+    }
 }
 
 module.exports = {

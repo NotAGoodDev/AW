@@ -478,6 +478,19 @@ img[src$="tive.png"]:hover {
     color: #ea0c0a;
 }
 
+.errorContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.errorImg{
+    display: flex;
+    align-self: center;
+    padding-left: 30px;
+}
+
 /* ----------FILTRO---------- */
 
 .filter-user-container{

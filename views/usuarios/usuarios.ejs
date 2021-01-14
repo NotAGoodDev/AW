@@ -2,45 +2,53 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <title>404 grupo 26</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" type="image/png" href="/img/favicon.png">
 </head>
+
 <body>
 
     <%- include("../header") %>
 
-    <div class="container">
+        <div class="container">
 
-        <div class="title big spaced">
-            <%= titulo %>
-        </div>
-
-        <div class="search-user-container">
-            <form action="/usuarios/busqueda" method="post" class="formSearch">
-                <input type="submit" class="button-special green text-white" value="Filtrar">
-                <input type="text" name="busqueda" id="" class="search-user" placeholder="Filtrar por usuario">
-            </form>
-        </div>
-        <div class="spaced"></div>
-
-        <div class="users-container">
-            <% usuarios.forEach(usuario => { %>
-            <div class="filter-user">
-                <img src="/usuarios/imagen/<%= usuario.id %>" alt="" class="spaced-form img-user">
-                <p class="spaced-form"><%= usuario.nombre %></p>
-                <p class="spaced-form"><%= usuario.reputacion %></p>
-                <% if (etiquetas[usuario.id] !== undefined){ %>
-                <% let ruta = "/preguntas/etiquetadas/" + etiquetas[usuario.id].etiqueta; %>
-                <a href=<%= ruta %> class="filter-tag green text-white"><%=etiquetas[usuario.id].etiqueta %></a>
-                <% }; %>
+            <div class="title big spaced">
+                <%= titulo %>
             </div>
-            <% }); %>
+
+            <div class="search-user-container">
+                <form action="/usuarios/busqueda" method="post" class="formSearch">
+                    <input type="submit" class="button-special green text-white" value="Filtrar">
+                    <input type="text" name="busqueda" id="" class="search-user" placeholder="Filtrar por usuario">
+                </form>
+            </div>
+            <div class="spaced"></div>
+
+            <div class="users-container">
+                <% usuarios.forEach(usuario=> { %>
+                    <div class="filter-user">
+                        <img src="/usuarios/imagen/<%= usuario.id %>" alt="" class="spaced-form img-user">
+                        <a class="very-small titulo" href="/usuarios/perfil/<%= usuario.id %>">
+                            <%= usuario.nombre %>
+                        </a>
+                        <p class="spaced-form">
+                            <%= usuario.reputacion %>
+                        </p>
+                        <% if (etiquetas[usuario.id] !==undefined){ %>
+                            <% let ruta="/preguntas/etiquetadas/" + etiquetas[usuario.id].etiqueta; %>
+                                <a href=<%=ruta %> class="filter-tag green text-white"><%=etiquetas[usuario.id].etiqueta
+                                        %></a>
+                                <% }; %>
+                    </div>
+                    <% }); %>
+            </div>
         </div>
-    </div>
-    
+
 
 </body>
+
 </html>

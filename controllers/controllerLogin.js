@@ -39,7 +39,6 @@ function accesoUsuario(request, response, next) {
                     request.session.currentUser = usuario[0].email;
                     request.session.nombre = usuario[0].nombre;
                     request.session.idUsuario = usuario[0].id;
-
                     response.redirect("/index");
                 }
             })
@@ -48,11 +47,9 @@ function accesoUsuario(request, response, next) {
 }
 
 function cerrarSesion(request, response, next) {  
-    response.status(200);
+    response.status(302);
     request.session.destroy();
-    response.redirect("/loginout/login", {
-        error: null
-    })
+    response.redirect("/loginout/login");
 }
 
 function mostrarRegistro(request, response, next) {

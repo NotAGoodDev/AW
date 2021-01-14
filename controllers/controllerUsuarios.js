@@ -19,7 +19,7 @@ const modelRespuestas = new MODELRespuestas(pool);
 const modelEtiquetas = new MODELEtiquetas(pool);
 
 
-function listarUsuarios(request, response) {
+function listarUsuarios(request, response, next) {
     modelUsuarios.listarUsuarios((err, usuarios) => {
         if (err) {
             response.status(500);
@@ -59,7 +59,7 @@ function listarUsuarios(request, response) {
     });
 }
 
-function imagenPerfil(request, response) {
+function imagenPerfil(request, response, next) {
     response.status(200);
     modelUsuarios.imagen(response.locals.userEmail, function (err, image) {
         if (err) {
@@ -72,7 +72,7 @@ function imagenPerfil(request, response) {
     })
 }
 
-function imagenPorId(request, response) {
+function imagenPorId(request, response, next) {
     response.status(200);
     modelUsuarios.leerPorId(request.params.id, function (err, usuario) {
         if (err) {
@@ -92,7 +92,7 @@ function imagenPorId(request, response) {
     })
 }
 
-function buscar(request, response) {
+function buscar(request, response, next) {
     response.status(200);
     if (request.body.busqueda !== "") {
         let ruta = "/usuarios/buscar/" + request.body.busqueda;
@@ -107,7 +107,7 @@ function buscar(request, response) {
     }
 }
 
-function buscarPorNombre(request, response) {
+function buscarPorNombre(request, response, next) {
     response.status(200);
 
     modelUsuarios.buscarUsuariosPorNombre(request.params.busqueda, (err, usuarios) => {
@@ -149,7 +149,7 @@ function buscarPorNombre(request, response) {
     });
 }
 
-function mostrarPerfil(request, response) {
+function mostrarPerfil(request, response, next) {
     response.status(200);
 
     modelUsuarios.leerPorEmail(response.locals.userEmail, (err, usuario) => {
