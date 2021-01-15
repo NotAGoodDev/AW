@@ -282,7 +282,7 @@ INSERT INTO `usuarios` VALUES (1, 'nico@404.es',0 , '12345678', 'Nico', 'Nico.pn
 INSERT INTO `usuarios` VALUES (2, 'roberto@404.es',0 , '12345678', 'Roberto', 'Kuroko.png', '2010/10/13');
 INSERT INTO `usuarios` VALUES (3, 'sfg@404.es', 0, '12345678', 'SFG', 'SFG.png', '2011/09/22');
 INSERT INTO `usuarios` VALUES (4, 'marta@404.es', 0, '12345678', 'Marta', 'Marta.png', '1990/06/04');
-INSERT INTO `usuarios` VALUES (5, 'lucas@404.es', 0, '12345678', 'Lucas', 'Lucas.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (5, 'lucas@404.es', 0, '12345678', 'Lucas', 'defecto3.png', '1990/06/04');
 INSERT INTO `usuarios` VALUES (6, 'emy@404.es', 0, '12345678', 'Emy', 'Amy.png', '1990/06/04');
 
 
