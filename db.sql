@@ -278,61 +278,29 @@ END$$
 DELIMITER ;
 
 
-INSERT INTO `usuarios` VALUES (1, 'nico@404.es',0 , '12345678', 'alex', 'U1.png', '2020/12/24');
-INSERT INTO `usuarios` VALUES (2, 'roberto@404.es',0 , '12345678', 'alvaro', 'U2.png', '2010/10/13');
-INSERT INTO `usuarios` VALUES (3, 'sfg@404.es', 0, '12345678', 'pedro', 'u3.png', '2011/09/22');
-INSERT INTO `usuarios` VALUES (4, 'marta@404.es', 0, '12345678', 'ana', 'u4.png', '1990/06/04');
-INSERT INTO `usuarios` VALUES (4, 'lucas@404.es', 0, '12345678', 'ana', 'u4.png', '1990/06/04');
-INSERT INTO `usuarios` VALUES (4, 'emy@404.es', 0, '12345678', 'ana', 'u4.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (1, 'nico@404.es',0 , '12345678', 'Nico', 'Nico.png', '2020/12/24');
+INSERT INTO `usuarios` VALUES (2, 'roberto@404.es',0 , '12345678', 'Roberto', 'Kuroko.png', '2010/10/13');
+INSERT INTO `usuarios` VALUES (3, 'sfg@404.es', 0, '12345678', 'SFG', 'SFG.png', '2011/09/22');
+INSERT INTO `usuarios` VALUES (4, 'marta@404.es', 0, '12345678', 'Marta', 'Marta.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (5, 'lucas@404.es', 0, '12345678', 'Lucas', 'Lucas.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (6, 'emy@404.es', 0, '12345678', 'Emy', 'Amy.png', '1990/06/04');
 
 
-INSERT INTO `preguntas` VALUES (0, 1, 'html y css cosas', 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2020/12/24', 0,0);
-INSERT INTO `preguntas` VALUES (0, 2, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0,0);
-INSERT INTO `preguntas` VALUES (0, 4, 'javascript', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0,0);
-INSERT INTO `preguntas` VALUES (0, 2, 'jbxdfvius', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0,0);
-INSERT INTO `preguntas` VALUES (0, 3, 'html y css cosas', 'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '2050/10/13', 0,0);
+INSERT INTO `preguntas` VALUES (0, 1, '¿Cual es la diferencia entre position: relative, position: absolute y position: fixed?', 'Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página. Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página.', '2020/12/24', 0,0);
+INSERT INTO `preguntas` VALUES (0, 2, '¿Cómo funciona exactamente nth-child?', 'No acabo de comprender muy bien que hace exactamente y qué usos prácticos puede tener.', '2050/10/13', 0,0);
+INSERT INTO `preguntas` VALUES (0, 3, 'Diferencias entre == y === (comparaciones en JavaScript)', 'Siempre he visto que en JavaScript hay: \n asignaciones = \n comparaciones == y === \n Creo entender que == hace algo parecido a comparar el valor de la variable y el === también compara el tipo (como un equals de java).', '2020/12/24', 0,0);
+INSERT INTO `preguntas` VALUES (0, 4, 'Problema con asincronismo en Node', 'Soy nueva en Node... Tengo una modulo que conecta a una BD de postgres por medio de pg-node. En eso no tengo problemas. Mi problema es que al llamar a ese modulo, desde otro modulo, y despues querer usar los datos que salieron de la BD me dice undefined... Estoy casi seguro que es porque la conexion a la BD devuelve una promesa, y los datos no estan disponibles al momento de usarlos.', '2020/12/13', 0,0);
+INSERT INTO `preguntas` VALUES (0, 5, '¿Qué es la inyección SQL y cómo puedo evitarla?', 'He encontrado bastantes preguntas en StackOverflow sobre programas o formularios web que guardan información en una base de datos (especialmente en PHP y MySQL) y que contienen graves problemas de seguridad relacionados principalmente con la inyección SQL. \n Normalmente dejo un comentario y/o un enlace a una referencia externa, pero un comentario no da mucho espacio para mucho y sería positivo que hubiera una referencia interna en SOes sobre el tema así que decidí escribir esta pregunta.', '2050/10/13', 0,0);
 
-INSERT INTO `respuestas` VALUES (0, 1, 3, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE(), 0);
-INSERT INTO `respuestas` VALUES (0, 1, 1, 'dfn bvzkxc zxfdhjxvgnbvbnnxcvm bkladjf nlkvnmldfzkxnzblknzxlck Lorem Ipsum ha sido el texto de relleno estándar de las industrifgjdfhmfghmfghmghjmfdgas desde el año 1500', '1990/06/04', 0);
-INSERT INTO `respuestas` VALUES (0, 3, 1, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', '1990/06/04', 0);
-INSERT INTO `respuestas` VALUES (0, 3, 4, 'lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500', CURDATE(), 0);
+INSERT INTO `respuestas` VALUES (0, 1, 5, 'La propiedad position sirve para posicionar un elemento dentro de la página. Sin embargo, dependiendo de cual sea la propiedad que usemos, el elemento tomará una referencia u otra para posicionarse respecto a ella. \n Los posibles valores que puede adoptar la propiedad position son: static | relative | absolute | fixed | inherit | initial.', CURDATE(), 0);
+INSERT INTO `respuestas` VALUES (0, 1, 6, 'La pseudoclase :nth-child() selecciona los hermanos que cumplan cierta condición definida en la fórmula an + b. a y b deben ser números enteros, n es un contador. El grupo an representa un ciclo, cada cuantos elementos se repite; b indica desde donde empezamos a contar.', '2021/06/04', 0);
 
-INSERT INTO `etiquetas` VALUES (0, 1, 'javascript');
-INSERT INTO `etiquetas` VALUES (0, 1, 'html');
 INSERT INTO `etiquetas` VALUES (0, 1, 'css');
-INSERT INTO `etiquetas` VALUES (0, 2, 'javascript');
-INSERT INTO `etiquetas` VALUES (0, 3, 'javascript');
-INSERT INTO `etiquetas` VALUES (0, 3, 'node');
-INSERT INTO `etiquetas` VALUES (0, 4, 'javascript');
-INSERT INTO `etiquetas` VALUES (0, 4, 'css');
-INSERT INTO `etiquetas` VALUES (0, 1, 'express');
+INSERT INTO `etiquetas` VALUES (0, 1, 'css3');
+INSERT INTO `etiquetas` VALUES (0, 2, 'css');
+INSERT INTO `etiquetas` VALUES (0, 2, 'html');
+INSERT INTO `etiquetas` VALUES (0, 3, 'JavaScript');
+INSERT INTO `etiquetas` VALUES (0, 4, 'nodejs');
+INSERT INTO `etiquetas` VALUES (0, 5, 'mysql');
+INSERT INTO `etiquetas` VALUES (0, 5, 'sql');
 
-INSERT INTO `medallas` VALUES (0, 'Estudiante', 'bronce');
-INSERT INTO `medallas` VALUES (1, 'Pregunta interesante', 'bronce');
-INSERT INTO `medallas` VALUES (2, 'Buena pregunta', 'plata');
-INSERT INTO `medallas` VALUES (3, 'Excelente pregunta', 'oro');
-INSERT INTO `medallas` VALUES (4, 'Pregunta popular', 'bronce');
-INSERT INTO `medallas` VALUES (5, 'Pregunta destacada', 'plata');
-INSERT INTO `medallas` VALUES (6, 'Pregunta famosa', 'oro');
-INSERT INTO `medallas` VALUES (7, 'Respuesta interesante', 'bronce');
-INSERT INTO `medallas` VALUES (8, 'Buena respuesta', 'plata');
-INSERT INTO `medallas` VALUES (9, 'Respuesta famosa', 'oro');
-
-
-INSERT INTO `voto_preg` VALUES (3, 1, 0);
-INSERT INTO `voto_preg` VALUES (3, 2, 0);
-INSERT INTO `voto_preg` VALUES (4, 3, 1);
-INSERT INTO `voto_preg` VALUES (4, 2, 0);
-INSERT INTO `voto_preg` VALUES (2, 1, 1);
-INSERT INTO `voto_preg` VALUES (2, 2, 1);
-INSERT INTO `voto_preg` VALUES (2, 3, 1);
-INSERT INTO `voto_preg` VALUES (2, 4, 1);
-
-INSERT INTO `voto_resp` VALUES (3, 1, 0);
-INSERT INTO `voto_resp` VALUES (3, 2, 0);
-INSERT INTO `voto_resp` VALUES (4, 3, 1);
-INSERT INTO `voto_resp` VALUES (4, 2, 0);
-INSERT INTO `voto_resp` VALUES (2, 1, 1);
-INSERT INTO `voto_resp` VALUES (2, 2, 1);
-INSERT INTO `voto_resp` VALUES (2, 3, 1);
-INSERT INTO `voto_resp` VALUES (2, 4, 1);
