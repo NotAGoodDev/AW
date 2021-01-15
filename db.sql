@@ -277,6 +277,16 @@ CREATE TRIGGER `Medallas_Preguntas_Visitadas_AU` AFTER UPDATE ON `preguntas`
 END$$
 DELIMITER ;
 
+INSERT INTO `medallas` VALUES (0, 'Estudiante', 'bronce');
+INSERT INTO `medallas` VALUES (1, 'Pregunta interesante', 'bronce');
+INSERT INTO `medallas` VALUES (2, 'Buena pregunta', 'plata');
+INSERT INTO `medallas` VALUES (3, 'Excelente pregunta', 'oro');
+INSERT INTO `medallas` VALUES (4, 'Pregunta popular', 'bronce');
+INSERT INTO `medallas` VALUES (5, 'Pregunta destacada', 'plata');
+INSERT INTO `medallas` VALUES (6, 'Pregunta famosa', 'oro');
+INSERT INTO `medallas` VALUES (7, 'Respuesta interesante', 'bronce');
+INSERT INTO `medallas` VALUES (8, 'Buena respuesta', 'plata');
+INSERT INTO `medallas` VALUES (9, 'Respuesta famosa', 'oro');
 
 INSERT INTO `usuarios` VALUES (1, 'nico@404.es',0 , '12345678', 'Nico', 'Nico.png', '2020/12/24');
 INSERT INTO `usuarios` VALUES (2, 'roberto@404.es',0 , '12345678', 'Roberto', 'Kuroko.png', '2010/10/13');

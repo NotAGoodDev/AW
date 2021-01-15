@@ -290,11 +290,13 @@ function votarPregunta(request, response, next) {
     modelVotos.existeVotoPregunta(request.params.idPregunta, response.locals.id, (err, voto) => {
         if (err) {
             response.status(500);
+            console.warn(err);
             next();
         } else {
             if (voto[0] === undefined) {
                 modelVotos.insertarVotoPregunta(request.params.idPregunta, response.locals.id, request.params.voto, (err, voto) => {
                     if (err) {
+                        console.warn(err);
                         response.status(500);
                         next();
                     } else {
@@ -307,6 +309,7 @@ function votarPregunta(request, response, next) {
                 modelVotos.modificarVotoPregunta(request.params.idPregunta, response.locals.id, request.params.voto, (err, voto) => {
                     if (err) {
                         response.status(500);
+                        console.warn(err);
                         next();
                     } else {
                         response.redirect("/preguntas/vista/" + request.params.idPregunta);
