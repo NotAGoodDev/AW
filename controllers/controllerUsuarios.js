@@ -49,7 +49,7 @@ function imagenPerfil(request, response, next) {
             response.status(500);
             next();
         } else {
-            let ruta = path.join(__dirname, "../profile_imgs", image);
+            let ruta = path.join(__dirname, "../profile_imgs/", image);
             response.sendFile(ruta);
         }
     })
@@ -67,7 +67,7 @@ function imagenPorId(request, response, next) {
                     response.status(500);
                     next();
                 } else {    //Siempre tiene imagen
-                    let ruta = path.join(__dirname, "../profile_imgs", image);
+                    let ruta = path.join(__dirname, "../profile_imgs/", image);
                     response.sendFile(ruta);
                 }
             })

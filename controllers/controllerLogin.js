@@ -73,7 +73,7 @@ function altaUsuario(request, response, next) {
                 let img = "";
 
                 if(request.file === undefined) {
-                    img = "/u" + Math.floor(Math.random() * 8 + 1) + ".png";
+                    img = "defecto" + Math.floor(Math.random() * 3 + 1) + ".png";
                 } else {
                     img = request.file.filename;
                 }
