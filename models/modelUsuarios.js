@@ -105,7 +105,7 @@ class DAOUsuarios {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"))
             } else {
-                const query = "INSERT INTO USUARIOS VALUES (0, ?, 0, ?, ?, ?, CURDATE())";
+                const query = "INSERT INTO USUARIOS VALUES (0, ?, 1, ?, ?, ?, CURDATE())";
 
                 connection.query(
                     query,
