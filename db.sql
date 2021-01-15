@@ -17,7 +17,7 @@ CREATE TABLE usuarios (
 CREATE TABLE preguntas (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_usu INT NOT NULL,
-    titulo VARCHAR(20) NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
     cuerpo VARCHAR(1000) NOT NULL,
     fecha DATE NOT NULL,
     visitas INT NOT NULL DEFAULT 0,
