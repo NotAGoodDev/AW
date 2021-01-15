@@ -9,7 +9,9 @@
 
     <div class="header-user">
         <img src="/usuarios/imagenPerfil" alt="Imagen de Perfil">
-        <p class="titule-page text-white"> <%= nombre %> </p>
+        <a class="titule-page text-white" href="/usuarios/perfil/<%= id %>">
+            <%= nombre %>
+        </a>
         <a href="/loginout/logout" class="button red text-white">Cerrar sesión</a>
     </div>
 </div>
