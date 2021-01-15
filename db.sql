@@ -107,7 +107,7 @@ CREATE TRIGGER `Reputacion_Usuarios_AU` AFTER UPDATE ON `voto_preg`
     THEN
       UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
       WHERE usuarios.id= 
-      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta) && usuarios.reputacion > 0;
+      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta) && usuarios.reputacion > 1;
   END IF ;
 END$$
 DELIMITER ;
@@ -124,7 +124,7 @@ CREATE TRIGGER `Reputacion_Usuarios_AI` AFTER INSERT ON `voto_preg`
     THEN
       UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
       WHERE usuarios.id= 
-      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta) && usuarios.reputacion > 0;
+      (SELECT id_usu FROM preguntas WHERE id = NEW.id_pregunta) && usuarios.reputacion > 1;
   END IF ;
 END$$
 DELIMITER ;
@@ -142,7 +142,7 @@ CREATE TRIGGER `Reputacion_Usuarios_Respuesta_AU` AFTER UPDATE ON `voto_resp`
     THEN
       UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
       WHERE usuarios.id= 
-      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 0;
+      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 1;
   END IF ;
 END$$
 DELIMITER ;
@@ -159,7 +159,7 @@ CREATE TRIGGER `Reputacion_Usuarios_Respuesta_AI` AFTER INSERT ON `voto_resp`
     THEN
       UPDATE usuarios SET usuarios.reputacion = usuarios.reputacion - 2
       WHERE usuarios.id= 
-      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 0;
+      (SELECT id_usu_resp FROM respuestas WHERE id = NEW.id_respuesta) && usuarios.reputacion > 1;
   END IF ;
 END$$
 DELIMITER ;
@@ -288,12 +288,12 @@ INSERT INTO `medallas` VALUES (7, 'Respuesta interesante', 'bronce');
 INSERT INTO `medallas` VALUES (8, 'Buena respuesta', 'plata');
 INSERT INTO `medallas` VALUES (9, 'Respuesta famosa', 'oro');
 
-INSERT INTO `usuarios` VALUES (1, 'nico@404.es',0 , '12345678', 'Nico', 'Nico.png', '2020/12/24');
-INSERT INTO `usuarios` VALUES (2, 'roberto@404.es',0 , '12345678', 'Roberto', 'Kuroko.png', '2010/10/13');
-INSERT INTO `usuarios` VALUES (3, 'sfg@404.es', 0, '12345678', 'SFG', 'SFG.png', '2011/09/22');
-INSERT INTO `usuarios` VALUES (4, 'marta@404.es', 0, '12345678', 'Marta', 'Marta.png', '1990/06/04');
-INSERT INTO `usuarios` VALUES (5, 'lucas@404.es', 0, '12345678', 'Lucas', 'defecto3.png', '1990/06/04');
-INSERT INTO `usuarios` VALUES (6, 'emy@404.es', 0, '12345678', 'Emy', 'Amy.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (1, 'nico@404.es',1 , '12345678', 'Nico', 'Nico.png', '2020/12/24');
+INSERT INTO `usuarios` VALUES (2, 'roberto@404.es',1 , '12345678', 'Roberto', 'Kuroko.png', '2010/10/13');
+INSERT INTO `usuarios` VALUES (3, 'sfg@404.es', 1, '12345678', 'SFG', 'SFG.png', '2011/09/22');
+INSERT INTO `usuarios` VALUES (4, 'marta@404.es', 1, '12345678', 'Marta', 'Marta.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (5, 'lucas@404.es', 1, '12345678', 'Lucas', 'defecto3.png', '1990/06/04');
+INSERT INTO `usuarios` VALUES (6, 'emy@404.es', 1, '12345678', 'Emy', 'Amy.png', '1990/06/04');
 
 
 INSERT INTO `preguntas` VALUES (0, 1, '¿Cual es la diferencia entre position: relative, position: absolute y position: fixed?', 'Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página. Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página.', '2020/12/24', 0,0);
